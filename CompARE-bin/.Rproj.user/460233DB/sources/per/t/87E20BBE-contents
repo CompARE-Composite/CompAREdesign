@@ -1,0 +1,54 @@
+
+context("CBEval3")
+
+test_that("CBEval3 works", {
+
+  a = effect_ce(0.3,0.4,0.2,0.5,0.32, type = "Diff")
+  b = effect_ce(0.3,0.4,0.2,0.5,0.32)
+  c = effect_ce(0.3,0.4,0.2,0.5,0.32, type = "OR")
+  d = effect_ce(0.65,0.23,0.42,0.15,0.32, type = "OR")
+  e = effect_ce(0.3,0.4,0.2,0.5,0.32, type = "RR")
+  f = effect_ce(0.43,0.87,0.32,0.25,0.23, type = "RR")
+
+
+  expect_true(((((length(a$Diff) == length(b$Diff)) == length(c$Diff)) == length(d$Diff))
+              == length(e$Diff)) == length(f$Diff))
+
+  condition <- function(a,b,c){
+    i <- 3
+      if(c == "T"){
+        expect_true(a[i,] == b[i,])
+      }else if(c == "F"){
+          expect_false(a[i,] == b[i,])
+      }
+  }
+
+  condition(a,b,"T")
+  condition(a,c,"F")
+  condition(a,e,"F")
+  condition(e,c,"F")
+
+  condition(c,d,"F")
+  condition(e,f,"F")
+
+  expect_error(effect_ce())
+  expect_error(effect_ce(p0_E1 = 0.3, p0_E2 = 0.4,p1_E1 = 0.2, p1_E2 = 0.5))
+  expect_error(effect_ce(p0_E1 = 0.3, p0_E2 = 0.4,p1_E1 = 0.2, rho = 0.5))
+  expect_error(effect_ce(p0_E1 = 0.3, p0_E2 = 0.4,p1_E2 = 0.2, rho = 0.5))
+  expect_error(effect_ce(p0_E1 = 0.3, p1_E1 = 0.4,p1_E2 = 0.2, rho = 0.5))
+  expect_error(effect_ce(p0_E2 = 0.3, p1_E1 = 0.4,p1_E2 = 0.2, rho = 0.5))
+
+
+  expect_that(effect_ce(3,0.4,0.2,0.5,0.32), throws_error("p0_E1 numeric value are not allowed"))
+  expect_that(effect_ce(0.3,4,0.2,0.5,0.32), throws_error("p0_E2 numeric value are not allowed"))
+  expect_that(effect_ce(0.3,0.4,2,0.5,0.32), throws_error("p1_E1 numeric value are not allowed"))
+  expect_that(effect_ce(0.3,0.4,0.2,5,0.32), throws_error("p1_E2 numeric value are not allowed"))
+  expect_that(effect_ce(0.3,0.4,0.2,5,32), throws_error("p1_E2 numeric value are not allowed"))
+  expect_that(effect_ce(0.3,0.4,0.2,0.5,32), throws_error("rho numeric value are not allowed"))
+
+  #Saber com validar els caracters
+
+  expect_that(effect_ce(0.3,0.4,0.2,0.5,0.32, type = "diff"), throws_error("This effect type are not allowed"))
+  #Or Rr
+
+})

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574210090287.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2495743931",
+    "id" : "87E20BBE",
+    "lastKnownWriteTime" : 1574210087,
+    "last_content_update" : 1574210087,
+    "path" : "C:/Users/raquel.rovira/Downloads/test-CBEval3 (1).R",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "36,30",
+        "scrollLine" : "31"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

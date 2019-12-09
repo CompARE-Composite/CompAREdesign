@@ -1,0 +1,212 @@
+#' PROBABILITY OF UNION OF TWO PRIMARY EVENTS
+#'
+#'
+#' This function is used to calculate the probability of the union of two events, E1 and E2,
+#' knowing in advance the probability of occurrence of each of the two events by separating
+#' them on the basis of the study population, and in the other band knowing
+#' the Pearson coefficient that correlates the events.
+#'
+#'
+#' @param p_e1 numeric parameter, probability of the event E1
+#' @param p_e2 numeric parameter, probability of the event E2
+#' @param rho numeric parameter, Pearson correlation between E1 i E2
+#' @details Returns a numeric value. The input parameters representing the probability of the events
+#' taking place are limited between 0 and 1, without including both values. Pearson's correlation
+#' must be within the confidence interval that allows the combined variable according to the probabilities given.
+#' @return Returns the probability of a union of two events
+#' @export
+#'
+prob_ce <- function(p_e1, p_e2, rho){
+  if(p_e1 < 0 || p_e1 > 1){
+    stop("p.E1 numeric value are not allowed")
+  }else if(p_e2 < 0 || p_e2 > 1){
+    stop("p.E2 numeric value are not allowed")
+  }else if(rho < lower_corr(p_e1,p_e2)  ||  rho > upper_corr(p_e1,p_e2)){
+    stop("rho numeric value are not allowed")
+  }else{
+    prob_ce <- 1- (1-p_e1)*(1-p_e2)*( 1+ rho*sqrt(p_e1*p_e2/((1-p_e1)*(1-p_e2))))
+    return(prob_ce)
+  }
+}
+
+#' LOWER LIMIT FOR PEARSON CORRELATION
+#'
+#'
+#' Knowing that the correlation of a combined variable is presented in an intervalic way,
+#' and has been calculated from the probability of occurrence of the respective events.
+#' This function allows to calculate the minimum correlation
+#' that this typology of variables can experience.
+#'
+#'
+#' @param p_e1 numeric parameter, probability of the event E1
+#' @param p_e2 numeric parameter, probability of the event E2
+#' @details lower_corr returns a numeric value negated bounded between -1 and 0.
+#' The probabilities of the occurrence of events must be defined by the open interval of (0.1).
+#' @return Returns the lower correlation threshold that the binominal compost event can reach
+#' @export
+lower_corr <- function(p_e1,p_e2){
+  if(p_e1 < 0 || p_e1 > 1){
+    stop("p.E1 numeric value are not allowed")
+  }else if(p_e2 < 0 || p_e2 > 1){
+    stop("p.E2 numeric value are not allowed")
+  }else{
+    lower_corr <- max(  -sqrt(p_e1*p_e2/((1-p_e1)*(1-p_e2))), -sqrt(((1-p_e1)*(1-p_e2))/(p_e1*p_e2)  ) )
+    return(lower_corr)
+  }
+}
+
+#' UPPER LIMIT FOR PEARSON CORRELATION
+#'
+#' Knowing that the correlation of a combined variable is presented in an intervalic manner,
+#' and calculated from the probability of occurrence of the respective events.
+#' This function allows to calculate the minimum correlation that this typology of variables can experience.
+#'
+#'
+#' @param p_e1 numeric parameter, probability of the event E1
+#' @param p_e2 numeric parameter, probability of the event E2
+#' @details upper_corr returns a numeric value negated bounded between 0 and 1.
+#' The probabilities of the occurrence of events must be defined by the open interval of (0.1).
+#' @return Returns the upper correlation threshold that can be set by the compost binarius event.
+#' @export
+upper_corr <- function(p_e1,p_e2){
+  if(p_e1 < 0 || p_e1 > 1){
+    stop("p.E1 numeric value are not allowed")
+  }else if(p_e2 < 0 || p_e2 > 1){
+    stop("p.E2 numeric value are not allowed")
+  }else{
+    upper_corr <- min(  sqrt( ( p_e1/ (1-p_e1) )/( p_e2/ (1-p_e2) ) ), sqrt((p_e2/(1-p_e2))/(p_e1/(1-p_e1)) ) )
+    return(upper_corr)
+  }
+}
+#' STATISTICAL EFFECTS
+#'
+#' "effect_ce" calculates various statistical measures for combined variables, in particular some measures
+#' such as rati odds, risk ratio or the difference in the proportions of two groups in relation
+#' to the binarius compost event.
+#'
+#'
+#' @param p0_e1 numeric parameter, probability of occurrence E1 by the control group
+#' @param p0_e2 numeric parameter, probability of occurrence E2 by the control group
+#' @param p1_e1 numeric parameter, probability of occurrence E1 by the intervention group
+#' @param p1_e2 numeric parameter, probability of occurrence E2 by the intervention group
+#' @param rho numeric parameter, correlation of pearson between two events E1 and E2
+#' @param type character, specifies the type of statistical measure that is calculated
+#' @details  Returns a numeric value. The input parameters representing the probability of the events
+#' taking place are limited between 0 and 1, without including both values. Pearson's correlation
+#' must be within the confidence interval that allows the combined variable according to the probabilities given.
+#' For defect, if you don't specify the type of effect you want to obtain,
+#' it calculates the difference in proportions.
+#' @return Returns the desired effect of the compost binàri event
+#' @export
+effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "diff"){
+  if(p0_e1 < 0 || p0_e1 > 1){
+    stop("p0_e1 numeric value are not allowed")
+  }else if(p0_e2 < 0 || p0_e2 > 1){
+    stop("p0_e2 numeric value are not allowed")
+  }else if(p1_e1 < 0 || p1_e1 > 1){
+    stop("p1_e1 numeric value are not allowed")
+  }else if(p1_e2 < 0 || p1_e2 > 1){
+    stop("p1_e2 numeric value are not allowed")
+  }else if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
+    stop("rho numeric value are not allowed")
+  }else if(type != "rr" && type != "diff" && type != "or"){
+    stop("This effect type are not allowed")
+  }else{
+    out_e1 = round(1- (1-p1_e1)*(1-p1_e2)*( 1+ rho*sqrt(p1_e1*p1_e2/((1-p1_e1)*(1-p1_e2)))),2)
+    out_e2 = round(1- (1-p0_e1)*(1-p0_e2)*( 1+ rho*sqrt(p0_e1*p0_e2/((1-p0_e1)*(1-p0_e2)))),2)
+    if(type == "diff"){
+      effect = out_e1 - out_e2
+      diff <- c(out_e1,out_e2,effect)
+      effect_ce <- as.data.frame(diff)
+    }else if(type == "rr"){
+      effect = out_e1 / out_e2
+      rr <- c(out_e1,out_e2,effect)
+      effect_ce <- as.data.frame(rr)
+    }else if(type == "or"){
+      O10= p0_e1/(1-p0_e1)
+      O20= p0_e2/(1-p0_e2)
+      or1 = (p1_e1/p1_e2)/(p0_e1/p0_e2)
+      or2 = (p1_e2/p1_e1)/(p0_e2/p0_e1)
+      effect = ((O10*or1+1)*(O20*or2+1)-1-rho*sqrt(or1*or2*O10*O20))*(1+rho*sqrt(O10*O20))/
+        (((1+O10)*(1+O20)-1-rho*sqrt(O10*O20))*(1+rho*sqrt(or1*or2*O10*O20)))
+      or <- c(out_e1,out_e2,effect)
+      effect_ce <- as.data.frame(or)
+    }
+    rownames(effect_ce) <- c("Effect E1","Effect E2", "Effect CE")
+    return(effect_ce)
+  }
+}
+#' SAMPLE SIZE FOR COMPOSITE BINARY ENDPOINT
+#'
+#' @param p0_e1 numeric parameter, probability of occurrence E1 by the control group
+#' @param p0_e2 numeric parameter, probability of occurrence E2 by the control group
+#' @param p1_e1 numeric parameter, probability of occurrence E1 by the intervention group
+#' @param p1_e2 numeric parameter, probability of occurrence E2 by the intervention group
+#' @param rho numeric parameter, correlation of pearson between two events E1 and E2
+#' @param effect_ce Effect to measure the sample size
+#' @param alpha level of confidencea alpha
+#' @param beta level of confidence beta
+#' @param unpooled Variance class used in the calculation of the sample size
+#' @return Return the sample measurement to be used based on the calculated parameters of the combined variable.
+#' The entry parameters representing the probability of the events taking place are limited between 0 and 1,
+#'  without including both values. Pearson's correlation must be within the confidence interval allowed
+#'  by the combined variable according to the probabilities given. By default, if the type of effect
+#'  with which the resulting large sample is to be associated is not specified,
+#'  the difference in proportions is used. When specifying the levels of alpha and beta meaning,
+#'  they may not be higher than 1, as well as the following type of variance that is desired to be used
+#'  in the calculation of the sample size.
+#' @export
+sample_size_ce <- function(p0_e1,p0_e2,p1_e1,p1_e2,effect_ce  = "diff",rho, alpha = 0.05, beta = 0.2, unpooled = "unpooled Variance"){
+
+  if(p0_e1 < 0 || p0_e1 > 1){
+    stop("p0_e1 numeric value are not allowed")
+  }else if(p0_e2 < 0 || p0_e2 > 1){
+    stop("p0_e2 numeric value are not allowed")
+  }else if(p0_e2 < 0 || p0_e2 > 1){
+    stop("p0_e2 numeric value are not allowed")
+  }else if(p0_e2 < 0 || p0_e2 > 1){
+    stop("p0_e2 numeric value are not allowed")
+  }else if(effect_ce != "diff" && effect_ce != "rr" && effect_ce != "or"){
+    stop("effect_ce effect are not allowed")
+  }else if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
+    stop("rho numeric value are not allowed")
+  }else if( 0 > alpha || alpha > 1){
+    stop("alpha numeric value are not allowed")
+  }else if( 0 > beta || beta > 1){
+    stop("beta numeric value are not allowed")
+  }else if(unpooled != "unpooled Variance" && unpooled != "Pooled Variance"){
+    stop("Variance type are incorrect")
+  }else if(effect_ce == "rr"){
+    p0_CBE = 1- (1-p0_e1)*(1-p0_e2)*( 1+ rho*sqrt(p0_e1*p0_e2/((1-p0_e1)*(1-p0_e2)) ))
+    rr_CBE <- effect(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")
+    if(unpooled =="unpooled Variance"){
+      samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
+    }else if(unpooled =="Variance"){
+      p = (rr_CBE*p0_CBE + p0_CBE)/2
+      # sample size per group
+      samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
+    }
+  }else if(effect_ce == "or"){
+    p0_CBE = 1- (1-p0_e1)*(1-p0_e2)*( 1+ rho*sqrt(p0_e1*p0_e2/((1-p0_e1)*(1-p0_e2)) ))
+    p1_CBE = 1- (1-p1_e1)*(1-p1_e2)*( 1+ rho*sqrt(p1_e1*p1_e2/((1-p1_e1)*(1-p1_e2)) ))
+    or_CBE = effect(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "or")
+    p1 = (or_CBE*p0_CBE/(1-p0_CBE))/(1+(or_CBE*p0_CBE/(1-p0_CBE)))
+    if(unpooled=="unpooled Variance"){
+      samp = ((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
+    }else{
+      samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
+    }
+  }else if(unpooled =="Variance"){
+    p0_CBE = 1- (1-p0_e1)*(1-p0_e2)*( 1+ rho*sqrt(p0_e1*p0_e2/((1-p0_e1)*(1-p0_e2)) ))
+    diff_CBE <- effect(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")
+    if(unpooled=="unpooled Variance"){
+      samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
+    }else if(unpooled=="Variance"){
+      p = (diff_CBE + 2 * p0_CBE)/2
+      # sample size per group
+      samp = ((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff.CBE)^2
+    }
+
+  }
+  return(samp)
+}

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574205320669.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "71347952",
+    "id" : "8DC250A6",
+    "lastKnownWriteTime" : 1574222330,
+    "last_content_update" : 1574222330024,
+    "path" : "C:/Users/raquel.rovira/Desktop/CBE/tests/testthat/test-CBEval1.R",
+    "project_path" : "tests/testthat/test-CBEval1.R",
+    "properties" : {
+        "cursorPosition" : "158,26",
+        "scrollLine" : "152"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
