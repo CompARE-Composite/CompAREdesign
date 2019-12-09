@@ -1,0 +1,5 @@
+export(prob_ce)
+export(lower_corr)
+export(upper_corr)
+export(effect_ce)
+export(sample_size_ce)
