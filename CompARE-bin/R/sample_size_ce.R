@@ -55,7 +55,7 @@ sample_size_ce <- function(p0_e1,p0_e2,p1_e1,p1_e2,effect_ce  = "diff",rho, alph
     rr_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")
     if(unpooled =="unpooled Variance"){
       samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
-    }else if(unpooled =="Variance"){
+    }else{
       p = (rr_CBE*p0_CBE + p0_CBE)/2
       # sample size per group
       samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
@@ -68,11 +68,11 @@ sample_size_ce <- function(p0_e1,p0_e2,p1_e1,p1_e2,effect_ce  = "diff",rho, alph
     }else{
       samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
     }
-  }else if(unpooled =="Variance"){
+  }else{
     diff_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")
     if(unpooled=="unpooled Variance"){
       samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
-    }else if(unpooled=="Variance"){
+    }else{
       p = (diff_CBE + 2 * p0_CBE)/2
       # sample size per group
       samp = ((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff.CBE)^2
