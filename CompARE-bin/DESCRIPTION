@@ -3,7 +3,7 @@ Type: Package
 Title: Set of functions that calculate measures  of the composite binary endpoints
 Version: 0.1.0
 Author: Raquel Rovira Salvat
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: 
 Description: It includes a set of functions of great use in studies where the study variable is combined.
             It has mainly been designed to calculate the large sample required in any assay.
             with combined variables.
