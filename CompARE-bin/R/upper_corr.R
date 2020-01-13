@@ -13,8 +13,6 @@
 #' @return Returns the upper correlation threshold that can be set by the compost binarius event.
 #' @details upper_corr returns a numeric value negated bounded between 0 and 1.
 #' The probabilities of the occurrence of events must be defined by the open interval of (0.1).
-#' @references M.Bofill , G.Gomez , A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components, http://cinna.upc.edu:3838/compare/compareCover/
-#' @author Raquel Rovira Salvat
 upper_corr <- function(p_e1,p_e2){
   if(p_e1 < 0 || p_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
