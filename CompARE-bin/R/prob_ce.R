@@ -18,9 +18,6 @@
 #' taking place are limited between 0 and 1, without including both values. Pearson's correlation
 #' must be within the confidence interval that allows the combined variable according to the probabilities given.
 #' To calculate this confidence interval you can use lower_corr and upper_corr functions that you can find in this package.
-#' @references M.Bofill , G.Gomez , A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components, http://cinna.upc.edu:3838/compare/compareCover/
-#' @author Raquel Rovira Salvat
-#'
 prob_ce <- function(p_e1, p_e2, rho){
   if(p_e1 < 0 || p_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
