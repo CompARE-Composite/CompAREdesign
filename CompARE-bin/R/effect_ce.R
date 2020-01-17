@@ -21,6 +21,11 @@
 #' To calculate this confidence interval you can use lower_corr and upper_corr functions that you can find in this package.
 #' For defect, if you don't specify the type of effect you want to obtain,
 #' it calculates the difference in proportions.
+#' 
+#' @example effect_ce(0.4,0.3,0.5,0.6,0.32)
+#' @example effect_ce(0.5,0.3,0.654,0.214,0.3,"diff")
+#' @example effect_ce(0.5,0.34,0.65,0.23,0.4,"rr")
+#' @example effect_ce(0.54,0.23,0.65,0.76,-0.3,"or")
 effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
