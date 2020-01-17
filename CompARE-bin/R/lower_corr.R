@@ -15,6 +15,9 @@
 #' @return Returns the lower correlation threshold that the binominal compost event can reach
 #' @details lower_corr returns a numeric value negated bounded between -1 and 0.
 #' The probabilities of the occurrence of events must be defined by the open interval of (0.1).
+#'
+#' @example lower_corr(0.4,0.23)
+#' @example lower_corr(0.5,0.76) 
 lower_corr <- function(p_e1,p_e2){
   if(p_e1 < 0 || p_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
