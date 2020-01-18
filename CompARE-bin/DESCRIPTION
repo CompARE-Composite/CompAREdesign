@@ -1,5 +1,5 @@
 Package: CompARE-package/CompARE-bin
-Title: Set of functions that calculate measures  of the composite binary endpoints
+Title: Two-sample statistics for binary and time-to-event outcomes
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Marta",
@@ -7,17 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "marta.bofill.roig@upc.edu",
            comment = c(ORCID = "0000-0002-4400-7541"))
-Description: It includes a set of functions of great use in studies where the study variable is combined.
-            It has mainly been designed to calculate the large sample required in any assay.
-            with combined variables.
-            In addition, it allows to calculate different statistical measures of great use in the clinical 
-            field as the odds rati, the relative risk or the difference in proportions, as well as the 
-            confidence interval on the correlation is established of the combined variable.
-            Some numerical values, such as the probability of the union of two primary events or the confidence 
-            bands on which the Pearson correlation of all variable combined is established, can also be calculated 
-            using functions of the same package.
-License:GPL-3 
+Description: Functions to compare two populations based on binary and time-to-event outcomes.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+	survival,
+	zoo,
+	pracma,
+	copula,
+	muhaz
 RoxygenNote: 6.1.1
-
