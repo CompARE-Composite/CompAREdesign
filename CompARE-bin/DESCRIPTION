@@ -1,9 +1,12 @@
 Package: CompARE-package/CompARE-bin
-Type: Package
 Title: Set of functions that calculate measures  of the composite binary endpoints
 Version: 0.0.0.9000
-Author: Raquel Rovira, Marta Bofill i Jordi Cortés
-Maintainer: "marta.bofill.roig@upc.edu"
+Authors@R: 
+    person(given = "Marta",
+           family = "Bofill Roig",
+           role = c("aut", "cre"),
+           email = "marta.bofill.roig@upc.edu",
+           comment = c(ORCID = "0000-0002-4400-7541"))
 Description: It includes a set of functions of great use in studies where the study variable is combined.
             It has mainly been designed to calculate the large sample required in any assay.
             with combined variables.
