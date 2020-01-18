@@ -13,7 +13,7 @@ Description: It includes a set of functions of great use in studies where the st
             Some numerical values, such as the probability of the union of two primary events or the confidence 
             bands on which the Pearson correlation of all variable combined is established, can also be calculated 
             using functions of the same package.
-Encoding: UTF-8
+Encoding: GPL-3
 LazyData: true
 RoxygenNote: 6.1.1
 License:MIT 
