@@ -1,9 +1,9 @@
 Package: CompARE-package
 Type: Package
 Title: Set of functions that calculate measures  of the composite binary endpoints
-Version: 0.1.0
+Version: 0.0.0.9000
 Author: Raquel Rovira, Marta Bofill i Jordi Cortés
-Maintainer: 
+Maintainer: "marta.bofill.roig@upc.edu"
 Description: It includes a set of functions of great use in studies where the study variable is combined.
             It has mainly been designed to calculate the large sample required in any assay.
             with combined variables.
@@ -13,7 +13,8 @@ Description: It includes a set of functions of great use in studies where the st
             Some numerical values, such as the probability of the union of two primary events or the confidence 
             bands on which the Pearson correlation of all variable combined is established, can also be calculated 
             using functions of the same package.
-Encoding: GPL-3
+License:GPL-3 
+Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-License:MIT 
+
