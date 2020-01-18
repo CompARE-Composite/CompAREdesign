@@ -1,4 +1,4 @@
-Package: CompARE-package
+Package: CompARE-package/CompARE-bin
 Type: Package
 Title: Set of functions that calculate measures  of the composite binary endpoints
 Version: 0.0.0.9000
