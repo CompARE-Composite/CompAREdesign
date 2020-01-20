@@ -60,7 +60,9 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
     p1_e1 = eff_e1 * p0_e1
   }else if(type_e1 == "diff"){
     p1_e1 = eff_e1 + p0_e1
-  }else if(type_e2 == "or"){
+  }
+  
+   if(type_e2 == "or"){
     p1_e2 = (eff_e2*p0_e2/(1-p0_e2))/(1+(eff_e2*p0_e2/(1-p0_e2)))
   }else if(type_e2 == "rr"){
     p1_e2 = eff_e2 * p0_e2
