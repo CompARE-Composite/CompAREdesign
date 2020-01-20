@@ -24,7 +24,7 @@ prob_ce <- function(p_e1, p_e2, rho){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p_e2 < 0 || p_e2 > 1){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  }else if(rho <= lower_corr(p_e1,p_e2)  ||  rho => upper_corr(p_e1,p_e2)){
+  }else if(rho <= lower_corr(p_e1,p_e2)  ||  rho >= upper_corr(p_e1,p_e2)){
     stop("The correlations of events must be in the correct interval")
   }else{
     prob_ce <- 1- (1-p_e1)*(1-p_e2)*( 1+ rho*sqrt(p_e1*p_e2/((1-p_e1)*(1-p_e2))))
