@@ -43,7 +43,7 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
     stop("The effect of the event E2 is not right")
   }else if(effect_ce != "diff" && effect_ce != "rr" && effect_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
-   }else if(rho < lower_corr(p0_e1,p0_e2)  ||  rho > upper_corr(p0_e1,p0_e2)){
+   }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
     stop("The correlations of events must be in the correct interval")
   }else if( 0 > alpha || alpha > 1){
     stop("Alpha value must be number between 0 and 1")
@@ -73,7 +73,7 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
 
 
   if(effect_ce == "rr"){
-    rr_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[,3]
+    rr_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[1,3]
     if(unpooled =="unpooled Variance"){
       samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
     }else if(unpooled =="Variance"){
@@ -82,7 +82,7 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
       samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
     }
   }else if(effect_ce == "or"){
-    or_CBE = effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "or")[,3]
+    or_CBE = effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "or")[1,3]
     p1 = (or_CBE*p0_CBE/(1-p0_CBE))/(1+(or_CBE*p0_CBE/(1-p0_CBE)))
     if(unpooled=="unpooled Variance"){
       samp = ((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
@@ -90,7 +90,7 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
       samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
     }
   }else{
-    diff_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[,3]
+    diff_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[1,3]
     if(unpooled=="unpooled Variance"){
       samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
     }else if(unpooled=="Variance"){
