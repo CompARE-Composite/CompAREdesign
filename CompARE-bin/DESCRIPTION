@@ -1,6 +1,10 @@
-Package: CompARE-package/CompARE-bin
+Package: CBE
 Title: Set of functions that calculate measures of the composite binary endpoints
 Version: 0.0.0.9000
+Authors@R: c(
+    person("Marta", "Bofill", email = "marta.bofill.roig@upc.edu", role = "cre"),
+    person("Raquel", "Rovira", email = "rovirasalvat.raquel@gmail.com", role = "aut"),
+    person("Jordi", "Cortes", email = "jordi.cortes-martinez@upc.edu", role = "aut"))
 Description: It includes a set of functions of great use in studies where the study variable is combined. It has mainly been designed to calculate the large sample required in any assay with combined variables.
  In addition, it allows to calculate different statistical measures of great use in the clinical field as the odds rati, 
  the relative risk or the difference in proportions, as well as the confidence interval on the correlation is established 
