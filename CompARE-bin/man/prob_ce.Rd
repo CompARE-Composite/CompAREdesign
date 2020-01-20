@@ -2,7 +2,7 @@
 % Please edit documentation in R/prob_ce.R
 \name{prob_ce}
 \alias{prob_ce}
-\title{PROBABILITY OF UNION OF TWO PRIMARY EVENTS}
+\title{PROBABILITY OF UNION OF TWO EVENTS}
 \usage{
 prob_ce(p_e1, p_e2, rho)
 }
@@ -27,10 +27,4 @@ Returns a numeric value. The input parameters representing the probability of th
 taking place are limited between 0 and 1, without including both values. Pearson's correlation
 must be within the confidence interval that allows the combined variable according to the probabilities given.
 To calculate this confidence interval you can use lower_corr and upper_corr functions that you can find in this package.
-}
-\references{
-M.Bofill , G.Gomez , A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components, http://cinna.upc.edu:3838/compare/compareCover/
-}
-\author{
-Raquel Rovira Salvat
 }
