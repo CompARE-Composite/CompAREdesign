@@ -4,17 +4,22 @@
 \alias{sample_size_ce}
 \title{SAMPLE SIZE FOR COMPOSITE BINARY ENDPOINT}
 \usage{
-sample_size_ce(p0_e1, p0_e2, p1_e1, p1_e2, effect_ce = "diff", rho,
-  alpha = 0.05, beta = 0.2, unpooled = "unpooled Variance")
+sample_size_ce(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2,
+  effect_ce = "diff", rho, alpha = 0.05, beta = 0.2,
+  unpooled = "unpooled Variance")
 }
 \arguments{
 \item{p0_e1}{numeric parameter, probability of occurrence E1 by the control group}
 
 \item{p0_e2}{numeric parameter, probability of occurrence E2 by the control group}
 
-\item{p1_e1}{numeric parameter, probability of occurrence E1 by the intervention group}
+\item{type_e1}{Effect of the event E1}
 
-\item{p1_e2}{numeric parameter, probability of occurrence E2 by the intervention group}
+\item{eff_e1}{numeric parameter, effect of the event E1}
+
+\item{type_e2}{Effect of the event E2}
+
+\item{eff_e2}{numeric parameter, effect of the event E2}
 
 \item{effect_ce}{Effect to measure the sample size}
 
@@ -35,17 +40,12 @@ This function calculates the value of the sample size according to its input par
 }
 \details{
 The entry parameters representing the probability of the events taking place are limited between 0 and 1,
- without including both values. Pearson's correlation must be within the confidence interval allowed
+ without including both values. The values of the primary events should be calculated giving a higher probability of observation to the control group.
+ Pearson's correlation must be within the confidence interval allowed
  by the combined variable according to the probabilities given. To calculate this confidence interval you can use lower_corr and upper_corr functions
  that you can find in this package. By default, if the type of effect
  with which the resulting large sample is to be associated is not specified,
  the difference in proportions is used. When specifying the levels of alpha and beta meaning,
  they may not be higher than 1, as well as the following type of variance that is desired to be used
  in the calculation of the sample size.
-}
-\references{
-M.Bofill , G.Gomez , A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components, http://cinna.upc.edu:3838/compare/compareCover/
-}
-\author{
-Raquel Rovira Salvat
 }
