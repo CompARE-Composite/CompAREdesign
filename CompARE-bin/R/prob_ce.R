@@ -1,4 +1,4 @@
-#' PROBABILITY OF UNION OF TWO PRIMARY EVENTS
+#' PROBABILITY OF UNION OF TWO EVENTS
 #'
 #'
 #' @description This function is used to calculate the probability of the union of two events, E1 and E2,
