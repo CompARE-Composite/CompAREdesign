@@ -14,7 +14,7 @@
 #'
 #' @export
 #'
-#' @return Returns the desired effect of the composite binary event and the effects of the primary events
+#' @return Returns the desired effect of the composite binary event and the effects of the events
 #' @details The input parameters representing the probability of the events
 #' taking place are limited between 0 and 1, without including both values. Pearson's correlation
 #' must be within the confidence interval that allows the combined variable according to the probabilities given.
