@@ -54,7 +54,7 @@ effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
       or_e2 = (p1_e2/(1-p1_e2))/(p0_e2/(1-p0_e2))
       effect = ((O10*or_e1+1)*(O20*or_e2+1)-1-rho*sqrt(or_e1*or_e2*O10*O20))*(1+rho*sqrt(O10*O20))/
         (((1+O10)*(1+O20)-1-rho*sqrt(O10*O20))*(1+rho*sqrt(or_e1*or_e2*O10*O20)))
-      effect_out = data.frame(or_e1,or_e1,effect)
+      effect_out = data.frame(or_e1,or_e2,effect)
     }
     colnames(effect_out) <- c("Effect E1","Effect E2","Effect CE")
     return(effect_out)
