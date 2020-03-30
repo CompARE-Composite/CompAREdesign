@@ -1,0 +1,12 @@
+Package: CompARE
+Title: Statistical functions for studies with composite endpoints
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Marta", "Bofill", email = "marta.bofill.roig@upc.edu", role = "cre"),
+    person("Raquel", "Rovira", email = "rovirasalvat.raquel@gmail.com", role = "aut"),
+    person("Jordi", "Cortes", email = "jordi.cortes-martinez@upc.edu", role = "aut"))
+Description: The package has been mainly designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
