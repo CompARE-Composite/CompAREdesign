@@ -17,3 +17,5 @@ The CBE package contains five key functions:
 # install.packages("devtools")
 library(devtools)
 install_github("CompARE-Composite/CompARE-package/CompARE-bin")
+```
+
