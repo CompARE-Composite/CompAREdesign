@@ -1,8 +1,7 @@
 #' STATISTICAL EFFECTS
 #'
-#' @description This function calculates various statistical measures for combined variables, in particular some measures
-#' such as rati odds, risk ratio or the difference in the proportions of two groups in relation
-#' to the binarius compost event.
+#' @description This function calculates different effect measures for binary composite outcomes. In particular,
+#' it allows for computing the risk difference, risk ratio and odds ratio.
 #'
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 by the control group
@@ -10,7 +9,8 @@
 #' @param p1_e1 numeric parameter, probability of occurrence E1 by the intervention group
 #' @param p1_e2 numeric parameter, probability of occurrence E2 by the intervention group
 #' @param rho numeric parameter, Pearson correlation between E1 i E2
-#' @param effect_ce character, specifies the type of statistical measure that is calculated
+#' @param effect_ce character, specifies the type of effect measure to be calculated
+#' (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
 #'
 #' @export
 #'
@@ -21,7 +21,7 @@
 #' To calculate this confidence interval you can use lower_corr and upper_corr functions that you can find in this package.
 #' For defect, if you don't specify the type of effect you want to obtain,
 #' it calculates the difference in proportions.
-#' 
+#'
 effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")

@@ -2,7 +2,7 @@
 
 # Description 
 
-The CBE package contains five key functions:
+The CompARE package contains five key functions:
 
 •	*Prob_ce* to compute the probability of union of two events.  \
 •	*Lower_corr* to compute the lower limit for pearson correlation \
