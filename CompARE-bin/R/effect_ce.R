@@ -3,7 +3,6 @@
 #' @description This function calculates different effect measures for binary composite outcomes. In particular,
 #' it allows for computing the risk difference, risk ratio and odds ratio.
 #'
-#'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 by the control group
 #' @param p0_e2 numeric parameter, probability of occurrence E2 by the control group
 #' @param p1_e1 numeric parameter, probability of occurrence E1 by the intervention group
