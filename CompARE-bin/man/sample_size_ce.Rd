@@ -4,9 +4,19 @@
 \alias{sample_size_ce}
 \title{SAMPLE SIZE FOR COMPOSITE BINARY ENDPOINT}
 \usage{
-sample_size_ce(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2,
-  effect_ce = "diff", rho, alpha = 0.05, beta = 0.2,
-  unpooled = "unpooled Variance")
+sample_size_ce(
+  p0_e1,
+  p0_e2,
+  type_e1,
+  eff_e1,
+  type_e2,
+  eff_e2,
+  effect_ce = "diff",
+  rho,
+  alpha = 0.05,
+  beta = 0.2,
+  unpooled = "unpooled Variance"
+)
 }
 \arguments{
 \item{p0_e1}{numeric parameter, probability of occurrence E1 by the control group}

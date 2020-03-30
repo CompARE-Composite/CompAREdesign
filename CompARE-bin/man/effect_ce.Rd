@@ -17,15 +17,15 @@ effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff")
 
 \item{rho}{numeric parameter, Pearson correlation between E1 i E2}
 
-\item{effect_ce}{character, specifies the type of statistical measure that is calculated}
+\item{effect_ce}{character, specifies the type of effect measure to be calculated
+(effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)}
 }
 \value{
 Returns the desired effect of the composite binary event and the effects of the events
 }
 \description{
-This function calculates various statistical measures for combined variables, in particular some measures
-such as rati odds, risk ratio or the difference in the proportions of two groups in relation
-to the binarius compost event.
+This function calculates different effect measures for binary composite outcomes. In particular,
+it allows for computing the risk difference, risk ratio and odds ratio.
 }
 \details{
 The input parameters representing the probability of the events

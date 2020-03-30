@@ -53,7 +53,7 @@ sample_size_ce <- function(p0_e1,p0_e2,type_e1,eff_e1,type_e2,eff_e2,effect_ce  
     stop("You must choose between pooled and unpooled variance")
   }
 
-  #Per substitució de l'equació
+
   if(type_e1 == "or"){
     p1_e1= (eff_e2*p0_e1/(1-p0_e1))/(1+(eff_e2*p0_e1/(1-p0_e1)))
   }else if(type_e1 == "rr"){
