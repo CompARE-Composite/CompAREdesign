@@ -17,18 +17,19 @@ effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff")
 
 \item{rho}{numeric parameter, Pearson correlation between E1 and E2}
 
-\item{effect_ce}{character, specifies the type of effect measure to be calculated
-(effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)}
+\item{effect_ce}{character, specifies the effect measure to be calculated  for the composite endpoint (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)}
 }
 \value{
-Returns the desired effect of the composite binary event and the effects of the events
+Returns the effect for the composite binary endpoint and the effects for the composite components
+
+ @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
+To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
+
+
+ @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 }
 \description{
 This function calculates different effect measures for binary composite outcomes. In particular,
 it allows for computing the risk difference, risk ratio and odds ratio.
-}
-\details{
-The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
-Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
-To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 }

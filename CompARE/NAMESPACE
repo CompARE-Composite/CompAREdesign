@@ -3,5 +3,5 @@
 export(effect_ce)
 export(lower_corr)
 export(prob_ce)
-export(sample_size_ce)
+export(samplesize_ce)
 export(upper_corr)
