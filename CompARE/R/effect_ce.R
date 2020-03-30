@@ -8,15 +8,19 @@
 #' @param p1_e1 numeric parameter, probability of occurrence E1 in the intervention group
 #' @param p1_e2 numeric parameter, probability of occurrence E2 in the intervention group
 #' @param rho numeric parameter, Pearson correlation between E1 and E2
-#' @param effect_ce character, specifies the type of effect measure to be calculated
-#' (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
+#' @param effect_ce character, specifies the effect measure to be calculated  for the composite endpoint (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
 #'
 #' @export
 #'
-#' @return Returns the desired effect of the composite binary event and the effects of the events
-#' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+#' @return Returns the effect for the composite binary endpoint and the effects for the composite components
+#'
+#'  @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
+#'
+#'
+#'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
+#'
 #'
 effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
   if(p0_e1 < 0 || p0_e1 > 1){
@@ -28,7 +32,7 @@ effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
   }else if(p1_e2 < 0 || p1_e2 > 1){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
   }else if(rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
-    stop("The correlations of events must be in the correct interval")
+    stop("The correlation must be in the correct interval")
   }else if(effect_ce != "rr" && effect_ce != "diff" && effect_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
   }
