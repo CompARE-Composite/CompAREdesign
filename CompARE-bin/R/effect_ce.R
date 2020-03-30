@@ -3,23 +3,20 @@
 #' @description This function calculates different effect measures for binary composite outcomes. In particular,
 #' it allows for computing the risk difference, risk ratio and odds ratio.
 #'
-#' @param p0_e1 numeric parameter, probability of occurrence E1 by the control group
-#' @param p0_e2 numeric parameter, probability of occurrence E2 by the control group
-#' @param p1_e1 numeric parameter, probability of occurrence E1 by the intervention group
-#' @param p1_e2 numeric parameter, probability of occurrence E2 by the intervention group
-#' @param rho numeric parameter, Pearson correlation between E1 i E2
+#' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
+#' @param p0_e2 numeric parameter, probability of occurrence E2 in the control group
+#' @param p1_e1 numeric parameter, probability of occurrence E1 in the intervention group
+#' @param p1_e2 numeric parameter, probability of occurrence E2 in the intervention group
+#' @param rho numeric parameter, Pearson correlation between E1 and E2
 #' @param effect_ce character, specifies the type of effect measure to be calculated
 #' (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
 #'
 #' @export
 #'
 #' @return Returns the desired effect of the composite binary event and the effects of the events
-#' @details The input parameters representing the probability of the events
-#' taking place are limited between 0 and 1, without including both values. Pearson's correlation
-#' must be within the confidence interval that allows the combined variable according to the probabilities given.
-#' To calculate this confidence interval you can use lower_corr and upper_corr functions that you can find in this package.
-#' For defect, if you don't specify the type of effect you want to obtain,
-#' it calculates the difference in proportions.
+#' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+#' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
+#' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #'
 effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
   if(p0_e1 < 0 || p0_e1 > 1){
