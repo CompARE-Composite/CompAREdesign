@@ -7,11 +7,11 @@
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
 #' @param p0_e2 numeric parameter, probability of occurrence E2 in the control group
-#' @param type_e1 Effect measure used for the event E1  (type_e1 = "diff" for difference of proportions, type_e1 = "rr" for risk ratio, type_e1 = "or" for odds ratio)
+#' @param effm_e1 Effect measure used for the event E1  (effm_e1 = "diff" for difference of proportions, effm_e1 = "rr" for risk ratio, effm_e1 = "or" for odds ratio)
 #' @param eff_e1 numeric parameter, anticipated effect for the composite component E1
-#' @param type_e2 Effect measure used for the event E2  (type_e2 = "diff" for difference of proportions, type_e2 = "rr" for risk ratio, type_e2 = "or" for odds ratio)
+#' @param effm_e2 Effect measure used for the event E2  (effm_e2 = "diff" for difference of proportions, effm_e2 = "rr" for risk ratio, effm_e2 = "or" for odds ratio)
 #' @param eff_e2 numeric parameter, anticipated effect for the composite component E2
-#' @param effect_ce Effect measure used for the composite endpoint (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
+#' @param effm_ce Effect measure used for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
 #' @param rho numeric parameter, Pearson's correlation between the two events E1 and E2
 #' @param alpha Type I error
 #' @param beta Type II error
@@ -29,21 +29,21 @@
 #'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-samplesize_ce <- function(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2, effect_ce="diff", rho, alpha = 0.05, beta = 0.2, unpooled = TRUE){
+samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho, alpha = 0.05, beta = 0.2, unpooled = TRUE){
 
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  }else if(type_e1 != "diff" && type_e1 != "rr" && type_e1 != "or"){
+  }else if(effm_e1 != "diff" && effm_e1 != "rr" && effm_e1 != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
-  }else if((type_e1 == "diff" && eff_e1 > 0) || (type_e1 == "or" && (eff_e1 < 0 || eff_e1 > 1)) || (type_e1 == "rr" && (eff_e1 < 0 || eff_e1 > 1))){
+  }else if((effm_e1 == "diff" && eff_e1 > 0) || (effm_e1 == "or" && (eff_e1 < 0 || eff_e1 > 1)) || (effm_e1 == "rr" && (eff_e1 < 0 || eff_e1 > 1))){
     stop("The effect of the event E1 is not right")
-  }else if(type_e2 != "diff" && type_e2 != "rr" && type_e2 != "or"){
+  }else if(effm_e2 != "diff" && effm_e2 != "rr" && effm_e2 != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
-  }else if((type_e2 == "diff" && eff_e2 > 0) || (type_e2 == "or" && (eff_e2 < 0 || eff_e2 > 1)) || (type_e2 == "rr" && (eff_e2 < 0 || eff_e2 > 1))){
+  }else if((effm_e2 == "diff" && eff_e2 > 0) || (effm_e2 == "or" && (eff_e2 < 0 || eff_e2 > 1)) || (effm_e2 == "rr" && (eff_e2 < 0 || eff_e2 > 1))){
     stop("The effect of the event E2 is not right")
-  }else if(effect_ce != "diff" && effect_ce != "rr" && effect_ce != "or"){
+  }else if(effm_ce != "diff" && effm_ce != "rr" && effm_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
   }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
     stop("The correlation must be in the correct interval")
@@ -56,31 +56,31 @@ samplesize_ce <- function(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2, effect
   }
 
 
-  if(type_e1 == "or"){
-    p1_e1= (eff_e2*p0_e1/(1-p0_e1))/(1+(eff_e2*p0_e1/(1-p0_e1)))
-  }else if(type_e1 == "rr"){
+  if(effm_e1 == "or"){
+    p1_e1= (eff_e1*p0_e1/(1-p0_e1))/(1+(eff_e1*p0_e1/(1-p0_e1)))
+  }else if(effm_e1 == "rr"){
     p1_e1 = eff_e1 * p0_e1
-  }else if(type_e1 == "diff"){
+  }else if(effm_e1 == "diff"){
     p1_e1 = eff_e1 + p0_e1
   }
 
-  if(type_e2 == "or"){
+  if(effm_e2 == "or"){
     p1_e2 = (eff_e2*p0_e2/(1-p0_e2))/(1+(eff_e2*p0_e2/(1-p0_e2)))
-  }else if(type_e2 == "rr"){
+  }else if(effm_e2 == "rr"){
     p1_e2 = eff_e2 * p0_e2
-  }else if(type_e2 == "diff"){
+  }else if(effm_e2 == "diff"){
     p1_e2 = eff_e2 + p0_e2
   }
 
-  p0_CBE = prob_ce(p_e1=p0_e1, p_e2=p0_e2, rho=rho)
-  p1_CBE = prob_ce(p_e1=p1_e1, p_e2=p1_e2, rho=rho)
+  p0_CBE = prob_cbe(p_e1=p0_e1, p_e2=p0_e2, rho=rho)
+  p1_CBE = prob_cbe(p_e1=p1_e1, p_e2=p1_e2, rho=rho)
 
   # p0_CBE = 1- (1-p0_e1)*(1-p0_e2)*( 1+ rho*sqrt(p0_e1*p0_e2/((1-p0_e1)*(1-p0_e2)) ))
   # p1_CBE = 1- (1-p1_e1)*(1-p1_e2)*( 1+ rho*sqrt(p1_e1*p1_e2/((1-p1_e1)*(1-p1_e2)) ))
 
 
-  if(effect_ce == "rr"){
-    rr_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[1,3]
+  if(effm_ce == "rr"){
+    rr_CBE <- effect_cbe(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "rr")[1,3]
     if(unpooled == TRUE){
       samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
     }else{
@@ -90,8 +90,8 @@ samplesize_ce <- function(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2, effect
       # sample size per group
       samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
     }
-  }else if(effect_ce == "or"){
-    or_CBE = effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "or")[1,3]
+  }else if(effm_ce == "or"){
+    or_CBE = effect_cbe(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "or")[1,3]
     p1 = (or_CBE*p0_CBE/(1-p0_CBE))/(1+(or_CBE*p0_CBE/(1-p0_CBE)))
     if(unpooled == TRUE){
       samp = ((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
@@ -99,7 +99,7 @@ samplesize_ce <- function(p0_e1, p0_e2, type_e1, eff_e1, type_e2, eff_e2, effect
       samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
     }
   }else{
-    diff_CBE <- effect_ce(p0_e1, p0_e2, p1_e1, p1_e2, rho, type = "rr")[1,3]
+    diff_CBE <- effect_cbe(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "rr")[1,3]
     if(unpooled== TRUE){
       samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
     }else{

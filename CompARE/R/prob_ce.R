@@ -20,7 +20,7 @@
 #'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-prob_ce <- function(p_e1, p_e2, rho){
+prob_cbe <- function(p_e1, p_e2, rho){
   if(p_e1 < 0 || p_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p_e2 < 0 || p_e2 > 1){

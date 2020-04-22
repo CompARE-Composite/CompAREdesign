@@ -8,7 +8,7 @@
 #' @param p1_e1 numeric parameter, probability of occurrence E1 in the intervention group
 #' @param p1_e2 numeric parameter, probability of occurrence E2 in the intervention group
 #' @param rho numeric parameter, Pearson correlation between E1 and E2
-#' @param effect_ce character, specifies the effect measure to be calculated  for the composite endpoint (effect_ce = "diff" for difference of proportions, effect_ce = "rr" for risk ratio, effect_ce = "or" for odds ratio)
+#' @param effm_ce character, specifies the effect measure to be calculated  for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
 #'
 #' @export
 #'
@@ -22,7 +22,7 @@
 #'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
+effect_cbe <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "diff"){
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
@@ -33,21 +33,21 @@ effect_ce <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effect_ce = "diff"){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
   }else if(rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
     stop("The correlation must be in the correct interval")
-  }else if(effect_ce != "rr" && effect_ce != "diff" && effect_ce != "or"){
+  }else if(effm_ce != "rr" && effm_ce != "diff" && effm_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
   }
 
-    if(effect_ce == "diff"){
+    if(effm_ce == "diff"){
       diff_e1 = p1_e1 - p0_e1
       diff_e2 = p1_e2 - p0_e2
       effect = prob_ce(p1_e1,p1_e2,rho) - prob_ce(p0_e1,p0_e2,rho)
       effect_out <- data.frame(diff_e1,diff_e2,effect)
-    }else if(effect_ce == "rr"){
+    }else if(effm_ce == "rr"){
       rr_e1 = p1_e1 / p0_e1
       rr_e2 = p1_e2 / p0_e2
       effect = prob_ce(p1_e1,p1_e2,rho)/prob_ce(p0_e1,p0_e2,rho)
       effect_out = data.frame(rr_e1,rr_e2,effect)
-    }else if(effect_ce == "or"){
+    }else if(effm_ce == "or"){
       O10= p0_e1/(1-p0_e1)
       O20= p0_e2/(1-p0_e2)
       or_e1 = (p1_e1/(1-p1_e1))/(p0_e1/(1-p0_e1))
