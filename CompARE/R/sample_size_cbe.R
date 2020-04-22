@@ -45,7 +45,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     stop("The effect of the event E2 is not right")
   }else if(effm_ce != "diff" && effm_ce != "rr" && effm_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
-  }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
+  }else if(rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
     stop("The correlation must be in the correct interval")
   }else if( 0 > alpha || alpha > 1){
     stop("Alpha value must be number between 0 and 1")

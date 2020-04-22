@@ -2,7 +2,7 @@
 % Please edit documentation in R/ARE_cbe.R
 \name{ARE_cbe}
 \alias{ARE_cbe}
-\title{Effect for composite binary endpoints}
+\title{ARE method for composite binary endpoints}
 \usage{
 ARE_cbe(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce = "or", rho)
 }

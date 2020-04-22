@@ -1,4 +1,4 @@
-#' Effect for composite binary endpoints
+#' ARE method for composite binary endpoints
 #'
 #' @description This function calculates the ARE method for binary composite outcomes.
 #'

@@ -5,10 +5,12 @@
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
 #' @param p0_e2 numeric parameter, probability of occurrence E2 in the control group
-#' @param p1_e1 numeric parameter, probability of occurrence E1 in the intervention group
-#' @param p1_e2 numeric parameter, probability of occurrence E2 in the intervention group
-#' @param rho numeric parameter, Pearson correlation between E1 and E2
-#' @param effm_ce character, specifies the effect measure to be calculated  for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
+#' @param effm_e1 Effect measure used for the event E1  (effm_e1 = "diff" for difference of proportions, effm_e1 = "rr" for risk ratio, effm_e1 = "or" for odds ratio)
+#' @param eff_e1 numeric parameter, anticipated effect for the composite component E1
+#' @param effm_e2 Effect measure used for the event E2  (effm_e2 = "diff" for difference of proportions, effm_e2 = "rr" for risk ratio, effm_e2 = "or" for odds ratio)
+#' @param eff_e2 numeric parameter, anticipated effect for the composite component E2
+#' @param effm_ce Effect measure used for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
+#' @param rho numeric parameter, Pearson's correlation between the two events E1 and E2
 #'
 #' @export
 #'
@@ -22,40 +24,80 @@
 #'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-effect_cbe <- function(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "diff"){
+effect_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho){
+  # if(p0_e1 < 0 || p0_e1 > 1){
+  #   stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
+  # }else if(p0_e2 < 0 || p0_e2 > 1){
+  #   stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
+  # }else if(p1_e1 < 0 || p1_e1 > 1){
+  #   stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
+  # }else if(p1_e2 < 0 || p1_e2 > 1){
+  #   stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
+  # }
+
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  }else if(p1_e1 < 0 || p1_e1 > 1){
-    stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
-  }else if(p1_e2 < 0 || p1_e2 > 1){
-    stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  }else if(rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
-    stop("The correlation must be in the correct interval")
-  }else if(effm_ce != "rr" && effm_ce != "diff" && effm_ce != "or"){
+  }else if(effm_e1 != "diff" && effm_e1 != "rr" && effm_e1 != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
+  }else if((effm_e1 == "diff" && eff_e1 > 0) || (effm_e1 == "or" && (eff_e1 < 0 || eff_e1 > 1)) || (effm_e1 == "rr" && (eff_e1 < 0 || eff_e1 > 1))){
+    stop("The effect of the event E1 is not right")
+  }else if(effm_e2 != "diff" && effm_e2 != "rr" && effm_e2 != "or"){
+    stop("You have to choose between odds ratio, relative risk or difference in proportions")
+  }else if((effm_e2 == "diff" && eff_e2 > 0) || (effm_e2 == "or" && (eff_e2 < 0 || eff_e2 > 1)) || (effm_e2 == "rr" && (eff_e2 < 0 || eff_e2 > 1))){
+    stop("The effect of the event E2 is not right")
+  }else if(effm_ce != "diff" && effm_ce != "rr" && effm_ce != "or"){
+    stop("You have to choose between odds ratio, relative risk or difference in proportions")
+  }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
+    stop("The correlation must be in the correct interval")
+  }else if( 0 > alpha || alpha > 1){
+    stop("Alpha value must be number between 0 and 1")
+  }else if( 0 > beta || beta > 1){
+    stop("Beta value must be number between 0 and 1")
+  }else if(unpooled != TRUE && unpooled != FALSE){
+    stop("You must choose between pooled and unpooled variance")
   }
 
-    if(effm_ce == "diff"){
-      diff_e1 = p1_e1 - p0_e1
-      diff_e2 = p1_e2 - p0_e2
-      effect = prob_ce(p1_e1,p1_e2,rho) - prob_ce(p0_e1,p0_e2,rho)
-      effect_out <- data.frame(diff_e1,diff_e2,effect)
-    }else if(effm_ce == "rr"){
-      rr_e1 = p1_e1 / p0_e1
-      rr_e2 = p1_e2 / p0_e2
-      effect = prob_ce(p1_e1,p1_e2,rho)/prob_ce(p0_e1,p0_e2,rho)
-      effect_out = data.frame(rr_e1,rr_e2,effect)
-    }else if(effm_ce == "or"){
-      O10= p0_e1/(1-p0_e1)
-      O20= p0_e2/(1-p0_e2)
-      or_e1 = (p1_e1/(1-p1_e1))/(p0_e1/(1-p0_e1))
-      or_e2 = (p1_e2/(1-p1_e2))/(p0_e2/(1-p0_e2))
-      effect = ((O10*or_e1+1)*(O20*or_e2+1)-1-rho*sqrt(or_e1*or_e2*O10*O20))*(1+rho*sqrt(O10*O20))/
-        (((1+O10)*(1+O20)-1-rho*sqrt(O10*O20))*(1+rho*sqrt(or_e1*or_e2*O10*O20)))
-      effect_out = data.frame(or_e1,or_e2,effect)
-    }
-    colnames(effect_out) <- c("Effect E1","Effect E2","Effect CE")
-    return(effect_out)
+
+
+  if(effm_e1 == "or"){
+    p1_e1= (eff_e1*p0_e1/(1-p0_e1))/(1+(eff_e1*p0_e1/(1-p0_e1)))
+  }else if(effm_e1 == "rr"){
+    p1_e1 = eff_e1 * p0_e1
+  }else if(effm_e1 == "diff"){
+    p1_e1 = eff_e1 + p0_e1
+  }
+
+  if(effm_e2 == "or"){
+    p1_e2 = (eff_e2*p0_e2/(1-p0_e2))/(1+(eff_e2*p0_e2/(1-p0_e2)))
+  }else if(effm_e2 == "rr"){
+    p1_e2 = eff_e2 * p0_e2
+  }else if(effm_e2 == "diff"){
+    p1_e2 = eff_e2 + p0_e2
+  }
+
+  if(effm_ce == "diff"){
+    diff_e1 = p1_e1 - p0_e1
+    diff_e2 = p1_e2 - p0_e2
+    effect = prob_cbe(p1_e1,p1_e2,rho) - prob_ce(p0_e1,p0_e2,rho)
+    effect_out <- data.frame(diff_e1,diff_e2,effect)
+  }else if(effm_ce == "rr"){
+    rr_e1 = p1_e1 / p0_e1
+    rr_e2 = p1_e2 / p0_e2
+    effect = prob_cbe(p1_e1,p1_e2,rho)/prob_ce(p0_e1,p0_e2,rho)
+    effect_out = data.frame(rr_e1,rr_e2,effect)
+  }else if(effm_ce == "or"){
+    O10= p0_e1/(1-p0_e1)
+    O20= p0_e2/(1-p0_e2)
+    or_e1 = (p1_e1/(1-p1_e1))/(p0_e1/(1-p0_e1))
+    or_e2 = (p1_e2/(1-p1_e2))/(p0_e2/(1-p0_e2))
+    effect = ((O10*or_e1+1)*(O20*or_e2+1)-1-rho*sqrt(or_e1*or_e2*O10*O20))*(1+rho*sqrt(O10*O20))/
+      (((1+O10)*(1+O20)-1-rho*sqrt(O10*O20))*(1+rho*sqrt(or_e1*or_e2*O10*O20)))
+    effect_out = data.frame(or_e1,or_e2,effect)
+  }
+
+  colnames(effect_out) <- c("Effect E1","Effect E2","Effect CE")
+  return(effect_out)
+
 }

@@ -4,20 +4,33 @@
 \alias{effect_cbe}
 \title{Effect for composite binary endpoints}
 \usage{
-effect_cbe(p0_e1, p0_e2, p1_e1, p1_e2, rho, effm_ce = "diff")
+effect_cbe(
+  p0_e1,
+  p0_e2,
+  eff_e1,
+  effm_e1,
+  eff_e2,
+  effm_e2,
+  effm_ce = "diff",
+  rho
+)
 }
 \arguments{
 \item{p0_e1}{numeric parameter, probability of occurrence E1 in the control group}
 
 \item{p0_e2}{numeric parameter, probability of occurrence E2 in the control group}
 
-\item{p1_e1}{numeric parameter, probability of occurrence E1 in the intervention group}
+\item{eff_e1}{numeric parameter, anticipated effect for the composite component E1}
 
-\item{p1_e2}{numeric parameter, probability of occurrence E2 in the intervention group}
+\item{effm_e1}{Effect measure used for the event E1  (effm_e1 = "diff" for difference of proportions, effm_e1 = "rr" for risk ratio, effm_e1 = "or" for odds ratio)}
 
-\item{rho}{numeric parameter, Pearson correlation between E1 and E2}
+\item{eff_e2}{numeric parameter, anticipated effect for the composite component E2}
 
-\item{effm_ce}{character, specifies the effect measure to be calculated  for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)}
+\item{effm_e2}{Effect measure used for the event E2  (effm_e2 = "diff" for difference of proportions, effm_e2 = "rr" for risk ratio, effm_e2 = "or" for odds ratio)}
+
+\item{effm_ce}{Effect measure used for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)}
+
+\item{rho}{numeric parameter, Pearson's correlation between the two events E1 and E2}
 }
 \value{
 Returns the effect for the composite binary endpoint and the effects for the composite components
