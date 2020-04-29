@@ -25,14 +25,15 @@ ARE_cbe(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce = "or", rho)
 }
 \value{
 Returns the ARE value.
-
- @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
-Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
-To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
-
-
- @references Bofill Roig, M., & Gomez Melis, G. (2018). Selection of composite binary endpoints in clinical trials. Biometrical Journal, 60(2), 246-261. https://doi.org/10.1002/bimj.201600229
 }
 \description{
 This function calculates the ARE method for binary composite outcomes.
+}
+\details{
+The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
+To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
+}
+\references{
+Bofill Roig, M., & Gomez Melis, G. (2018). Selection of composite binary endpoints in clinical trials. Biometrical Journal, 60(2), 246-261. https://doi.org/10.1002/bimj.201600229
 }

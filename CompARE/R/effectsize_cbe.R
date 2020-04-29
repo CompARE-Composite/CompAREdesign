@@ -16,15 +16,15 @@
 #'
 #' @return Returns the effect for the composite binary endpoint and the effects for the composite components
 #'
-#'  @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+#' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #'
 #'
-#'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
+#' @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-effect_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho){
+effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho){
   # if(p0_e1 < 0 || p0_e1 > 1){
   #   stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   # }else if(p0_e2 < 0 || p0_e2 > 1){
