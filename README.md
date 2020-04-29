@@ -2,7 +2,7 @@
 
 # Description 
 
-The CompARE package contains five key functions:
+The CompARE package contains the following functions:
 
 - *prob_cbe* to compute the probability of a composite binary endpoint;   
 - *lower_corr* to compute the lower bound of Pearson's correlation; 
