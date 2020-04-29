@@ -13,8 +13,12 @@ The package has been mainly designed for calculating the required sample size in
 
 Authors:
 \itemize{
-  \item Raquel Rovira \email{rovirasalvat.raquel@gmail.com}
   \item Jordi Cortes Martinez \email{jordi.cortes-martinez@upc.edu}
+}
+
+Other contributors:
+\itemize{
+  \item Guadalupe Gomez Melis [contributor]
 }
 
 }
