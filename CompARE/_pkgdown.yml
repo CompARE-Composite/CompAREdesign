@@ -1,9 +1,2 @@
 
-template:
-  params:
-    bootswatch: cosmo
-
-authors:
-  Marta Bofill Roig:
-    href:  http://martabofillroig.github.io/
-
+url:  http://martabofillroig.github.io/CompARE/
