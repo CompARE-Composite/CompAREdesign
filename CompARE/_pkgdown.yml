@@ -1,1 +1,9 @@
-destination: docs
+
+template:
+  params:
+    bootswatch: cosmo
+
+authors:
+  Marta Bofill Roig:
+    href:  http://martabofillroig.github.io/
+
