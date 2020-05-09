@@ -9,7 +9,7 @@
 The package has been mainly designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint.
 }
 \author{
-\strong{Maintainer}: Marta Bofill Roig \email{marta.bofill.roig@upc.edu}
+\strong{Maintainer}: Marta Bofill Roig \email{marta.bofill.roig@upc.edu} (\href{https://orcid.org/0000-0002-4400-7541}{ORCID})
 
 Authors:
 \itemize{
