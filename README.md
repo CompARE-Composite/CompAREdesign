@@ -56,5 +56,5 @@ The CompARE package contains the following functions:
 ``` r
 # install.packages("devtools")
 library(devtools)
-install_github("CompARE-Composite/CompARE-package/CompARE")
+install_github("CompARE-Composite/CompARE-package")
 ```
