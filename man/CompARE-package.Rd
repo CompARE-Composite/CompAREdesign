@@ -13,12 +13,12 @@ The package has been mainly designed for calculating the required sample size in
 
 Authors:
 \itemize{
-  \item Jordi Cortes Martinez \email{jordi.cortes-martinez@upc.edu}
+  \item Jordi Cortes Martinez \email{jordi.cortes-martinez@upc.edu} (\href{https://orcid.org/0000-0002-3764-0795}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Guadalupe Gomez Melis [contributor]
+  \item Guadalupe Gomez Melis (\href{https://orcid.org/0000-0003-4252-4884}{ORCID}) [contributor]
 }
 
 }
