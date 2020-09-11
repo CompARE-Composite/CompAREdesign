@@ -23,7 +23,7 @@
 #' @references Bofill Roig, M., & Gomez Melis, G. (2018). Selection of composite binary endpoints in clinical trials. Biometrical Journal, 60(2), 246-261. https://doi.org/10.1002/bimj.201600229
 #'
 #'
-ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="or", rho){
+ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1= "or", eff_e2, effm_e2= "or", effm_ce="or", rho){
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
@@ -38,10 +38,13 @@ ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="or"
     stop("The effect of the event E2 is not right")
   }else if(effm_ce != "diff" && effm_ce != "or"){
     stop("You have to choose between odds ratio, or difference in proportions")
-  }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
-    stop("The correlation must be in the correct interval")
   }
-
+  # else if(
+  #   rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))
+  #   # rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)
+  #   ){
+  #   stop("The correlation must be in the correct interval")
+  # }
 
   if(effm_e1 == "or"){
     p1_e1= (eff_e1*p0_e1/(1-p0_e1))/(1+(eff_e1*p0_e1/(1-p0_e1)))
@@ -57,6 +60,12 @@ ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="or"
     p1_e2 = eff_e2 * p0_e2
   }else if(effm_e2 == "diff"){
     p1_e2 = eff_e2 + p0_e2
+  }
+  
+  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))
+    # rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)
+  ){
+    stop("The correlation must be in the correct interval")
   }
 
   p0_CBE = prob_cbe(p_e1=p0_e1, p_e2=p0_e2, rho=rho)
