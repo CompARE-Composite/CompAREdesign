@@ -62,7 +62,7 @@ ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1= "or", eff_e2, effm_e2= "or", 
     p1_e2 = eff_e2 + p0_e2
   }
   
-  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))
+  if(rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))
     # rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)
   ){
     stop("The correlation must be in the correct interval")
