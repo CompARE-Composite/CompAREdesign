@@ -21,19 +21,10 @@
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #'
 #'
-#' @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
+#' @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092
 #'
 #'
-effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho){
-  # if(p0_e1 < 0 || p0_e1 > 1){
-  #   stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
-  # }else if(p0_e2 < 0 || p0_e2 > 1){
-  #   stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  # }else if(p1_e1 < 0 || p1_e1 > 1){
-  #   stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
-  # }else if(p1_e2 < 0 || p1_e2 > 1){
-  #   stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
-  # }
+effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho){ 
 
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
@@ -51,14 +42,7 @@ effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
   }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
     stop("The correlation must be in the correct interval")
-  }else if( 0 > alpha || alpha > 1){
-    stop("Alpha value must be number between 0 and 1")
-  }else if( 0 > beta || beta > 1){
-    stop("Beta value must be number between 0 and 1")
-  }else if(unpooled != TRUE && unpooled != FALSE){
-    stop("You must choose between pooled and unpooled variance")
   }
-
 
 
   if(effm_e1 == "or"){
