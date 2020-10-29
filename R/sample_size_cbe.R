@@ -87,7 +87,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
 
 
   if(effm_ce == "rr"){
-    rr_CBE <- effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 == "diff", effm_e2 == "diff", rho, effm_ce = "rr")[1,3]
+    rr_CBE <- effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 = "diff", effm_e2 = "diff", rho, effm_ce = "rr")[1,3]
     if(unpooled == TRUE){
       samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
     }else{
@@ -98,7 +98,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
       samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
     }
   }else if(effm_ce == "or"){
-    or_CBE = effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 == "diff", effm_e2 == "diff", rho, effm_ce = "or")[1,3]
+    or_CBE = effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 = "diff", effm_e2 = "diff", rho, effm_ce = "or")[1,3]
     p1 = (or_CBE*p0_CBE/(1-p0_CBE))/(1+(or_CBE*p0_CBE/(1-p0_CBE)))
     if(unpooled == TRUE){
       samp = ((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
@@ -106,7 +106,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
       samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
     }
   }else{
-    diff_CBE <- effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 == "diff", effm_e2 == "diff", rho, effm_ce = "diff")[1,3]
+    diff_CBE <- effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 = "diff", effm_e2 = "diff", rho, effm_ce = "diff")[1,3]
     if(unpooled== TRUE){
       samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
     }else{
