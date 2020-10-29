@@ -4,7 +4,16 @@
 \alias{ARE_cbe}
 \title{ARE method for composite binary endpoints}
 \usage{
-ARE_cbe(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce = "or", rho)
+ARE_cbe(
+  p0_e1,
+  p0_e2,
+  eff_e1,
+  effm_e1 = "or",
+  eff_e2,
+  effm_e2 = "or",
+  effm_ce = "or",
+  rho
+)
 }
 \arguments{
 \item{p0_e1}{numeric parameter, probability of occurrence E1 in the control group}
