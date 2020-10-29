@@ -40,9 +40,10 @@ effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     stop("The effect of the event E2 is not right")
   }else if(effm_ce != "diff" && effm_ce != "rr" && effm_ce != "or"){
     stop("You have to choose between odds ratio, relative risk or difference in proportions")
-  }else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
-    stop("The correlation must be in the correct interval")
   }
+  # else if(rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)){
+  #   stop("The correlation must be in the correct interval")
+  # }
 
 
   if(effm_e1 == "or"){
@@ -59,6 +60,10 @@ effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     p1_e2 = eff_e2 * p0_e2
   }else if(effm_e2 == "diff"){
     p1_e2 = eff_e2 + p0_e2
+  }
+  
+  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
+    stop("The correlation must be in the correct interval")
   }
 
   if(effm_ce == "diff"){
