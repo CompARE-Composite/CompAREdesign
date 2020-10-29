@@ -45,5 +45,5 @@ Note that Pearson's correlation takes values between two bounds that depend on t
 To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 }
 \references{
-Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
+Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092
 }
