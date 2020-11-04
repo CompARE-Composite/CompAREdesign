@@ -42,7 +42,7 @@ samplesize_cbe(
 \item{unpooled}{Variance estimate used for the sample size calculation ("TRUE" for unpooled variance estimate, and "FALSE" for pooled variance estimate).}
 }
 \value{
-Return the sample size for composite binary endpoints based on the anticipated values of the composite components
+Return the total sample size for composite binary endpoints based on the anticipated values of the composite components
 and the association between them in terms of Pearson's correlation.
 }
 \description{
