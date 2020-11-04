@@ -62,19 +62,22 @@ effectsize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     p1_e2 = eff_e2 + p0_e2
   }
   
-  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
+  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > min(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
     stop("The correlation must be in the correct interval")
   }
+  
+  p0_CBE = prob_cbe(p_e1=p0_e1, p_e2=p0_e2, rho=rho)
+  p1_CBE = prob_cbe(p_e1=p1_e1, p_e2=p1_e2, rho=rho)
 
   if(effm_ce == "diff"){
     diff_e1 = p1_e1 - p0_e1
     diff_e2 = p1_e2 - p0_e2
-    effect = prob_cbe(p1_e1,p1_e2,rho) - prob_ce(p0_e1,p0_e2,rho)
+    effect = p1_CBE - p1_CBE
     effect_out <- data.frame(diff_e1,diff_e2,effect)
   }else if(effm_ce == "rr"){
     rr_e1 = p1_e1 / p0_e1
     rr_e2 = p1_e2 / p0_e2
-    effect = prob_cbe(p1_e1,p1_e2,rho)/prob_ce(p0_e1,p0_e2,rho)
+    effect = p1_CBE/p0_CBE
     effect_out = data.frame(rr_e1,rr_e2,effect)
   }else if(effm_ce == "or"){
     O10= p0_e1/(1-p0_e1)

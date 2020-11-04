@@ -19,7 +19,7 @@
 #'
 #' @export
 #'
-#' @return Return the sample size for composite binary endpoints based on the anticipated values of the composite components
+#' @return Return the total sample size for composite binary endpoints based on the anticipated values of the composite components
 #' and the association between them in terms of Pearson's correlation.
 #'
 #' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
@@ -74,7 +74,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     p1_e2 = eff_e2 + p0_e2
   }
   
-  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
+  if(rho < max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho > min(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))){
     stop("The correlation must be in the correct interval")
   }
   
@@ -91,28 +91,24 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
     if(unpooled == TRUE){
       samp = 2*(((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(rr_CBE)))^2*( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE))
     }else{
-
-      p = (rr_CBE*p0_CBE + p0_CBE)/2
-
-      # sample size per group
+      p = (rr_CBE*p0_CBE + p0_CBE)/2 
       samp = 2*(( (qnorm(1-alpha,0,1)* sqrt(2*(1-p)/p) + qnorm(1-beta,0,1)* sqrt( (1-rr_CBE*p0_CBE)/(rr_CBE*p0_CBE) + (1-p0_CBE)/p0_CBE) )/(log(rr_CBE)) )^2  )
     }
   }else if(effm_ce == "or"){
     or_CBE = effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 = "diff", effm_e2 = "diff", rho, effm_ce = "or")[1,3]
     p1 = (or_CBE*p0_CBE/(1-p0_CBE))/(1+(or_CBE*p0_CBE/(1-p0_CBE)))
     if(unpooled == TRUE){
-      samp = ((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
+      samp = 2*((qnorm(1-alpha,0,1)+qnorm(1-beta,0,1))/(log(or_CBE)))^2*( 1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1)) )
     }else{
-      samp = ((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
+      samp = 2*((qnorm(1-alpha,0,1)* sqrt(2/(((p1 + p0_CBE)/2)*(1-((p1 + p0_CBE)/2)))) + qnorm(1-beta,0,1)* sqrt(1/(p0_CBE*(1-p0_CBE)) + 1/(p1*(1-p1))))/(log(or_CBE)))^2
     }
   }else{
     diff_CBE <- effectsize_cbe(p0_e1, p0_e2, eff_e1=p1_e1-p0_e1, eff_e2=p1_e2-p0_e2, effm_e1 = "diff", effm_e2 = "diff", rho, effm_ce = "diff")[1,3]
     if(unpooled== TRUE){
-      samp = ((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
+      samp = 2*((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
     }else{
-      p = (diff_CBE + 2 * p0_CBE)/2
-      # sample size per group
-      samp = ((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff.CBE)^2
+      p = (diff_CBE + 2 * p0_CBE)/2 
+      samp = 2*((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff.CBE)^2
     }
 
   }
