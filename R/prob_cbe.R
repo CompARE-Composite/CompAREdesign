@@ -1,8 +1,8 @@
 #' Probability of composite binary endpoints
 #'
 #'
-#' @description This function calculates the probability of the composite of two events E1 and E2 (i.e., the union of the events E1 and E2).
-#' This probability is calculated by means of the probabilities of each event and the correlation between them.
+#' @description This function calculates the probability of the composite binary endpoint formed by a combination of two events (E1 and E2).
+#' This probability is calculated by means of the probabilities of the composite components (E1 and E2) and the correlation between them in terms of Pearson's correlation coefficient.
 #'
 #'
 #' @param p_e1 numeric parameter, probability of the event E1
@@ -16,8 +16,8 @@
 #' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
-#'
-#'  @references Bofill Roig, M., & Gómez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935–1956. https://doi.org/10.1002/sim.8092
+#' 
+#' @references Bofill Roig, M., & Gomez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092
 #'
 #'
 prob_cbe <- function(p_e1, p_e2, rho){
