@@ -1,5 +1,5 @@
 Package: CompARE
-Title: Statistical functions for studies with composite endpoints
+Title: Statistical functions for the design of studies with composite endpoints
 Version: 0.0.0.9000
 Authors@R: c(person("Marta", "Bofill Roig", email = "marta.bofill.roig@upc.edu", role = c("cre","aut"), 
            comment = c(ORCID = "0000-0002-4400-7541")),
@@ -7,7 +7,7 @@ Authors@R: c(person("Marta", "Bofill Roig", email = "marta.bofill.roig@upc.edu",
 	  person("Guadalupe", "Gomez Melis", role = "ctb", comment = c(ORCID = "0000-0003-4252-4884")))
 Author: Marta Bofill Roig [aut, cre], Jordi Cortes Martinez [aut], Guadalupe Gomez Melis [ctb]
 Maintainer: Marta Bofill Roig <marta.bofill.roig@upc.edu>
-Description: The package has been mainly designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint.
+Description: The package has been designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint, among others.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
