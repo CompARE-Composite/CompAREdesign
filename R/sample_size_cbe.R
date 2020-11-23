@@ -18,7 +18,7 @@
 #' @param unpooled Variance estimate used for the sample size calculation ("TRUE" for unpooled variance estimate, and "FALSE" for pooled variance estimate).
 #'
 #' @export
-#'
+#' @import stats
 #' @return Return the total sample size for composite binary endpoints based on the anticipated values of the composite components
 #' and the association between them in terms of Pearson's correlation.
 #'
@@ -31,6 +31,7 @@
 #'
 samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_ce="diff", rho, alpha = 0.05, beta = 0.2, unpooled = TRUE){
 
+  requireNamespace("stats")
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
@@ -108,7 +109,7 @@ samplesize_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1, eff_e2, effm_e2, effm_
       samp = 2*((qnorm(1-alpha,0,1) +qnorm(1-beta,0,1))/diff_CBE)^2*( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE))
     }else{
       p = (diff_CBE + 2 * p0_CBE)/2 
-      samp = 2*((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff.CBE)^2
+      samp = 2*((qnorm(1-alpha,0,1)* sqrt(2*p*(1-p)) +  qnorm(1-beta,0,1)* sqrt( p0_CBE*(1-p0_CBE) + (diff_CBE+p0_CBE)*(1-p0_CBE-diff_CBE)))/diff_CBE)^2
     }
 
   }

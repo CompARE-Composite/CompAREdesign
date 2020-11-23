@@ -11,4 +11,6 @@ Description: The package has been designed for calculating the required sample s
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+	stats
 RoxygenNote: 7.1.1

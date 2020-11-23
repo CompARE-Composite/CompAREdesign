@@ -1,6 +1,7 @@
 #' ARE method for composite binary endpoints
 #'
-#' @description This function calculates the ARE method for binary composite outcomes.
+#' @description This function calculates the ARE method for binary endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to define the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred. The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2).
+#' 
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
 #' @param p0_e2 numeric parameter, probability of occurrence E2 in the control group
@@ -11,9 +12,9 @@
 #' @param effm_ce Effect measure used for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
 #' @param rho numeric parameter, Pearson's correlation between the two events E1 and E2
 #'
-#' @export
+#' @export 
 #'
-#' @return Returns the ARE value.
+#' @return Returns the ARE value. If the ARE value is larger than 1 then the composite endpoint is preferred over the relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary endpoint of the study.
 #'
 #' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
@@ -39,13 +40,7 @@ ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1= "or", eff_e2, effm_e2= "or", 
   }else if(effm_ce != "diff" && effm_ce != "or"){
     stop("You have to choose between odds ratio, or difference in proportions")
   }
-  # else if(
-  #   rho <= max(c(lower_corr(p0_e1,p0_e2),lower_corr(p1_e1,p1_e2)))  ||  rho >= max(c(upper_corr(p0_e1,p0_e2),upper_corr(p1_e1,p1_e2)))
-  #   # rho <= lower_corr(p0_e1,p0_e2)  ||  rho >= upper_corr(p0_e1,p0_e2)
-  #   ){
-  #   stop("The correlation must be in the correct interval")
-  # }
-
+  
   if(effm_e1 == "or"){
     p1_e1= (eff_e1*p0_e1/(1-p0_e1))/(1+(eff_e1*p0_e1/(1-p0_e1)))
   }else if(effm_e1 == "rr"){
@@ -72,7 +67,7 @@ ARE_cbe <- function(p0_e1, p0_e2, eff_e1, effm_e1= "or", eff_e2, effm_e2= "or", 
     if(effm_ce == "diff"){
       diff_e1 = p1_e1 - p0_e1
       diff_e2 = p1_e2 - p0_e2
-      effect = prob_ce(p1_e1,p1_e2,rho) - prob_ce(p0_e1,p0_e2,rho)
+      effect = prob_cbe(p1_e1,p1_e2,rho) - prob_cbe(p0_e1,p0_e2,rho)
       effect_out <- data.frame(diff_e1,diff_e2,effect)
 
       are <- ( (effect)^2*(p0_e1*(1-p0_e1)) )/( (diff_e1)^2*(p0_CBE*(1-p0_CBE))  )

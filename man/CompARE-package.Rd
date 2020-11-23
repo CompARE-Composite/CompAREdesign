@@ -4,9 +4,9 @@
 \name{CompARE-package}
 \alias{CompARE}
 \alias{CompARE-package}
-\title{CompARE: Statistical functions for studies with composite endpoints}
+\title{CompARE: Statistical functions for the design of studies with composite endpoints}
 \description{
-The package has been mainly designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint.
+The package has been designed for calculating the required sample size in randomized clinical trials with composite endpoints. This package also includes functions for calculating the probability of observing the composite endpoint and the expected effect on the composite endpoint, among others.
 }
 \author{
 \strong{Maintainer}: Marta Bofill Roig \email{marta.bofill.roig@upc.edu} (\href{https://orcid.org/0000-0002-4400-7541}{ORCID})
