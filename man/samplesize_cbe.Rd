@@ -48,11 +48,11 @@ and the association between them in terms of Pearson's correlation.
 \description{
 This function calculates the required sample size for trials with a composite binary endpoint as primary endpoint.
 The primary endpoint is assumed to be a composite binary endpoint formed by a combination of two events (E1 and E2).
-The sample size is computed for evaluating differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
-The sample size is calculated on the basis of anticipated information of the composite components and the correlation between them.
+The sample size is computed to evaluate differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
+The sample size is calculated on the basis of anticipated information on the composite components and the correlation between them.
 }
 \details{
-The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 }

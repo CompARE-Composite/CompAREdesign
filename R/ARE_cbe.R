@@ -1,6 +1,6 @@
 #' ARE method for composite binary endpoints
 #'
-#' @description This function calculates the ARE method for binary endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to define the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred. The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2).
+#' @description The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2). This function calculates the ARE method for binary endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to choose the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred. 
 #' 
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
@@ -16,7 +16,7 @@
 #'
 #' @return Returns the ARE value. If the ARE value is larger than 1 then the composite endpoint is preferred over the relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary endpoint of the study.
 #'
-#' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+#' @details The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #'

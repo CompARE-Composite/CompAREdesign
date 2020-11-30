@@ -2,7 +2,7 @@
 #'
 #' @description This function calculates different effect measures for binary composite outcomes. 
 #' The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2).
-#' The effect size is calculated on the basis of anticipated information of the composite components and the correlation between them. The function allows for computing the effect size in terms of the risk difference, risk ratio and odds ratio. 
+#' The effect size is calculated on the basis of anticipated information on the composite components and the correlation between them. The function allows to compute the effect size in terms of the risk difference, risk ratio and odds ratio. 
 #'
 #' @param p0_e1 numeric parameter, probability of occurrence E1 in the control group
 #' @param p0_e2 numeric parameter, probability of occurrence E2 in the control group
@@ -17,7 +17,7 @@
 #'
 #' @return Returns the effect for the composite binary endpoint and the effects for the composite components.
 #'
-#' @details The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+#' @details The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #'
