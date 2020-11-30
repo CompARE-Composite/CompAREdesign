@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Effect for composite binary endpoints — effectsize_cbe • CompARE</title>
+<title>Effect for composite binary endpoints — effectsize_cbe • CompAREdesign</title>
 
 
 <!-- jquery -->
@@ -40,8 +40,9 @@
 
 
 <meta property="og:title" content="Effect for composite binary endpoints — effectsize_cbe" />
-<meta property="og:description" content="This function calculates different effect measures for binary composite outcomes. In particular,
-it allows for computing the risk difference, risk ratio and odds ratio." />
+<meta property="og:description" content="This function calculates different effect measures for binary composite outcomes. 
+The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2).
+The effect size is calculated on the basis of anticipated information on the composite components and the correlation between them. The function allows to compute the effect size in terms of the risk difference, risk ratio and odds ratio." />
 
 
 
@@ -72,7 +73,7 @@ it allows for computing the risk difference, risk ratio and odds ratio." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">CompARE</a>
+        <a class="navbar-link" href="../index.html">CompAREdesign</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -110,8 +111,9 @@ it allows for computing the risk difference, risk ratio and odds ratio." />
     </div>
 
     <div class="ref-description">
-    <p>This function calculates different effect measures for binary composite outcomes. In particular,
-it allows for computing the risk difference, risk ratio and odds ratio.</p>
+    <p>This function calculates different effect measures for binary composite outcomes. 
+The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2).
+The effect size is calculated on the basis of anticipated information on the composite components and the correlation between them. The function allows to compute the effect size in terms of the risk difference, risk ratio and odds ratio.</p>
     </div>
 
     <pre class="usage"><span class='fu'>effectsize_cbe</span><span class='op'>(</span>
@@ -164,10 +166,10 @@ it allows for computing the risk difference, risk ratio and odds ratio.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the effect for the composite binary endpoint and the effects for the composite components</p>
+    <p>Returns the effect for the composite binary endpoint and the effects for the composite components.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+    <p>The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -185,7 +187,7 @@ To calculate the correlation bounds you can use the R functions lower_corr and u
 
       <footer>
       <div class="copyright">
-  <p>Developed by Marta Bofill Roig, Jordi Cortes Martinez.</p>
+  <p>Developed by Marta Bofill Roig.</p>
 </div>
 
 <div class="pkgdown">

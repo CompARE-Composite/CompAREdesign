@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARE method for composite binary endpoints — ARE_cbe • CompARE</title>
+<title>ARE method for composite binary endpoints — ARE_cbe • CompAREdesign</title>
 
 
 <!-- jquery -->
@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="ARE method for composite binary endpoints — ARE_cbe" />
-<meta property="og:description" content="This function calculates the ARE method for binary composite outcomes." />
+<meta property="og:description" content="The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2). This function calculates the ARE method for binary endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to choose the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred." />
 
 
 
@@ -71,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">CompARE</a>
+        <a class="navbar-link" href="../index.html">CompAREdesign</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -109,7 +109,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function calculates the ARE method for binary composite outcomes.</p>
+    <p>The composite endpoint is assumed to be a binary endpoint formed by a combination of two events (E1 and E2). This function calculates the ARE method for binary endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to choose the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ARE_cbe</span><span class='op'>(</span>
@@ -162,10 +162,10 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the ARE value.</p>
+    <p>Returns the ARE value. If the ARE value is larger than 1 then the composite endpoint is preferred over the relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary endpoint of the study.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+    <p>The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -183,7 +183,7 @@ To calculate the correlation bounds you can use the R functions lower_corr and u
 
       <footer>
       <div class="copyright">
-  <p>Developed by Marta Bofill Roig, Jordi Cortes Martinez.</p>
+  <p>Developed by Marta Bofill Roig.</p>
 </div>
 
 <div class="pkgdown">

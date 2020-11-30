@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample size for composite binary endpoints — samplesize_cbe • CompARE</title>
+<title>Sample size for composite binary endpoints — samplesize_cbe • CompAREdesign</title>
 
 
 <!-- jquery -->
@@ -42,8 +42,8 @@
 <meta property="og:title" content="Sample size for composite binary endpoints — samplesize_cbe" />
 <meta property="og:description" content="This function calculates the required sample size for trials with a composite binary endpoint as primary endpoint.
 The primary endpoint is assumed to be a composite binary endpoint formed by a combination of two events (E1 and E2).
-The sample size is computed for evaluating differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
-The sample size is calculated on the basis of anticipated information of the composite components and the correlation between them." />
+The sample size is computed to evaluate differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
+The sample size is calculated on the basis of anticipated information on the composite components and the correlation between them." />
 
 
 
@@ -74,7 +74,7 @@ The sample size is calculated on the basis of anticipated information of the com
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">CompARE</a>
+        <a class="navbar-link" href="../index.html">CompAREdesign</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
@@ -114,8 +114,8 @@ The sample size is calculated on the basis of anticipated information of the com
     <div class="ref-description">
     <p>This function calculates the required sample size for trials with a composite binary endpoint as primary endpoint.
 The primary endpoint is assumed to be a composite binary endpoint formed by a combination of two events (E1 and E2).
-The sample size is computed for evaluating differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
-The sample size is calculated on the basis of anticipated information of the composite components and the correlation between them.</p>
+The sample size is computed to evaluate differences between two groups  in terms of the risk difference, risk ratio or odds ratio.
+The sample size is calculated on the basis of anticipated information on the composite components and the correlation between them.</p>
     </div>
 
     <pre class="usage"><span class='fu'>samplesize_cbe</span><span class='op'>(</span>
@@ -187,10 +187,12 @@ The sample size is calculated on the basis of anticipated information of the com
 and the association between them in terms of Pearson's correlation.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The input parameters represent the probability of the composite components and Pearson's correlation between the two components.
+    <p>The input parameters stand for the probability of the composite components and Pearson's correlation between the two components.
 Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.</p>
-<p>@references Bofill Roig, M., &amp; Gomez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Bofill Roig, M., &amp; Gomez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -203,7 +205,7 @@ To calculate the correlation bounds you can use the R functions lower_corr and u
 
       <footer>
       <div class="copyright">
-  <p>Developed by Marta Bofill Roig, Jordi Cortes Martinez.</p>
+  <p>Developed by Marta Bofill Roig.</p>
 </div>
 
 <div class="pkgdown">
