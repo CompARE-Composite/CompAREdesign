@@ -9,6 +9,9 @@
 #' @param p_e2 numeric parameter, probability of the event E2
 #'
 #' @export
+#' 
+#' @examples 
+#' CompAREdesign::lower_corr(p_e1=0.1, p_e2=0.6)
 #'
 #' @return Returns the minimum value that the correlation between the two outcomes can take.
 #' @details lower_corr returns a numeric value between -1 and 0.

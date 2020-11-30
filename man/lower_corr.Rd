@@ -21,3 +21,7 @@ This function calculates the lower bound of the correlation based on the probabi
 \details{
 lower_corr returns a numeric value between -1 and 0.
 }
+\examples{
+CompAREdesign::lower_corr(p_e1=0.1, p_e2=0.6)
+
+}

@@ -21,3 +21,7 @@ This function calculates the upper bound of the correlation based on the probabi
 \details{
 upper_corr returns a numeric value between 0 and 1.
 }
+\examples{
+CompAREdesign::upper_corr(p_e1=0.3, p_e2=0.6)
+
+}

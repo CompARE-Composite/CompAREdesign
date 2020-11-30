@@ -17,6 +17,9 @@
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #' 
+#' @examples 
+#' CompAREdesign::prob_cbe(p_e1=0.1, p_e2=0.2, rho=0)
+#' 
 #' @references Bofill Roig, M., & Gomez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092
 #'
 #'
@@ -27,18 +30,7 @@ prob_cbe <- function(p_e1, p_e2, rho){
     stop("The probability of observing the event E2 (p_e2) must be number between 0 and 1")
   }else if(rho < lower_corr(p_e1,p_e2)  ||  rho > upper_corr(p_e1,p_e2)){
     stop("The correlation must be in the correct interval") 
-  }else{ 
-  # else if(rho <= lower_corr(p_e1,p_e2)){
-    # print(rho)
-    # print(lower_corr(p_e1,p_e2))
-    # stop("The correlation must be in the correct interval -- LOW")
-  # }else if(rho >= upper_corr(p_e1,p_e2)){
-    # print(p_e1)
-    # print(p_e2)
-    # print(rho)
-    # print(upper_corr(p_e1,p_e2))
-    # stop("The correlation must be in the correct interval -- UPP") 
-  # }else{
+  }else{  
     prob_ce <- 1- (1-p_e1)*(1-p_e2)*( 1+ rho*sqrt(p_e1*p_e2/((1-p_e1)*(1-p_e2))))
     return(prob_ce)
   }
