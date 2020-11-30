@@ -3,7 +3,7 @@ Title: Statistical Functions for the Design of Studies with Composite Endpoints
 Version: 0.0.0.9000
 Author: Marta Bofill Roig [aut, cre], Jordi Cortes Martinez [aut], Guadalupe Gomez Melis [ctb]
 Maintainer: Marta Bofill Roig <marta.bofill.roig@upc.edu>
-Description: The package has been designed to calculate the required sample size in randomized clinical trials with composite endpoints. This package also includes functions to calculate the probability of observing the composite endpoint and the expected effect on the composite endpoint, among others.
+Description: It has been designed to calculate the required sample size in randomized clinical trials with composite endpoints. This package also includes functions to calculate the probability of observing the composite endpoint and the expected effect on the composite endpoint, among others.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
