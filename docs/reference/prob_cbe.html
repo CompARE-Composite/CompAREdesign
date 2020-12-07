@@ -8,6 +8,13 @@
 
 <title>Probability of composite binary endpoints — prob_cbe • CompAREdesign</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Probability of composite binary endpoints — prob_cbe" />
 <meta property="og:description" content="This function calculates the probability of the composite binary endpoint formed by a combination of two events (E1 and E2).
 This probability is calculated by means of the probabilities of the composite components (E1 and E2) and the correlation between them in terms of Pearson's correlation coefficient." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -73,7 +81,7 @@ This probability is calculated by means of the probabilities of the composite co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CompAREdesign</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
       </span>
     </div>
 
@@ -145,6 +153,10 @@ To calculate the correlation bounds you can use the R functions lower_corr and u
 
     <p>Bofill Roig, M., &amp; Gomez Melis, G. (2019). A new approach for sizing trials with composite binary endpoints using anticipated marginal values and accounting for the correlation between components. Statistics in Medicine, 38(11), 1935-1956. https://doi.org/10.1002/sim.8092</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>CompAREdesign</span><span class='fu'>::</span><span class='fu'>prob_cbe</span><span class='op'>(</span>p_e1<span class='op'>=</span><span class='fl'>0.1</span>, p_e2<span class='op'>=</span><span class='fl'>0.2</span>, rho<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0.28</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
