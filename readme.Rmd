@@ -2,7 +2,15 @@
 output: github_document
 ---
 
-# CompARE  <img src='figures/logo.png' align="right" height="139" />
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/"
+)
+```
+
+# CompARE <img src="man/figures/logo.png" align="right" alt="" width="250" />
 
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
   
@@ -23,10 +31,10 @@ These vignettes provide an introduction to CompARE:
   - **Time-to-event Tutorial**: Guide document of CompARE for Time-to-event endpoints [Time-to-event Tutorial](http://cinna.upc.edu:3838/compare/CompARETimeToEvent/help_Tutorial.html). 
   - **Binary Tutorial**: Guide document of CompARE for Binary endpoints [Binary Tutorial](http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html).
 
-## `CompARE` R package  
+## `CompAREdesign` R package  
 
 
-The CompARE package contains the following functions:
+The `CompAREdesign` package contains the following functions:
 
 - *prob_cbe* to compute the probability of a composite binary endpoint;   
 - *lower_corr* to compute the lower bound of Pearson's correlation; 

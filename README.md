@@ -1,5 +1,5 @@
 
-# CompARE
+# CompARE <img src="man/figures/logo.png" align="right" alt="" width="250" />
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -37,9 +37,9 @@ vignettes. These vignettes provide an introduction to CompARE:
     [Binary
     Tutorial](http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html).
 
-## `CompARE` R package
+## `CompAREdesign` R package
 
-The CompARE package contains the following functions:
+The `CompAREdesign` package contains the following functions:
 
   - *prob\_cbe* to compute the probability of a composite binary
     endpoint;  
