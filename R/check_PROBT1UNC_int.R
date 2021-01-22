@@ -1,3 +1,11 @@
+#' ARE method for composite time to event endpoints
+#'
+#' @description  
+#' @export 
+#' @keywords external
+#'
+#'
+#'
 check_PROBT1UNC_int <- function(PROBT1UNC_temp){
   PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=0, upper=1,subdivisions=10000)$value, error = function(e) e)
   lower_PROBT1UNC_int <- 0
