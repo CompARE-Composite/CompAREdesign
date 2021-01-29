@@ -2,7 +2,7 @@
 #'
 #' @description  
 #' @export 
-#' @keywords external
+#' @keywords internal 
 #'
 #'
 #'

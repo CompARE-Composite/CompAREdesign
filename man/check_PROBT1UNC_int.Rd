@@ -9,4 +9,4 @@ check_PROBT1UNC_int(PROBT1UNC_temp)
 \description{
 
 }
-\keyword{external}
+\keyword{internal}

@@ -9,4 +9,4 @@ ARE_tte_array(x, case, copula, rhoType)
 \description{
 
 }
-\keyword{external}
+\keyword{internal}
