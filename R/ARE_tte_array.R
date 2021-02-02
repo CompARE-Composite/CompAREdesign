@@ -1,5 +1,6 @@
-#' ARE method for composite time to event endpoints
-#' @description  
+#' ARE applied to several scenarios
+#' 
+#' @description  ARE applied to several combination of parameters
 #' @export 
 #' @keywords internal 
 #' 

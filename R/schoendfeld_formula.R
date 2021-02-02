@@ -1,6 +1,6 @@
-#' Schoendfeld's formula to calculate the number of events required
+#' Schoendfeld's formula
 #'
-#' @description  
+#' @description Schoendfeld's formula to calculate the number of events required
 #' @export 
 #' @keywords internal 
 #'

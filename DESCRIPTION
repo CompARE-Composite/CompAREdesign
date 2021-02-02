@@ -13,5 +13,7 @@ LazyData: true
 Imports:
 	stats,
 	copula,
-	ggplot2
+	ggplot2,
+	rootSolve,
+	numDeriv
 RoxygenNote: 7.1.1

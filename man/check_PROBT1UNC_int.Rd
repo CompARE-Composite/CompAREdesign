@@ -2,11 +2,11 @@
 % Please edit documentation in R/check_PROBT1UNC_int.R
 \name{check_PROBT1UNC_int}
 \alias{check_PROBT1UNC_int}
-\title{ARE method for composite time to event endpoints}
+\title{Part of the ARE formula}
 \usage{
 check_PROBT1UNC_int(PROBT1UNC_temp)
 }
 \description{
-
+Calculates and check part of the denominator in the ARE formula
 }
 \keyword{internal}

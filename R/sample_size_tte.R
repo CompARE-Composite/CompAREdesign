@@ -24,7 +24,7 @@
 #'
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
 #' For the shape parameters (beta_e1, beta_e2) of the Weibull distribution, we recommend to use \eqn{\beta_j=0.5}, \eqn{\beta_j=1} or \eqn{\beta_j=2} if a decreasing, constant or increasing rates over time are expected, respectively.
-#' For the correlation (rho) between both endpoints, generally a positive value is expected as it has no sense to design an study with two endpoints negatively correlated. We recommend to use \eqn{\rho=0.1}, \eqn{\rho=0.3} or {\rho=0.5} for weak, mild and moderate correlations, respectively.
+#' For the correlation (rho) between both endpoints, generally a positive value is expected as it has no sense to design an study with two endpoints negatively correlated. We recommend to use \eqn{\rho=0.1}, \eqn{\rho=0.3} or \eqn{\rho=0.5} for weak, mild and moderate correlations, respectively.
 #' For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 #' In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 #' 
@@ -34,7 +34,7 @@
 #'
 #' @references 
 #' Friedman L.M., Furberg C.D., DeMets D.L. Fundamentals of Clinical Trials. 3rd ed. New York: Springer; 1998.
-#' Cortés Martínez J., Geskus R.B., Kim K., Gómez Melis G. (2021). Using the Geometric Average Hazard Ratio in Sample Size Calculation for Time-to-event Data With Composite Endpoints. Research Square
+#' Cortés Martínez J., Geskus R.B., Kim K. and Gómez Melis G.. Using the Geometric Average Hazard Ratio in Sample Size Calculation for Time-to-event Data With Composite Endpoints, 29 January 2021, PREPRINT (Version 1) available at Research Square DOI: https://doi.org/10.21203/rs.3.rs-152258/v1
 #'
 #'
 samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){
@@ -69,7 +69,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   }
   
   eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_HR = FALSE)
-  gAHR <- eff_size$gAHR
+  gAHR <- eff_size$effect_size$gAHR
   
   ##-- Events
   events_1 <- ifelse(ss_formula=='schoendfeld',
@@ -81,12 +81,19 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   events_c <- schoendfeld_formula(alpha,power,gAHR)
   
   ##-- Sample size --> Falta p1
-  ss_1 <- events_1/p0_e1
-  ss_2 <- events_2/p0_e2
-  ss_c <- events_c/p0_e2
+  p0_star <- eff_size$measures_by_group$pstar[1]
+  p1_star <- eff_size$measures_by_group$pstar[2]
   
+  ss_1 <- 2*ceiling(events_1/(p0_e1 + p1_e1))
+  ss_2 <- 2*ceiling(events_2/(p0_e2 + p1_e2))
+  ss_c <- 2*ceiling(events_c/(p0_star + p1_star))
   
-  return(list('ss_E1' = ceiling(ss_1),
-              'ss_E2' = ceiling(ss_2),
-              'ss_Ec' = ceiling(ss_c))
+  ##-- Output text
+  cat('The total sample size required to conduct a trial with the first component is',formatC(ss_1,digits = 0,big.mark = ','),'\n',
+      'The total sample size required to conduct a trial with the second component is',formatC(ss_2,digits = 0,big.mark = ','),'\n',
+      'The total sample size required to conduct a trial with the composite endpoint is',formatC(ss_c,digits = 0,big.mark = ','))
+  
+  return(list('ss_E1' = ss_1,
+              'ss_E2' = ss_2,
+              'ss_Ec' = ss_c))
 }

@@ -52,7 +52,7 @@ This function calculates the ARE (Assymptotic Relative Efficiency) method for ti
 \details{
 Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
 For the shape parameters (beta_e1, beta_e2) of the Weibull distribution, we recommend to use \eqn{\beta_j=0.5}, \eqn{\beta_j=1} or \eqn{\beta_j=2} if a decreasing, constant or increasing rates over time are expected, respectively.
-For the correlation (rho) between both endpoints, generally a positive value is expected as it has no sense to design an study with two endpoints negatively correlated. We recommend to use \eqn{\rho=0.1}, \eqn{\rho=0.3} or {\rho=0.5} for weak, mild and moderate correlations, respectively.
+For the correlation (rho) between both endpoints, generally a positive value is expected as it has no sense to design an study with two endpoints negatively correlated. We recommend to use \eqn{\rho=0.1}, \eqn{\rho=0.3} or \eqn{\rho=0.5} for weak, mild and moderate correlations, respectively.
 For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 }

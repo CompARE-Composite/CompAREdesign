@@ -1,6 +1,6 @@
-#' ARE method for composite time to event endpoints
-#'
-#' @description  
+#' Part of the ARE formula
+#' 
+#' @description Calculates and check part of the denominator in the ARE formula
 #' @export 
 #' @keywords internal 
 #'

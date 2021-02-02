@@ -1,6 +1,6 @@
-#' Freedman's formula to calculate the number of events required
+#' Freedman's formula
 #'
-#' @description  
+#' @description Freedman's formula to calculate the number of events required
 #' @export 
 #' @keywords internal 
 #'

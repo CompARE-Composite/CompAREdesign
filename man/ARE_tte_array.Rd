@@ -2,11 +2,11 @@
 % Please edit documentation in R/ARE_tte_array.R
 \name{ARE_tte_array}
 \alias{ARE_tte_array}
-\title{ARE method for composite time to event endpoints}
+\title{ARE applied to several scenarios}
 \usage{
 ARE_tte_array(x, case, copula, rhoType)
 }
 \description{
-
+ARE applied to several combination of parameters
 }
 \keyword{internal}
