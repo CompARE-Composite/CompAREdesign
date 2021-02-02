@@ -24,10 +24,10 @@
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
 #' @param plot_HR logical. If the HR over time should be displayed. The default is FALSE
 #' 
-#' @import copula
 #' @import ggplot2
 #' @import rootSolve
-#' @import numDeriv
+#' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
+#' @rawNamespace import(numDeriv, except = hessian)
 #' 
 #' @export 
 #'
