@@ -7,9 +7,22 @@
 #' The function allows to compute the effect size in terms of the geometric average hazard ratio, the average hazard ratio, 
 #' the ratio of restricted mean survival times and the median survival time ratio.
 #' 
+#' @param p0_e1 numeric parameter between 0 and 1, expected proportion of observed events for the endpoint E1
+#' @param p0_e2 numeric parameter between 0 and 1, expected proportion of observed events for the endpoint E2
+#' @param HR_e1 numeric parameter between 0 and 1, expected cause specific hazard Ratio the endpoint E1
+#' @param HR_e2 numeric parameter between 0 and 1, expected cause specific hazard Ratio the endpoint E2
+#' @param beta_e1 numeric positive parameter, shape parameter (\eqn{\beta_1}) for a Weibull distribution for the endpoint E1 in the control group. See details for more info.
+#' @param beta_e2 numeric positive parameter, shape parameter (\eqn{\beta_2}) for a Weibull distribution for the endpoint E2 in the control group. See details for more info.
+#' @param case integer parameter in {1,2,3,4}
+#'             1: none of the endpoints is death
+#'             2: endpoint 2 is death
+#'             3: endpoint 1 is death
+#'             4: both endpoints are death by different causes  
+#' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
+#' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
+#' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
 #' @param plot_HR logical. If the HR over time should be displayed. The default is FALSE
-#' @inheritParams ARE_tte
 #' 
 #' @import copula
 #' @import ggplot2
@@ -205,10 +218,10 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   # p21 <- 1-exp(-(1/b21)^beta_e2)
   
   if(plot_HR){
-    dd <- data.frame(t=t, HR=HRstar)
+    dd <- data.frame(t=t, HRstar=HRstar)
     ymin <- min(HRstar,0.5)
     ymax <- max(HRstar,1)
-    gg1 <- ggplot(dd, aes(x=t,y=HR)) + geom_line(color='blue',size=2) + 
+    gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='blue',size=2) + 
       ylim(ymin,ymax) + 
       ggtitle('HR(t) of the composite endpoint') + 
       xlab('Proportion of follow-up time') + ylab('HR*')

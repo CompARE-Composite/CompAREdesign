@@ -111,8 +111,8 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,theta,copula='Fran
     
     x <- c(NA,NA)
     
-    # Compute b10
-    Fb10 <- function(b10,b20,p1){
+    # To compute b10
+    Fb10_case4 <- function(b10,b20,p1){
       b10-> x[1]
       b20-> x[2]
       integral<-integrate(function(u) {
@@ -123,8 +123,8 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,theta,copula='Fran
       return(integral-p1)
     }
     
-    # Compute b20
-    Fb20<-function(b10,b20,p2) {
+    # To compute b20
+    Fb20_case4 <- function(b10,b20,p2) {
       b10-> x[1]
       b20-> x[2]
       integral<-integrate(function(v) {
@@ -137,7 +137,7 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,theta,copula='Fran
     }
     
     model <- function(x){
-      c(Fb10(x[1],x[2],p1), Fb20(x[1],x[2],p2))
+      c(Fb10_case4(x[1],x[2],p1), Fb20_case4(x[1],x[2],p2))
     }
     
     sol <- multiroot(f = model, start = c(1,1))
