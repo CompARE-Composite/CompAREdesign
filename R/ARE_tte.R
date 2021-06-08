@@ -159,7 +159,8 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       lambdaC21 <- function(t) HR_e2*lambdaC20(t)
       
       
-      # EVALUATION OF LambdaC20 BEFORE COMPUTATION (IT MAY FAIL IN CASES 2/4 FOR BETAS = 0.5 BECAUSE IT IS NOT ALWAYS EVALUABLE AT T=0)
+      # Evaluation of LambdaC20 before computation 
+      # IT MAY FAIL IN CASES 2/4 FOR BETAS = 0.5 BECAUSE IT IS NOT ALWAYS EVALUABLE AT T=0
       # WHENEVER LambdaC20 FAILS, WE INCREASE THE LOWER LIMIT OF INTEGRATION
       LambdaC20_check <- tryCatch(LambdaC20 <- function(t) integrate(lambdaC20,lower=0,upper=t,subdivisions=10000)$value,error = function(e) e)
       lower_LambdaC20 <- 0
@@ -191,13 +192,11 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       
       
       ## Computation of PROBT1UNC
-      PROBT1UNC_temp_num <- function(t) exp(-HR_e2*LambdaC20(t))*Sstar0(t)*lambdaC10(t)
-      PROBT1UNC_temp_den <- function(t) exp(-LambdaC20(t))*1/2 + exp(-HR_e2*LambdaC20(t))*1/2
+      PROBT1UNC_temp_num <- function(t) exp(-HR_e2*LambdaC20(t)) * Sstar0(t) * lambdaC10(t)
+      PROBT1UNC_temp_den <- function(t) 1/2 * (exp(-LambdaC20(t)) + exp(-HR_e2 * LambdaC20(t)))
       PROBT1UNC_temp <- Vectorize(function(t){PROBT1UNC_temp_num(t)/PROBT1UNC_temp_den(t)})
-
       lower_PROBT1UNC_int <- check_PROBT1UNC_int(PROBT1UNC_temp)
-      
-      system.time(PROBT1UNC_int <- integrate(PROBT1UNC_temp,lower=lower_PROBT1UNC_int, upper=1,subdivisions=10000)$value)
+      PROBT1UNC_int <- integrate(PROBT1UNC_temp,lower=lower_PROBT1UNC_int, upper=1,subdivisions=10000)$value
       
       ############################################
       # ARE VALUE:
@@ -205,7 +204,13 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       AREstarT 
     }
   
-  return(AREstarT)
+  if(AREstarT>1){
+    cat("The use of the composite endpoint as primary endoint is recommended over the use of the relevant endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),">1.\n")
+  }else{
+    cat("The use of the first endpoint as primary endoint is recommended over the use of the composite endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),"<1.\n")
+  }
+  
+  return(invisible(AREstarT))
 }
 
 

@@ -81,18 +81,20 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   events_c <- schoendfeld_formula(alpha,power,gAHR)
   
   ##-- Sample size --> Falta p1_e1 y p1_e2
+  p1_e1 <- eff_size$measures_by_group$p_e1[2]
+  p1_e2 <- eff_size$measures_by_group$p_e2[2]
   p0_star <- eff_size$measures_by_group$pstar[1]
   p1_star <- eff_size$measures_by_group$pstar[2]
   
-  ss_1 <- 2*ceiling(events_1/(p0_e1 + p1_e1))
-  ss_2 <- 2*ceiling(events_2/(p0_e2 + p1_e2))
-  ss_c <- 2*ceiling(events_c/(p0_star + p1_star))
+  ss_1 <- as.numeric(2*ceiling(events_1/(p0_e1 + p1_e1)))
+  ss_2 <- as.numeric(2*ceiling(events_2/(p0_e2 + p1_e2)))
+  ss_c <- as.numeric(2*ceiling(events_c/(p0_star + p1_star)))
   
   ##-- Output text
-  cat('The total sample size required to conduct a trial with the first component is',formatC(ss_1,digits = 0,big.mark = ','),'\n',
-      'The total sample size required to conduct a trial with the second component is',formatC(ss_2,digits = 0,big.mark = ','),'\n',
-      'The total sample size required to conduct a trial with the composite endpoint is',formatC(ss_c,digits = 0,big.mark = ','))
-  
+  cat('The total sample size required to conduct a trial with the first component is',format(ss_1,digits = 0,big.mark = ','),'\n',
+      'The total sample size required to conduct a trial with the second component is',format(ss_2,digits = 0,big.mark = ','),'\n',
+      'The total sample size required to conduct a trial with the composite endpoint is',format(ss_c,digits = 0,big.mark = ','),'\n')
+
   return(list('ss_E1' = ss_1,
               'ss_E2' = ss_2,
               'ss_Ec' = ss_c))
