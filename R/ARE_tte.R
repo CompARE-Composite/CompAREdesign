@@ -130,15 +130,14 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       
 
       # Only marginal Weibull distributions for fT10, fT20, ST10, ST20.
-      # fT10 <- function(t) (beta_e1/b10) * ( (t/b10)^(beta_e1-1) ) * (exp(-(t/b10)^beta_e1))
-      # ST10 <- function(t) exp(-(t/b10)^beta_e1)
-      # fT20 <- function(t) (beta_e2/b20) * ( (t/b20)^(beta_e2-1) ) * (exp(-(t/b20)^beta_e2))
-      # ST20 <- function(t) exp(-(t/b20)^beta_e2)
-      fT10 <- function(t) dweibull(x=t,beta_e1,b10)
-      ST10 <- function(t) 1-pweibull(q=t,beta_e1,b10)
-      
-      fT20 <- function(t) dweibull(x=t,beta_e2,b20)
-      ST20 <- function(t) 1-pweibull(q=t,beta_e2,b20)
+      # fT10 <- function(t) dweibull(x=t,beta_e1,b10)
+      # ST10 <- function(t) 1-pweibull(q=t,beta_e1,b10)
+      # 
+      # fT20 <- function(t) dweibull(x=t,beta_e2,b20)
+      # ST20 <- function(t) 1-pweibull(q=t,beta_e2,b20)
+      fT0 <- function(t,beta,b) dweibull(x=t,beta,b)         # density function
+      ST0 <- function(t,beta,b) 1-pweibull(q=t,beta,b)       # survival function
+
       
       
       # Sstar0 and fstar0 for any copula
@@ -147,15 +146,15 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       
       ##-- Cause specific (CS) hazards
       # CS endpoint 1
-      aux21 <- function(t,y) theta*exp(-theta*(ST10(t)+y))*(1-exp(-theta))/(exp(-theta)-exp(-theta*ST10(t))-exp(-theta*y)+exp(-theta*(ST10(t)+y)))^2
-      aux22 <- function(u) {integrate(aux21,0, ST20(u),t=u,subdivisions=10000)$value} # t=u indicates that we are derivating respect to the other variable in aux21(t,y). That is, respect to y.
-      lambdaC10 <- function(t) aux22(t)*fT10(t)/Sstar0(t)
+      aux21 <- function(t,y) theta*exp(-theta*(ST0(t,beta_e1,b10)+y))*(1-exp(-theta))/(exp(-theta)-exp(-theta*ST0(t,beta_e1,b10))-exp(-theta*y)+exp(-theta*(ST0(t,beta_e1,b10)+y)))^2
+      aux22 <- function(u) {integrate(aux21,0, ST0(u,beta_e2,b20),t=u,subdivisions=10000)$value} # t=u indicates that we are derivating respect to the other variable in aux21(t,y). That is, respect to y.
+      lambdaC10 <- function(t) aux22(t)*fT0(t,beta_e1,b10)/Sstar0(t)
       lambdaC11 <- function(t) HR_e1*lambdaC10(t)
       
       # CS endpoint 2
-      aux23 <- function(x,t) theta*exp(-theta*(x+ST20(t)))*(1-exp(-theta))/(exp(-theta)-exp(-theta*x)-exp(-theta*ST20(t))+exp(-theta*(x+ST20(t))))^2
-      aux24 <- Vectorize(function(u){integrate(aux23,0,ST10(u),t=u,subdivisions=10000)$value}) #t=u indicates that we are derivating respect to the other variable in aux23(x,t). That is, respect to x.
-      lambdaC20 <- function(t) aux24(t)*fT20(t)/Sstar0(t)
+      aux23 <- function(x,t) theta*exp(-theta*(x+ST0(t,beta_e2,b20)))*(1-exp(-theta))/(exp(-theta)-exp(-theta*x)-exp(-theta*ST0(t,beta_e2,b20))+exp(-theta*(x+ST0(t,beta_e2,b20))))^2
+      aux24 <- Vectorize(function(u){integrate(aux23,0,ST0(u,beta_e1,b10),t=u,subdivisions=10000)$value}) #t=u indicates that we are derivating respect to the other variable in aux23(x,t). That is, respect to x.
+      lambdaC20 <- function(t) aux24(t)*fT0(t,beta_e2,b20)/Sstar0(t)
       lambdaC21 <- function(t) HR_e2*lambdaC20(t)
       
       
@@ -190,13 +189,24 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
       temp4 <- integrate(temp3,0+lower_temp4, 1, subdivisions=10000)$value
       numerator <- (temp4)^2
       
-      
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       ## Computation of PROBT1UNC
       PROBT1UNC_temp_num <- function(t) exp(-HR_e2*LambdaC20(t)) * Sstar0(t) * lambdaC10(t)
       PROBT1UNC_temp_den <- function(t) 1/2 * (exp(-LambdaC20(t)) + exp(-HR_e2 * LambdaC20(t)))
       PROBT1UNC_temp <- Vectorize(function(t){PROBT1UNC_temp_num(t)/PROBT1UNC_temp_den(t)})
-      lower_PROBT1UNC_int <- check_PROBT1UNC_int(PROBT1UNC_temp)
+      PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=0, upper=1,subdivisions=10000)$value, error = function(e) e)
+      lower_LambdaC20 <- 0
+      while(inherits(PROBT1UNC_int_check, "error")=="TRUE"){
+        lower_LambdaC20 <- lower_LambdaC20+0.001
+        PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
+        print(lower_LambdaC20)
+      }
+      lower_PROBT1UNC_int <- lower_LambdaC20
       PROBT1UNC_int <- integrate(PROBT1UNC_temp,lower=lower_PROBT1UNC_int, upper=1,subdivisions=10000)$value
+      ## End of computation of PROBT1UNC
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       
       ############################################
       # ARE VALUE:
@@ -205,9 +215,9 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copu
     }
   
   if(AREstarT>1){
-    cat("The use of the composite endpoint as primary endoint is recommended over the use of the relevant endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),">1.\n")
+    cat("The use of the composite endpoint as primary endoint is recommended over the use of the relevant endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),"> 1.\n")
   }else{
-    cat("The use of the first endpoint as primary endoint is recommended over the use of the composite endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),"<1.\n")
+    cat("The use of the first endpoint as primary endoint is recommended over the use of the composite endpoint since ARE =",formatC(AREstarT,digits = 3,big.mark = ','),"< 1.\n")
   }
   
   return(invisible(AREstarT))

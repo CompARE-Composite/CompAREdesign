@@ -34,7 +34,7 @@
 #'
 #' @references 
 #' Friedman L.M., Furberg C.D., DeMets D.L. Fundamentals of Clinical Trials. 3rd ed. New York: Springer; 1998.
-#' Cortés Martínez J., Geskus R.B., Kim K. and Gómez Melis G.. Using the Geometric Average Hazard Ratio in Sample Size Calculation for Time-to-event Data With Composite Endpoints, 29 January 2021, PREPRINT (Version 1) available at Research Square DOI: https://doi.org/10.21203/rs.3.rs-152258/v1
+#' Cortés Martínez, J., Geskus, R.B., Kim, K. et al. Using the geometric average hazard ratio in sample size calculation for time-to-event data with composite endpoints. BMC Med Res Methodol 21, 99 (2021). https://doi.org/10.1186/s12874-021-01286-x
 #'
 #'
 samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){
