@@ -56,6 +56,12 @@ For the correlation (rho) between both endpoints, generally a positive value is 
 For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 }
+\examples{
+# Asymptotic relative Efficiency for a specific study where the composite endpoint is recommended
+ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+# Asymptotic relative Efficiency for a specific study where the composite endpoint is not recommended
+ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+}
 \references{
 Gomez Melis, G. and Lagakos, S.W. (2013). Statistical considerations when using a composite endpoint for comparing treatment groups. Statistics in Medicine. Vol 32(5), pp. 719-738. https://doi.org/10.1002/sim.5547
 }

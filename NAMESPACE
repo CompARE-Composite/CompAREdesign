@@ -20,7 +20,7 @@ export(samplesize_cbe)
 export(samplesize_tte)
 export(schoendfeld_formula)
 export(upper_corr)
-
+import(copula)
 import(copula, except = c(profile,coef,logLik,confint))
 import(ggplot2)
 import(numDeriv, except = hessian)

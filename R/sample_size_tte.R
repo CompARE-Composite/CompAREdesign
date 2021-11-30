@@ -91,15 +91,15 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   ss_c <- as.numeric(2*ceiling(events_c/(p0_star + p1_star)))
   
   ##-- Output text
-  cat('The total sample size required to conduct a trial with the first component is',format(ss_1,digits = 0,big.mark = ','),'\n',
-      'The total sample size required to conduct a trial with the second component is',format(ss_2,digits = 0,big.mark = ','),'\n',
-      'The total sample size required to conduct a trial with the composite endpoint is',format(ss_c,digits = 0,big.mark = ','),'\n')
+  # cat('The total sample size required to conduct a trial with the first component is',format(ss_1,digits = 0,big.mark = ','),'\n',
+  #     'The total sample size required to conduct a trial with the second component is',format(ss_2,digits = 0,big.mark = ','),'\n',
+  #     'The total sample size required to conduct a trial with the composite endpoint is',format(ss_c,digits = 0,big.mark = ','),'\n')
 
   ##-- Output data.frame
-  df <- data.frame(Endpoint=c('Endpoint 1','Endpoint 2','Composite endpoint')
-                   "Sample size"=c(ss_1,ss_2,ss_c),
+  df <- data.frame(Endpoint=c('--------','Endpoint 1','Endpoint 2','Composite endpoint'),
+                   "Total sample size"=c("-----------------",ss_1,ss_2,ss_c),
                    check.names = FALSE)
-  print(df)
+  print(df, row.names = FALSE,right=FALSE)
   
   ##-- Returned list
   return(invisible(list('ss_E1' = ss_1,
