@@ -95,7 +95,14 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
       'The total sample size required to conduct a trial with the second component is',format(ss_2,digits = 0,big.mark = ','),'\n',
       'The total sample size required to conduct a trial with the composite endpoint is',format(ss_c,digits = 0,big.mark = ','),'\n')
 
-  return(list('ss_E1' = ss_1,
-              'ss_E2' = ss_2,
-              'ss_Ec' = ss_c))
+  ##-- Output data.frame
+  df <- data.frame(Endpoint=c('Endpoint 1','Endpoint 2','Composite endpoint')
+                   "Sample size"=c(ss_1,ss_2,ss_c),
+                   check.names = FALSE)
+  print(df)
+  
+  ##-- Returned list
+  return(invisible(list('ss_E1' = ss_1,
+                        'ss_E2' = ss_2,
+                        'ss_Ec' = ss_c)))
 }

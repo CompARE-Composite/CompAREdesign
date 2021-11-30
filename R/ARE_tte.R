@@ -33,6 +33,13 @@
 #'
 #' @references Gomez Melis, G. and Lagakos, S.W. (2013). Statistical considerations when using a composite endpoint for comparing treatment groups. Statistics in Medicine. Vol 32(5), pp. 719-738. https://doi.org/10.1002/sim.5547
 #'
+#' @examples
+#' # Asymptotic relative Efficiency for a specific study where the composite endpoint is recommended
+#' ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+#' # Asymptotic relative Efficiency for a specific study where the composite endpoint is not recommended
+#' ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+
+
 ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman'){ 
   
   
