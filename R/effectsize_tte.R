@@ -234,13 +234,24 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
     print(gg1)
   }
   
-  return(list(effect_size=list('gAHR' = round(gAHR,4),
-                               'AHR' = round(AHR,4),
-                               'RMST_ratio' = round(RMST_1/RMST_0,4),
-                               'Median_Ratio' = round(Med_1/Med_0,4)),
-              measures_by_group=list('pstar'= c('Reference'=pstar_0,'Treated'=pstar_1),
-                                     'p_e1'= c('Reference'=p0_e1,'Treated'=p1_e1),
-                                     'p_e2'= c('Reference'=p0_e2,'Treated'=p1_e2),
-                                     'RMST'= c('Reference'=RMST_0,'Treated'=RMST_1),
-                                     'Median'= c('Reference'=Med_0,'Treated'=Med_1))))
+  ##-- Output data.frame
+  df <- data.frame('Effect measure'= c('--------------','gAHR','AHR','RMST ratio','Median ratio','','',''),
+                   'Effect value'  = c('------------',formatC(c(gAHR,AHR,RMST_1/RMST_0,Med_1/Med_0),format='f',digits=4),'','',''),
+                   '|' = rep('|',8),
+                   'Group measure' = c('-------------','','','RMST','Median','Prob. E1','Prob. E2','Prob. CE'),
+                   'Reference'     = c('---------','','',formatC(c(RMST_0,Med_0,p0_e1,p0_e2,pstar_0),format='f',digits=4)),
+                   'Treated'       = c('-------','','',formatC(c(RMST_1,Med_1,p1_e1,p1_e2,pstar_1),format='f',digits=4)),
+                   check.names = FALSE)
+  print(df, row.names = FALSE,right=FALSE)
+  
+  
+  return(invisible(list(effect_size=list('gAHR' = round(gAHR,4),
+                                         'AHR' = round(AHR,4),
+                                         'RMST_ratio' = round(RMST_1/RMST_0,4),
+                                         'Median_Ratio' = round(Med_1/Med_0,4)),
+                        measures_by_group=list('pstar'= c('Reference'=pstar_0,'Treated'=pstar_1),
+                                               'p_e1'= c('Reference'=p0_e1,'Treated'=p1_e1),
+                                               'p_e2'= c('Reference'=p0_e2,'Treated'=p1_e2),
+                                               'RMST'= c('Reference'=RMST_0,'Treated'=RMST_1),
+                                               'Median'= c('Reference'=Med_0,'Treated'=Med_1)))))
 }
