@@ -68,7 +68,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
     stop("The selected formula (ss_formula) must be one of 'schoendfeld' (default) or 'freedman'")
   }
   
-  eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_HR = FALSE)
+  invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_HR = FALSE)))
   gAHR <- eff_size$effect_size$gAHR
   
   ##-- Events

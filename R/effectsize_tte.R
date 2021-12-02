@@ -225,11 +225,11 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   
   if(plot_HR){
     dd <- data.frame(t=t, HRstar=HRstar)
-    ymin <- min(HRstar,0.5)
-    ymax <- max(HRstar,1)
-    gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='blue',size=2) + 
+    ymin <- floor(min(HRstar)*10)/10                 # min(HRstar,0.5)
+    ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) # max(HRstar,1)
+    gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='blue',size=1.5) + 
       ylim(ymin,ymax) + 
-      ggtitle('HR(t) of the composite endpoint') + 
+      ggtitle('HR*(t) of the composite endpoint') + 
       xlab('Proportion of follow-up time') + ylab('HR*')
     print(gg1)
   }
