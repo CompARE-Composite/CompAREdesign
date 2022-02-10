@@ -8,6 +8,8 @@
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
 #' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman' 
+#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE. 
+#' @param plot_res logical. If the sample size according the correlation should be displayed. The default is FALSE
 #' @inheritParams ARE_tte
 #' 
 #' @import copula
@@ -37,7 +39,7 @@
 #' Cortés Martínez, J., Geskus, R.B., Kim, K. et al. Using the geometric average hazard ratio in sample size calculation for time-to-event data with composite endpoints. BMC Med Res Methodol 21, 99 (2021). https://doi.org/10.1186/s12874-021-01286-x
 #'
 #'
-samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){
+samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', alpha=0.05, power=0.80 ,ss_formula='schoendfeld', subdivisions=50, plot_res=FALSE){
   
   requireNamespace("stats")
   if(p0_e1 < 0 || p0_e1 > 1){
@@ -68,7 +70,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
     stop("The selected formula (ss_formula) must be one of 'schoendfeld' (default) or 'freedman'")
   }
   
-  invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_HR = FALSE)))
+  invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_res = FALSE)))
   gAHR <- eff_size$effect_size$gAHR
   
   ##-- Events
@@ -80,15 +82,41 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
                      freedman_formula(alpha,power,HR_e2))
   events_c <- schoendfeld_formula(alpha,power,gAHR)
   
-  ##-- Sample size --> Falta p1_e1 y p1_e2
+  ##-- Probabilities of observing the event
   p1_e1 <- eff_size$measures_by_group$p_e1[2]
   p1_e2 <- eff_size$measures_by_group$p_e2[2]
   p0_star <- eff_size$measures_by_group$pstar[1]
   p1_star <- eff_size$measures_by_group$pstar[2]
   
+  ##-- Sample size
   ss_1 <- as.numeric(2*ceiling(events_1/(p0_e1 + p1_e1)))
   ss_2 <- as.numeric(2*ceiling(events_2/(p0_e2 + p1_e2)))
   ss_c <- as.numeric(2*ceiling(events_c/(p0_star + p1_star)))
+  
+  if(plot_res){
+    rho_seq <- seq(0.01,0.99,length=subdivisions)  # correlation where to calculate SS
+    ss_c_temp <- c()                               # sample size composite for each correlation
+    for(rho_temp in rho_seq){
+      invisible(capture.output(eff_size_temp <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho=rho_temp, rho_type, subdivisions=1000,plot_res = FALSE)))
+      gAHR_temp <- eff_size_temp$effect_size$gAHR
+      
+      ##-- Events
+      events_c_temp <- schoendfeld_formula(alpha,power,gAHR_temp)
+      
+      ##-- Probabilities of observing the event
+      p0_star_temp <- eff_size_temp$measures_by_group$pstar[1]
+      p1_star_temp <- eff_size_temp$measures_by_group$pstar[2]
+      
+      ##-- Sample size
+      ss_c_temp[which(rho_seq==rho_temp)] <- as.numeric(2*ceiling(events_c_temp/(p0_star_temp + p1_star_temp)))
+    }
+    dd <- data.frame(rho=rho_seq, sample_size=ss_c_temp)
+    gg1 <- ggplot(dd,aes(x=rho,y=ss_c_temp)) + 
+      geom_line(color='darkblue',size=1.5) +
+      # geom_point() +
+      xlab('Rho') + ylab('Sample size CE')
+    print(gg1)
+  }
   
   ##-- Output text
   # cat('The total sample size required to conduct a trial with the first component is',format(ss_1,digits = 0,big.mark = ','),'\n',

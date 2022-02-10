@@ -22,7 +22,7 @@
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
-#' @param plot_HR logical. If the HR over time should be displayed. The default is FALSE
+#' @param plot_res logical. If the HR over time should be displayed. The default is FALSE
 #' 
 #' @import ggplot2
 #' @import rootSolve
@@ -65,7 +65,7 @@
 #' @references Schemper, M., Wakounig, S., Heinze, G. (2009). The estimation of average hazard ratios by weighted Cox regression. Stat. in Med. 28(19): 2473--2489. doi:10.1002/sim.3623
 #'
 #'
-effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', subdivisions=1000, plot_HR=FALSE){
+effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', subdivisions=1000, plot_res=FALSE){
  
   requireNamespace("stats")
   
@@ -91,7 +91,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
   }else if(!(is.numeric(subdivisions) && subdivisions>=10)){
     stop("The number of subdivisions must be an integer greater than or equal to 10")
-  }else if(!is.logical(plot_HR)){
+  }else if(!is.logical(plot_res)){
     stop("The parameter plot_HR must be logical")
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
@@ -223,7 +223,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   # p11 <- 1-exp(-(1/b11)^beta_e1)
   # p21 <- 1-exp(-(1/b21)^beta_e2)
   
-  if(plot_HR){
+  if(plot_res){
     dd <- data.frame(t=t, HRstar=HRstar)
     ymin <- floor(min(HRstar)*10)/10                 # min(HRstar,0.5)
     ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) # max(HRstar,1)
