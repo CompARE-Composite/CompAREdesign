@@ -140,35 +140,36 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, cop
   
   ## Endpoint 1
   gg1  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
-    stat_function(fun = sweibull,args = list(shape=MS[[5]]$shape,scale=MS[[5]]$scale),aes(color='red'),size=1.3,linetype='longdash') +
-    stat_function(fun = sweibull,args = list(shape=MS[[7]]$shape,scale=MS[[7]]$scale),aes(color='darkgreen'),size=1.3,linetype='longdash')  +
+    stat_function(fun = sweibull,args = list(shape=MS[[5]]$shape,scale=MS[[5]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
+    stat_function(fun = sweibull,args = list(shape=MS[[7]]$shape,scale=MS[[7]]$scale),aes(color='darkblue'),size=1.3,linetype='longdash')  +
     xlab('Time') + ylab('Survival') + ggtitle('Endpoint 1') +
     scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) + 
     scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
     scale_color_identity(name = "Group",
-                         breaks = c("darkgreen", "red"),
+                         breaks = c('darkblue','lightblue'), # c("darkgreen", "red"),
                          labels = c("Treated", "Control"),
                          guide = "legend") + theme.plot
   
   ## Endpoint 2
   gg2  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
-    stat_function(fun = sweibull,args = list(shape=MS[[6]]$shape,scale=MS[[6]]$scale),aes(color='red'),size=1.3,linetype='longdash') +
-    stat_function(fun = sweibull,args = list(shape=MS[[8]]$shape,scale=MS[[8]]$scale),aes(color='darkgreen'),size=1.3,linetype='longdash')  +
+    stat_function(fun = sweibull,args = list(shape=MS[[6]]$shape,scale=MS[[6]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
+    stat_function(fun = sweibull,args = list(shape=MS[[8]]$shape,scale=MS[[8]]$scale),aes(color='darkblue'),size=1.3,linetype='longdash')  +
     xlab('Time') + ylab('Survival') + ggtitle('Endpoint 2') +
     scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
     scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
     scale_color_identity(name = "Group",
-                         breaks = c("darkgreen", "red"),
+                         breaks = c('darkblue','lightblue'), #c("darkgreen", "red"),
                          labels = c("Treated", "Control"),
                          guide = "legend") + theme.plot
   
 
   ## Composite endpoint
   gg3 <- ggplot() +
-    geom_line(mapping=aes(x=t,y=Sstar0),linetype ='longdash',size=1.3,color='red') +      # S*_1
-    geom_line(mapping=aes(x=t,y=Sstar1),linetype ='longdash',size=1.3,col='darkgreen') +  # S*_2
+    geom_line(mapping=aes(x=t,y=Sstar0),linetype ='longdash',size=1.3,color='lightblue') +      # S*_1
+    geom_line(mapping=aes(x=t,y=Sstar1),linetype ='longdash',size=1.3,color='darkblue') +        #'darkgreen' # S*_2
     scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
-    scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
+    scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,
+                       labels=pretty(0:1*f_time),expand=c(0,0.01)) +
     xlab('Time') + ylab('Survival') + ggtitle('Composite endpoint') + theme.plot
 
   g_legend <- function(a.gplot){
