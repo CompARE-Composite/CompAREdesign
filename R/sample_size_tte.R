@@ -9,7 +9,7 @@
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
 #' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman' 
 #' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE. 
-#' @param plot_res logical. If the sample size according the correlation should be displayed. The default is FALSE
+#' @param plot_res logical indicating if the sample size according to the correlation should be displayed. The default is FALSE
 #' @inheritParams ARE_tte
 #' 
 #' @import copula

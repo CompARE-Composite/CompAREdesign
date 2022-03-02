@@ -17,7 +17,9 @@ samplesize_tte(
   rho_type = "Spearman",
   alpha = 0.05,
   power = 0.8,
-  ss_formula = "schoendfeld"
+  ss_formula = "schoendfeld",
+  subdivisions = 50,
+  plot_res = FALSE
 )
 }
 \arguments{
@@ -50,6 +52,10 @@ samplesize_tte(
 \item{power}{numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}}
 
 \item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman'}
+
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE.}
+
+\item{plot_res}{logical indicating if the sample size according to the correlation should be displayed. The default is FALSE}
 }
 \value{
 A list containing the following components:

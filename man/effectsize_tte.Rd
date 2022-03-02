@@ -16,7 +16,7 @@ effectsize_tte(
   rho = 0.3,
   rho_type = "Spearman",
   subdivisions = 1000,
-  plot_HR = FALSE
+  plot_res = FALSE
 )
 }
 \arguments{
@@ -46,7 +46,7 @@ effectsize_tte(
 
 \item{subdivisions}{integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000.}
 
-\item{plot_HR}{logical. If the HR over time should be displayed. The default is FALSE}
+\item{plot_res}{logical. If the HR over time should be displayed. The default is FALSE}
 }
 \value{
 A list formed by two lists: \code{effect_size}, which contains the expected treatment effect measures and \code{measures_by_group}, which contains some measures for each group

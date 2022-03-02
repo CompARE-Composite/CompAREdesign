@@ -14,7 +14,9 @@ ARE_tte(
   case,
   copula = "Frank",
   rho = 0.3,
-  rho_type = "Spearman"
+  rho_type = "Spearman",
+  subdivisions = 50,
+  plot_res = FALSE
 )
 }
 \arguments{
@@ -41,6 +43,10 @@ ARE_tte(
 \item{rho}{numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.}
 
 \item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
+
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE.}
+
+\item{plot_res}{logical indicating if the ARE according to the correlation should be displayed. The default is FALSE}
 }
 \value{
 Returns the ARE value. If the ARE value is larger than 1 then the composite endpoint is preferred over the relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary endpoint of the study.
