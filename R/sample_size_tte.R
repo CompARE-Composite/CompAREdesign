@@ -129,8 +129,11 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
                    check.names = FALSE)
   print(df, row.names = FALSE,right=FALSE)
   
-  ##-- Returned list
-  return(invisible(list('ss_E1' = ss_1,
+  return_object <- list('ss_E1' = ss_1,
                         'ss_E2' = ss_2,
-                        'ss_Ec' = ss_c)))
+                        'ss_Ec' = ss_c)
+  if(plot_res) return_object <- c(return_object,gg_object=gg1)
+  
+  ##-- Returned list
+  return(invisible(return_object))
 }

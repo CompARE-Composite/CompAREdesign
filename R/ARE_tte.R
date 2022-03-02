@@ -259,10 +259,14 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
       scale_y_log10(limits=c(1/max(ARE_array),max(ARE_array))) +
       geom_hline(yintercept=1,linetype='dashed')
     print(gg1)
+    return_object <- list(ARE=ARE_array[1],rho=rho_sel,gg_object=gg1)  
+  }else{
+    return_object <- list(ARE=ARE_array[1],rho=rho_sel,gg_object=NA)  
   }
   
+  # class(return_object) <- c('compare')
   
-  return(invisible(ARE_array[1]))
+  return(invisible(return_object))
 }
 
 

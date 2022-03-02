@@ -183,5 +183,10 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, cop
                            gg2+theme(legend.position="none"),
                            gg3+theme(legend.position="none"),ncol=2),
                mylegend,nrow=2,heights=c(10, 1))
-
+  
+  if(plot_res){
+    return_object <- list(gg_object=gg3)
+    return(invisible(return_object))
+  }
+  
 }
