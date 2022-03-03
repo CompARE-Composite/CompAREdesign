@@ -21,8 +21,10 @@
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
+#' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
-#' @param plot_res logical. If the HR over time should be displayed. The default is FALSE
+#' @param plot_res logical indicating if the HR over time should be displayed. The default is FALSE
+#' @param plot_store logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE
 #' 
 #' @import ggplot2
 #' @import rootSolve
@@ -31,7 +33,9 @@
 #' 
 #' @export 
 #'
-#' @return A list formed by two lists: \code{effect_size}, which contains the expected treatment effect measures and \code{measures_by_group}, which contains some measures for each group
+#' @return A list formed by two lists: \code{effect_size}, which contains the 
+#' expected treatment effect measures and \code{measures_by_group}, which contains 
+#' some relevant measures for each group
 #' 
 #' \code{effect_size} list:
 #' 
@@ -51,7 +55,10 @@
 #'     \item{\code{RMST}}{array with the restricted mean survival time for each group}
 #'     \item{\code{Median}}{array with the median surival time for each group}
 #' }
-#'   
+#'
+#' In addition, if \code{plot_store=TRUE} an object of class \code{ggplot} with
+#' the HR over time for composite endpoint is stored in the list.
+#'     
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
 #' For the shape parameters (beta_e1, beta_e2) of the Weibull distribution, we recommend to use \eqn{\beta_j=0.5}, \eqn{\beta_j=1} or \eqn{\beta_j=2} if a decreasing, constant or increasing rates over time are expected, respectively.
 #' For the correlation (rho) between both endpoints, generally a positive value is expected as it has no sense to design an study with two endpoints negatively correlated. We recommend to use \eqn{\rho=0.1}, \eqn{\rho=0.3} or \eqn{\rho=0.5} for weak, mild and moderate correlations, respectively.
@@ -65,7 +72,10 @@
 #' @references Schemper, M., Wakounig, S., Heinze, G. (2009). The estimation of average hazard ratios by weighted Cox regression. Stat. in Med. 28(19): 2473--2489. doi:10.1002/sim.3623
 #'
 #'
-effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman', subdivisions=1000, plot_res=FALSE){
+effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
+                           case, copula = 'Frank', rho=0.3, rho_type='Spearman',
+                           followup_time=1,
+                           subdivisions=1000, plot_res=FALSE, plot_store=FALSE){
  
   requireNamespace("stats")
   
@@ -91,8 +101,12 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
   }else if(!(is.numeric(subdivisions) && subdivisions>=10)){
     stop("The number of subdivisions must be an integer greater than or equal to 10")
+  }else if(!(is.numeric(followup_time) && followup_time>0)){
+    stop("The followup_time must be a positive numeric value")      
   }else if(!is.logical(plot_res)){
-    stop("The parameter plot_HR must be logical")
+    stop("The parameter plot_res must be logical")
+  }else if(!is.logical(plot_store)){
+    stop("The parameter plot_store must be logical")  
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
   }
@@ -223,15 +237,19 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
   # p11 <- 1-exp(-(1/b11)^beta_e1)
   # p21 <- 1-exp(-(1/b21)^beta_e2)
   
-  if(plot_res){
+  f_time <- as.numeric(followup_time)          # follow_up_time 
+  
+  if(plot_res | plot_store){
     dd <- data.frame(t=t, HRstar=HRstar)
     ymin <- floor(min(HRstar)*10)/10                 # min(HRstar,0.5)
     ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) # max(HRstar,1)
-    gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='blue',size=1.5) + 
+    gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='darkblue',size=1.3) +
+      geom_hline(yintercept=1,linetype='dashed') + 
       ylim(ymin,ymax) + 
-      ggtitle('HR*(t) of the composite endpoint') + 
-      xlab('Proportion of follow-up time') + ylab('HR*')
-    print(gg1)
+      scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,
+                         labels=pretty(0:1*f_time),expand=c(0,0.01)) +
+      # ggtitle('HR*(t) of the composite endpoint') + 
+      xlab('Time') + ylab('HR CE')
   }
   
   ##-- Output data.frame
@@ -252,10 +270,14 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, cas
                                                'p_e1'= c('Reference'=p0_e1,'Treated'=p1_e1),
                                                'p_e2'= c('Reference'=p0_e2,'Treated'=p1_e2),
                                                'RMST'= c('Reference'=RMST_0,'Treated'=RMST_1),
-                                               'Median'= c('Reference'=Med_0,'Treated'=Med_1)))
+                                               'Median'= c('Reference'=Med_0,'Treated'=Med_1)),
+                        gg_object=NA)
   
-  if(plot_res) return_object <- c(return_object,gg_object=gg1)
+  ## Print graphic
+  if(plot_res) print(gg1)
   
+  ## Store plot in the output
+  if(plot_store) return_object$gg_object <- gg1
   
   return(invisible(return_object))
 }

@@ -19,8 +19,9 @@
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
-#' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
-#' @param plot_HR logical. If the HR over time should be displayed. The default is FALSE
+#' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
+#' @param plot_res logical indicating if the survival curves should be displayed. The default is TRUE
+#' @param plot_store logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE
 #' 
 #' @import ggplot2
 #' @import rootSolve
@@ -30,7 +31,9 @@
 #' 
 #' @export 
 #'
-#' @return A plot of the survival functions for composite endpoint as well as the plots for the survival for each component.
+#' @return For each group, if  \code{plot_res=TRUE}, the function returns a plot 
+#' of the survival functions for composite endpoint as well as the plots of the 
+#' survival function for each component.
 #'   
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
 #' For the shape parameters (beta_e1, beta_e2) of the Weibull distribution, we recommend to use \eqn{\beta_j=0.5}, \eqn{\beta_j=1} or \eqn{\beta_j=2} if a decreasing, constant or increasing rates over time are expected, respectively.
@@ -41,7 +44,9 @@
 #'
 #'
 
-surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, copula = 'Frank', rho=0.3, rho_type='Spearman',follow_time=1){
+surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
+                     copula = 'Frank', rho=0.3, rho_type='Spearman',followup_time=1, 
+                     plot_res=TRUE, plot_store=FALSE){
   
   requireNamespace("stats")
   
@@ -65,10 +70,12 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, cop
     stop("The correlation (rho) must be a number between -1 and 1 and a number different from 0")
   }else if(!rho_type %in% c('Spearman','Kendall')){
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
-  # }else if(!(is.numeric(subdivisions) && subdivisions>=10)){
-  #   stop("The number of subdivisions must be an integer greater than or equal to 10")
-  # }else if(!is.logical(plot_HR)){
-  #   stop("The parameter plot_HR must be logical")
+  }else if(!(is.numeric(followup_time) && followup_time>0)){
+    stop("The followup_time must be a positive numeric value")    
+  }else if(!is.logical(plot_res)){
+     stop("The parameter plot_res must be logical")
+  }else if(!is.logical(plot_store)){
+    stop("The parameter plot_store must be logical")    
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
   }
@@ -79,9 +86,8 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, cop
   ## To change: constant plot independent of the time of follow-up (change x tick marks but not the plot itself)
   copula0 <- CopulaSelection(copula,rho=rho,rho_type)
   theta <- copula0[[2]] 
-  MS <- MarginalsSelection(beta1=beta_e1,beta2=beta_e2,
-                           HR1=HR_e1,HR2=HR_e2,
-                           p1=p0_e1,p2=p0_e2,case=case,theta=theta,copula=copula)
+  MS <- MarginalsSelection(beta1=beta_e1,beta2=beta_e2,HR1=HR_e1,HR2=HR_e2,p1=p0_e1,p2=p0_e2,
+                           case=case,theta=theta,copula=copula)
   
   ##################################################
   # Survival function
@@ -120,73 +126,84 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, cop
   ##################################################
   # Plots
   ##################################################
-  
-  xmax <- max(1,as.numeric(follow_time),na.rm=TRUE)
-  
-  theme.plot <- theme(legend.position="bottom",
-                      legend.text=element_text(size=15,face='bold'),
-                      legend.title =element_blank(),
-                      legend.key.size = unit(0.8, "cm"),
-                      axis.text=element_text(size=14,hjust=0.5, face='bold'),
-                      axis.title.x=element_text(size=15,face="bold"),
-                      axis.title=element_text(size=15,face="bold"),
-                      plot.title = element_text(face='bold'))
-  
-  # Data for plot
-  t_plot <- c(0.0001, seq(0.04,0.99,0.05))   # x points where to calculate HR*
-  n_t_plot <- length(t_plot)                 # number of x points to calculate survival function
-  f_time <- as.numeric(follow_time)          # follow_up_time  
-  
-  
-  ## Endpoint 1
-  gg1  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
-    stat_function(fun = sweibull,args = list(shape=MS[[5]]$shape,scale=MS[[5]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
-    stat_function(fun = sweibull,args = list(shape=MS[[7]]$shape,scale=MS[[7]]$scale),aes(color='darkblue'),size=1.3,linetype='longdash')  +
-    xlab('Time') + ylab('Survival') + ggtitle('Endpoint 1') +
-    scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) + 
-    scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
-    scale_color_identity(name = "Group",
-                         breaks = c('darkblue','lightblue'), # c("darkgreen", "red"),
-                         labels = c("Treated", "Control"),
-                         guide = "legend") + theme.plot
-  
-  ## Endpoint 2
-  gg2  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
-    stat_function(fun = sweibull,args = list(shape=MS[[6]]$shape,scale=MS[[6]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
-    stat_function(fun = sweibull,args = list(shape=MS[[8]]$shape,scale=MS[[8]]$scale),aes(color='darkblue'),size=1.3,linetype='longdash')  +
-    xlab('Time') + ylab('Survival') + ggtitle('Endpoint 2') +
-    scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
-    scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
-    scale_color_identity(name = "Group",
-                         breaks = c('darkblue','lightblue'), #c("darkgreen", "red"),
-                         labels = c("Treated", "Control"),
-                         guide = "legend") + theme.plot
-  
-
-  ## Composite endpoint
-  gg3 <- ggplot() +
-    geom_line(mapping=aes(x=t,y=Sstar0),linetype ='longdash',size=1.3,color='lightblue') +      # S*_1
-    geom_line(mapping=aes(x=t,y=Sstar1),linetype ='longdash',size=1.3,color='darkblue') +        #'darkgreen' # S*_2
-    scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
-    scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,
-                       labels=pretty(0:1*f_time),expand=c(0,0.01)) +
-    xlab('Time') + ylab('Survival') + ggtitle('Composite endpoint') + theme.plot
-
-  g_legend <- function(a.gplot){
-    tmp <- ggplot_gtable(ggplot_build(a.gplot))
-    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-    legend <- tmp$grobs[[leg]]
-    return(legend)}
-
-  mylegend <- g_legend(gg1)
-  grid.arrange(arrangeGrob(gg1+theme(legend.position="none"),
-                           gg2+theme(legend.position="none"),
-                           gg3+theme(legend.position="none"),ncol=2),
-               mylegend,nrow=2,heights=c(10, 1))
-  
-  if(plot_res){
-    return_object <- list(gg_object=gg3)
-    return(invisible(return_object))
+  if(plot_res | plot_store){
+    xmax <- max(1,as.numeric(followup_time),na.rm=TRUE)
+    
+    theme.plot <- theme(legend.position="bottom",
+                        #legend.text=element_text(size=15,face='bold'),
+                        legend.title =element_blank(),
+                        legend.key.size = unit(0.8, "cm"))
+                        #axis.text=element_text(size=14,hjust=0.5, face='bold'),
+                        #axis.title.x=element_text(size=15,face="bold"),
+                        #axis.title = element_text(size=10))
+                        # plot.title = element_text(face='bold'))
+    
+    # Data for plot
+    t_plot <- c(0.0001, seq(0.04,0.99,0.05))   # x points where to calculate HR*
+    n_t_plot <- length(t_plot)                 # number of x points to calculate survival function
+    f_time <- as.numeric(followup_time)        # follow_up_time  
+    
+    ## Endpoint 1
+    gg1  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
+      stat_function(fun = sweibull,args = list(shape=MS[[5]]$shape,scale=MS[[5]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
+      stat_function(fun = sweibull,args = list(shape=MS[[7]]$shape,scale=MS[[7]]$scale),aes(color='darkcyan'),size=1.3,linetype='longdash')  +
+      xlab('Time') + ylab('Survival E1') + 
+      scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) + 
+      scale_x_continuous(limits=c(0,1),
+                         breaks=pretty(0:1*f_time)/f_time,
+                         labels=pretty(0:1*f_time),expand=c(0,0.01)) +
+      scale_color_identity(name = "Group",
+                           breaks = c('darkcyan','lightblue'), 
+                           labels = c("Treated", "Control"),
+                           guide = "legend") + theme.plot
+    
+    ## Endpoint 2
+    gg2  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
+      stat_function(fun = sweibull,args = list(shape=MS[[6]]$shape,scale=MS[[6]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
+      stat_function(fun = sweibull,args = list(shape=MS[[8]]$shape,scale=MS[[8]]$scale),aes(color='darkcyan'),size=1.3,linetype='longdash')  +
+      xlab('Time') + ylab('Survival E2') + #ggtitle('Endpoint 2') +
+      scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
+      scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
+      scale_color_identity(name = "Group",
+                           breaks = c('darkcyan','lightblue'),
+                           labels = c("Treated", "Control"),
+                           guide = "legend") + theme.plot
+    
+    
+    ## Composite endpoint
+    gg3 <- ggplot() +
+      geom_line(mapping=aes(x=t,y=Sstar0),linetype ='longdash',size=1.3,color='lightblue') +
+      geom_line(mapping=aes(x=t,y=Sstar1),linetype ='longdash',size=1.3,color='darkcyan') +
+      scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
+      scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,
+                         labels=pretty(0:1*f_time),expand=c(0,0.01)) +
+      xlab('Time') + ylab('Survival CE') + 
+      theme.plot
+    
+    gg_all <- ggarrange(gg1,gg2,gg3,nrow=1,ncol=3,common.legend = TRUE)
   }
+
+  # g_legend <- function(a.gplot){
+  #   tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  #   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  #   legend <- tmp$grobs[[leg]]
+  #   return(legend)}
+  # 
+  # mylegend <- g_legend(gg1)
+  # grid.arrange(arrangeGrob(gg1+theme(legend.position="none"),
+  #                          gg2+theme(legend.position="none"),
+  #                          gg3+theme(legend.position="none"),ncol=2),
+  #              mylegend,nrow=2,heights=c(10, 1))
   
+  
+  
+  return_object <- list(gg_object=NA)
+  
+  ## Print graphic
+  if(plot_res) print(gg_all)
+  
+  ## Store plot in the output
+  if(plot_store) return_object$gg_object <- gg3
+  
+  return(invisible(return_object))
 }

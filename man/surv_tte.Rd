@@ -15,7 +15,9 @@ surv_tte(
   copula = "Frank",
   rho = 0.3,
   rho_type = "Spearman",
-  follow_time = 1
+  followup_time = 1,
+  plot_res = TRUE,
+  plot_store = FALSE
 )
 }
 \arguments{
@@ -43,12 +45,16 @@ surv_tte(
 
 \item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
 
-\item{subdivisions}{integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000.}
+\item{followup_time}{numeric parameter indicating the maximum follow up time (in any unit). Default is 1.}
 
-\item{plot_HR}{logical. If the HR over time should be displayed. The default is FALSE}
+\item{plot_res}{logical indicating if the survival curves should be displayed. The default is TRUE}
+
+\item{plot_store}{logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE}
 }
 \value{
-A plot of the survival functions for composite endpoint as well as the plots for the survival for each component.
+For each group, if  \code{plot_res=TRUE}, the function returns a plot 
+of the survival functions for composite endpoint as well as the plots of the 
+survival function for each component.
 }
 \description{
 It provides the survival function for time-to-event composite outcomes. 

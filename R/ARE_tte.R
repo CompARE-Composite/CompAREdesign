@@ -18,13 +18,18 @@
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
-#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE. 
+#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE. 
 #' @param plot_res logical indicating if the ARE according to the correlation should be displayed. The default is FALSE
+#' @param plot_store logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE
 #' 
 #' @import copula
 #' @export 
 #'
-#' @return Returns the ARE value. If the ARE value is larger than 1 then the composite endpoint is preferred over the relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary endpoint of the study.
+#' @return Returns the ARE value along with the fixed correlation. If the ARE 
+#' value is larger than 1 then the composite endpoint is preferred over the 
+#' relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary 
+#' endpoint of the study. In addition, if \code{plot_store=TRUE} an object of 
+#' class \code{ggplot} with the ARE according to the correlation is stored in the output.
 #'
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
 #' For the shape parameters (beta_e1, beta_e2) of the Weibull distribution, we recommend to use \eqn{\beta_j=0.5}, \eqn{\beta_j=1} or \eqn{\beta_j=2} if a decreasing, constant or increasing rates over time are expected, respectively.
@@ -42,8 +47,9 @@
 #' ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
 
 
-ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
-                    copula = 'Frank', rho=0.3, rho_type='Spearman', subdivisions=50, plot_res=FALSE){ 
+ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
+                    case, copula = 'Frank', rho=0.3, rho_type='Spearman', 
+                    subdivisions=50, plot_res=FALSE, plot_store=FALSE){ 
   
   
   requireNamespace("stats")
@@ -67,13 +73,19 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The correlation (rho) must be a number between -1 and 1")
   }else if(!rho_type %in% c('Spearman','Kendall')){
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
+  }else if(!(is.numeric(subdivisions) && subdivisions>=10)){
+    stop("The number of subdivisions must be an integer greater than or equal to 10")    
+  }else if(!is.logical(plot_res)){
+    stop("The parameter plot_res must be logical")
+  }else if(!is.logical(plot_store)){
+    stop("The parameter plot_store must be logical")      
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
   }
   
   # Values of rho where to calculate ARE
   rho_sel <- rho
-  if(plot_res){
+  if(plot_res | plot_store){
     rho_seq <- unique(c(rho,seq(0.01,0.98,length=subdivisions)))
   }else{
     rho_seq <- rho
@@ -86,6 +98,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   pb = txtProgressBar(min = 0, max = length(rho_seq), initial = 0)
   for(rho in rho_seq){
     setTxtProgressBar(pb,which(rho_seq==rho))
+    
     # Copula
     copula0 <- CopulaSelection(copula,rho,rho_type)
     which.copula <- copula0[[1]]
@@ -251,20 +264,25 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
         formatC(ARE_array[1],digits = 3,big.mark = ','),"< 1.\n")
   }
   
-  if(plot_res){
+  if(plot_res | plot_store){
     dd <- data.frame(rho=rho_seq, ARE_c=ARE_array)
     gg1 <- ggplot(dd,aes(x=rho,y=ARE_c)) + 
-      geom_line(color='darkblue',size=1.5) +
-      xlab('Rho') + ylab('ARE CE') +
+      geom_line(color='darkblue',size=1.3) +
+      xlab(expression(rho)) + ylab('ARE CE') +
       scale_y_log10(limits=c(1/max(ARE_array),max(ARE_array))) +
       geom_hline(yintercept=1,linetype='dashed')
-    print(gg1)
-    return_object <- list(ARE=ARE_array[1],rho=rho_sel,gg_object=gg1)  
-  }else{
-    return_object <- list(ARE=ARE_array[1],rho=rho_sel,gg_object=NA)  
   }
   
-  # class(return_object) <- c('compare')
+  return_object <- list(ARE=ARE_array[1],
+                        rho=rho_sel,
+                        gg_object=NA)
+  
+  ## Print graphic
+  if(plot_res) print(gg1)
+  
+  ## Store plot in the output
+  if(plot_store) return_object$gg_object <- gg1
+
   
   return(invisible(return_object))
 }

@@ -18,11 +18,12 @@
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
+#' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
 #' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman' 
-
-#' @import copula
+#' 
+#' @import ggpubr
 #' @export 
 #'
 #' @return Four plots related to composite endpoint are returned:
@@ -44,7 +45,9 @@
 
 
 plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
-                     copula = 'Frank', rho=0.3, rho_type='Spearman', alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){ 
+                     copula = 'Frank', rho=0.3, rho_type='Spearman',
+                     followup_time=1,
+                     alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){ 
   
   
   requireNamespace("stats")
@@ -70,24 +73,41 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
+  }else if(!(is.numeric(followup_time) && followup_time>0)){
+    stop("The followup_time must be a positive numeric value")
+  }else if(alpha<=0 || alpha>=1){
+    stop("The probability of type I error (alpha) must be a numeric value between 0 and 1")
+  }else if(power<=0 || power>=1){
+    stop("The power must be a numeric value between 0 and 1")
+  }else if(!ss_formula %in% c('schoendfeld','freedman')){
+    stop("The selected formula (ss_formula) must be one of 'schoendfeld' (default) or 'freedman'")
   }
   
 
-  plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case, 
-                          copula = copula, rho=rho, rho_type=rho_type, plot_res=TRUE)$gg_object
-  plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,  
-                                copula = copula, rho=rho, rho_type=rho_type, plot_res=TRUE)$gg_object
-  plot_ARE    <- ARE_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,  
-                         copula = copula, rho=rho, rho_type=rho_type, plot_res=TRUE)$gg_object
-  plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
-                                copula = copula, rho=rho, rho_type=rho_type, plot_res=TRUE, 
-                                alpha=0.05, power=0.80 ,ss_formula='schoendfeld')$gg_object
+  invisible(capture.output(plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case, 
+                                copula = copula, rho=rho, rho_type=rho_type,
+                                followup_time=followup_time,
+                                plot_res=FALSE,plot_store=TRUE)$gg_object))
+  
+  invisible(capture.output(plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,  
+                                copula = copula, rho=rho, rho_type=rho_type,
+                                followup_time=followup_time,
+                                plot_res=FALSE,plot_store=TRUE)$gg_object))
+  
+  invisible(capture.output(plot_ARE    <- ARE_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,  
+                                copula = copula, rho=rho, rho_type=rho_type, 
+                                plot_res=FALSE,plot_store=TRUE)$gg_object))
+  
+  invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
+                                copula = copula, rho=rho, rho_type=rho_type, 
+                                plot_res=FALSE,plot_store=TRUE, 
+                                alpha=0.05, power=0.80 ,ss_formula='schoendfeld')$gg_object))
   
     
   print(ggarrange(plot_surv,
-            plot_HR,
-            plot_ARE,
-            plot_SS,nrow=2,ncol=2))
+                  plot_effect,
+                  plot_ARE,
+                  plot_ss,ncol=2,nrow=2))
   
   
 }
