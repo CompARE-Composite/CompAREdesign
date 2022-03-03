@@ -28,10 +28,10 @@
 #'
 #' @return Four plots related to composite endpoint are returned:
 #' \describe{
-#'     \item{Survival curve for the composite endpoint over time}
-#'     \item{Hazard Ratio for the composite endpoint over time}
-#'     \item{ARE according to correlation (\eqn{\rho})}
-#'     \item{Sample size for the composite endpoint according to correlation (\eqn{\rho})} 
+#' \item{S}{Survival curve for the composite endpoint over time}
+#' \item{HR}{Hazard Ratio for the composite endpoint over time}
+#' \item{ARE}{ARE according to correlation (\eqn{\rho})}
+#' \item{SS}{Sample size for the composite endpoint according to correlation (\eqn{\rho})} 
 #' }
 #' 
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 

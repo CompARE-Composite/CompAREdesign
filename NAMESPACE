@@ -26,9 +26,6 @@ import(copula)
 import(copula, except = c(profile,coef,logLik,confint))
 import(ggplot2)
 import(ggpubr)
-import(gridExtra)
-
-import(numDeriv, except = hessian)
 import(numDeriv, except = hessian)
 
 import(rootSolve)

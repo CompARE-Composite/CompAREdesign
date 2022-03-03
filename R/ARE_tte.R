@@ -42,9 +42,11 @@
 #'
 #' @examples
 #' # Asymptotic relative Efficiency for a specific study where the composite endpoint is recommended
-#' ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+#' ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
+#' case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
 #' # Asymptotic relative Efficiency for a specific study where the composite endpoint is not recommended
-#' ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
+#' ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
+#' case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
 
 
 ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
@@ -265,8 +267,8 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }
   
   if(plot_res | plot_store){
-    dd <- data.frame(rho=rho_seq, ARE_c=ARE_array)
-    gg1 <- ggplot(dd,aes(x=rho,y=ARE_c)) + 
+    dd <- data.frame(rho=rho_seq, ARE=ARE_array)
+    gg1 <- ggplot(dd,aes(x=rho,y=ARE)) + 
       geom_line(color='darkblue',size=1.3) +
       xlab(expression(rho)) + ylab('ARE CE') +
       scale_y_log10(limits=c(1/max(ARE_array),max(ARE_array))) +

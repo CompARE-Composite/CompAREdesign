@@ -27,7 +27,6 @@
 #' @import rootSolve
 #' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
 #' @rawNamespace import(numDeriv, except = hessian)
-#' @rawNamespace import(gridExtra)
 #' 
 #' @export 
 #'
