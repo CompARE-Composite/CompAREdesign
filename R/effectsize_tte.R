@@ -218,8 +218,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   AHR <- AHR_num/AHR_den                                                                 # Alternative AHR weighted by f_0 + f_1
     
   ##-- RMST (Restricted Mean Survival Time)
-  RMST_0 <- integrate(Sstar, dist1=T1pdist,dist2=T2pdist,param1=T10param,param2=T20param,dist_biv= distribution0, lower=0,upper=1,subdivisions=subdivisions)$value
-  RMST_1 <- integrate(Sstar, dist1=T1pdist,dist2=T2pdist,param1=T11param,param2=T21param,dist_biv= distribution1, lower=0,upper=1,subdivisions=subdivisions)$value
+  RMST_0 <- followup_time * integrate(Sstar, dist1=T1pdist,dist2=T2pdist,param1=T10param,param2=T20param,dist_biv= distribution0, lower=0,upper=1,subdivisions=subdivisions)$value
+  RMST_1 <- followup_time * integrate(Sstar, dist1=T1pdist,dist2=T2pdist,param1=T11param,param2=T21param,dist_biv= distribution1, lower=0,upper=1,subdivisions=subdivisions)$value
   
   ##-- Probability of event during follow_up
   pstar_0 <- 1 - Sstar(1,dist1=T1pdist,dist2=T2pdist,param1=T10param,param2=T20param,dist_biv= distribution0)
@@ -230,8 +230,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   
   ##-- Median
   limits <- c(0,10)                                                                         # The first and the last values must be in opposite signs for the function
-  Med_0 <- uniroot(Sstar_func_perc, interval=limits,extendInt="yes", perc=0.5,dist1=T1pdist,dist2=T2pdist,param1=T10param,param2=T20param,dist_biv= distribution0)$root  # Find the root (value which equals the function to zero). extendInt="yes": 'interval limits' is extended automatically if necessary
-  Med_1 <- uniroot(Sstar_func_perc, interval=limits,extendInt="yes", perc=0.5,dist1=T1pdist,dist2=T2pdist,param1=T11param,param2=T21param,dist_biv= distribution1)$root  # Find the root (value which equals the function to zero). extendInt="yes": 'interval limits' is extended automatically if necessary
+  Med_0 <- followup_time * uniroot(Sstar_func_perc, interval=limits,extendInt="yes", perc=0.5,dist1=T1pdist,dist2=T2pdist,param1=T10param,param2=T20param,dist_biv= distribution0)$root  # Find the root (value which equals the function to zero). extendInt="yes": 'interval limits' is extended automatically if necessary
+  Med_1 <- followup_time * uniroot(Sstar_func_perc, interval=limits,extendInt="yes", perc=0.5,dist1=T1pdist,dist2=T2pdist,param1=T11param,param2=T21param,dist_biv= distribution1)$root  # Find the root (value which equals the function to zero). extendInt="yes": 'interval limits' is extended automatically if necessary
   
   ##-- Probabilities p11,p21 (Not returned)
   # p11 <- 1-exp(-(1/b11)^beta_e1)
