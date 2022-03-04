@@ -102,7 +102,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     setTxtProgressBar(pb,which(rho_seq==rho))
     
     # Copula
-    copula0 <- CopulaSelection(copula,rho,rho_type)
+    copula0 <- CopulaSelection(copula=copula,rho=rho,rho_type=rho_type)
     which.copula <- copula0[[1]]
     theta <- copula0[[2]]   
     
