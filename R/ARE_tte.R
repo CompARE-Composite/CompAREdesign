@@ -258,13 +258,13 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }
   close(pb)
   
-  if(ARE_array[1]>1){
-    cat("The use of the composite endpoint as primary endpoint is recommended over the use of the relevant endpoint since ARE =",
-        formatC(ARE_array[1],digits = 3,big.mark = ','),"> 1.\n")
-  }else{
-    cat("The use of the first endpoint as primary endpoint is recommended over the use of the composite endpoint since ARE =",
-        formatC(ARE_array[1],digits = 3,big.mark = ','),"< 1.\n")
-  }
+  # if(ARE_array[1]>1){
+  #   cat("The use of the composite endpoint as primary endpoint is recommended over the use of the relevant endpoint since ARE =",
+  #       formatC(ARE_array[1],digits = 3,big.mark = ','),"> 1.\n")
+  # }else{
+  #   cat("The use of the first endpoint as primary endpoint is recommended over the use of the composite endpoint since ARE =",
+  #       formatC(ARE_array[1],digits = 3,big.mark = ','),"< 1.\n")
+  # }
   
   if(plot_res | plot_store){
     dd <- data.frame(rho=rho_seq, ARE=ARE_array)

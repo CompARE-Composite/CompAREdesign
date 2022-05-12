@@ -79,6 +79,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
  
   requireNamespace("stats")
   
+  cat('test_2')
+  
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be a number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){

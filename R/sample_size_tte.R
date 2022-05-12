@@ -48,7 +48,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman', 
                            alpha=0.05, power=0.80 ,ss_formula='schoendfeld', 
                            subdivisions=50, plot_res=FALSE, plot_store=FALSE){
-  
+  cat('test_1')
   requireNamespace("stats")
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be a number between 0 and 1")

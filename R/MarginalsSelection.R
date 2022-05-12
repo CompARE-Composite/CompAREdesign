@@ -28,7 +28,7 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,theta,copula='Fran
     b20 <- 1/((-log(1-p2))^(1/beta2))
   
   ## -- Case 2 --------------------------------------------------------
-  } else if (case==2) {  
+  }else if (case==2){  
     
     Fb10 <- function(b10,p1){
       integral<-integrate(function(u) {
@@ -163,6 +163,7 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,theta,copula='Fran
     p21 <- 1-exp(-(1/b21)^beta2)
   }else if(case==3){
     p11 <- 1-exp(-(1/b11)^beta1)
+    cat(beta1,beta2,b11,b21,case,rho,copula,"\n")
     p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2) # theta or rho?
   }else if(case==4){
     p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1)
