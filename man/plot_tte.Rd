@@ -18,7 +18,7 @@ plot_tte(
   followup_time = 1,
   alpha = 0.05,
   power = 0.8,
-  ss_formula = "schoendfeld"
+  ss_formula = "schoenfeld"
 )
 }
 \arguments{
@@ -52,7 +52,7 @@ plot_tte(
 
 \item{power}{numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}}
 
-\item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman'}
+\item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman'}
 }
 \value{
 Four plots related to composite endpoint are returned:

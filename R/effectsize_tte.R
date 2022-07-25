@@ -3,7 +3,7 @@
 #' @description This function calculates different effect measures for time-to-event composite outcomes. 
 #' The composite endpoint is assumed to be a time-to-event endpoint formed by a combination of two events (E1 and E2).
 #' The effect size is calculated on the basis of anticipated information on the composite components and the correlation between them.
-#' MMarginal distributions are assumed weibull for both endpoints.
+#' Marginal distributions are assumed weibull for both endpoints.
 #' The function allows to compute the effect size in terms of the geometric average hazard ratio, the average hazard ratio, 
 #' the ratio of restricted mean survival times and the median survival time ratio.
 #' 
@@ -79,8 +79,6 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
  
   requireNamespace("stats")
   
-  cat('test_2')
-  
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be a number between 0 and 1")
   }else if(p0_e2 < 0 || p0_e2 > 1){
@@ -122,7 +120,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   theta <- copula0[[2]]   
   
   ##-- Marginal distribution and parameters
-  MarginSelec <- MarginalsSelection(beta_e1,beta_e2,HR_e1,HR_e2,p0_e1,p0_e2,case,theta,copula=copula)
+  MarginSelec <- MarginalsSelection(beta_e1,beta_e2,HR_e1,HR_e2,p0_e1,p0_e2,case,rho,theta,copula=copula)
   
   ##-- Weibull marginal distributions
   T1dist   <- MarginSelec[[1]]

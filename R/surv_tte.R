@@ -86,7 +86,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   copula0 <- CopulaSelection(copula,rho=rho,rho_type)
   theta <- copula0[[2]] 
   MS <- MarginalsSelection(beta1=beta_e1,beta2=beta_e2,HR1=HR_e1,HR2=HR_e2,p1=p0_e1,p2=p0_e2,
-                           case=case,theta=theta,copula=copula)
+                           case=case,rho=rho,theta=theta,copula=copula)
   
   ##################################################
   # Survival function

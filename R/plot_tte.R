@@ -21,7 +21,7 @@
 #' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
-#' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman' 
+#' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman' 
 #' 
 #' @import ggpubr
 #' @export 
@@ -47,7 +47,7 @@
 plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
                      copula = 'Frank', rho=0.3, rho_type='Spearman',
                      followup_time=1,
-                     alpha=0.05, power=0.80 ,ss_formula='schoendfeld'){ 
+                     alpha=0.05, power=0.80 ,ss_formula='schoenfeld'){ 
   
   
   requireNamespace("stats")
@@ -79,8 +79,8 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The probability of type I error (alpha) must be a numeric value between 0 and 1")
   }else if(power<=0 || power>=1){
     stop("The power must be a numeric value between 0 and 1")
-  }else if(!ss_formula %in% c('schoendfeld','freedman')){
-    stop("The selected formula (ss_formula) must be one of 'schoendfeld' (default) or 'freedman'")
+  }else if(!ss_formula %in% c('schoenfeld','freedman')){
+    stop("The selected formula (ss_formula) must be one of 'schoenfeld' (default) or 'freedman'")
   }
   
 
@@ -101,7 +101,7 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
                                 copula = copula, rho=rho, rho_type=rho_type, 
                                 plot_res=FALSE,plot_store=TRUE, 
-                                alpha=0.05, power=0.80 ,ss_formula='schoendfeld')$gg_object))
+                                alpha=0.05, power=0.80 ,ss_formula='schoenfeld')$gg_object))
   
     
   print(ggarrange(plot_surv,

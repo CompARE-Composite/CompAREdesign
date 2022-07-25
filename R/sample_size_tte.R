@@ -7,7 +7,7 @@
 #'
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
-#' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman' 
+#' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman' 
 #' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE.
 #' @param plot_res logical indicating if the sample size according to the correlation should be displayed. The default is FALSE
 #' @param plot_store logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE
@@ -35,8 +35,8 @@
 #' For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 #' In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 #' 
-#' The user can choose between the two most common formulae (Schoendfeld and Freedman) for the sample size calculation for the single components. 
-#' Schoendfeld formula always be used for the composite endpoint.
+#' The user can choose between the two most common formulae (Schoenfeld and Freedman) for the sample size calculation for the single components. 
+#' Schoenfeld formula always be used for the composite endpoint.
 #'
 #'
 #' @references 
@@ -46,9 +46,8 @@
 #'
 samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman', 
-                           alpha=0.05, power=0.80 ,ss_formula='schoendfeld', 
+                           alpha=0.05, power=0.80 ,ss_formula='schoenfeld', 
                            subdivisions=50, plot_res=FALSE, plot_store=FALSE){
-  cat('test_1')
   requireNamespace("stats")
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be a number between 0 and 1")
@@ -74,8 +73,8 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     stop("The probability of type I error (alpha) must be a numeric value between 0 and 1")
   }else if(power<=0 || power>=1){
     stop("The power must be a numeric value between 0 and 1")
-  }else if(!ss_formula %in% c('schoendfeld','freedman')){
-    stop("The selected formula (ss_formula) must be one of 'schoendfeld' (default) or 'freedman'")
+  }else if(!ss_formula %in% c('schoenfeld','freedman')){
+    stop("The selected formula (ss_formula) must be one of 'schoenfeld' (default) or 'freedman'")
   }else if(!is.logical(plot_res)){
     stop("The parameter plot_res must be logical")
   }else if(!is.logical(plot_store)){
@@ -103,13 +102,13 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     gAHR <- eff_size$effect_size$gAHR
     
     ##-- Events
-    events_1 <- ifelse(ss_formula=='schoendfeld',
-                       schoendfeld_formula(alpha,power,HR_e1),
+    events_1 <- ifelse(ss_formula=='schoenfeld',
+                       schoenfeld_formula(alpha,power,HR_e1),
                        freedman_formula(alpha,power,HR_e1))
-    events_2 <- ifelse(ss_formula=='schoendfeld',
-                       schoendfeld_formula(alpha,power,HR_e2),
+    events_2 <- ifelse(ss_formula=='schoenfeld',
+                       schoenfeld_formula(alpha,power,HR_e2),
                        freedman_formula(alpha,power,HR_e2))
-    events_c <- schoendfeld_formula(alpha,power,gAHR)
+    events_c <- schoenfeld_formula(alpha,power,gAHR)
     
     ##-- Probabilities of observing the event
     p1_e1 <- eff_size$measures_by_group$p_e1[2]

@@ -11,7 +11,7 @@
 It has been designed to calculate the required sample size in randomized clinical trials with composite endpoints. This package also includes functions to calculate the probability of observing the composite endpoint and the expected effect on the composite endpoint, among others. The methods implemented can be found in Bofill & Gómez (2019) <doi:10.1002/sim.8092> and Gómez & Lagakos (2013) <doi:10.1002/sim.5547>.
 }
 \author{
-\strong{Maintainer}: Marta Bofill Roig \email{marta.bofill.roig@upc.edu} (\href{https://orcid.org/0000-0002-4400-7541}{ORCID})
+\strong{Maintainer}: Marta Bofill Roig \email{marta.bofillroig@meduniwien.ac.at} (\href{https://orcid.org/0000-0002-4400-7541}{ORCID})
 
 Authors:
 \itemize{

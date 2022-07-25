@@ -17,7 +17,7 @@ samplesize_tte(
   rho_type = "Spearman",
   alpha = 0.05,
   power = 0.8,
-  ss_formula = "schoendfeld",
+  ss_formula = "schoenfeld",
   subdivisions = 50,
   plot_res = FALSE,
   plot_store = FALSE
@@ -52,7 +52,7 @@ samplesize_tte(
 
 \item{power}{numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}}
 
-\item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoendfeld' (default) or 'freedman'}
+\item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman'}
 
 \item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE.}
 
@@ -86,8 +86,8 @@ For the correlation (rho) between both endpoints, generally a positive value is 
 For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 
-The user can choose between the two most common formulae (Schoendfeld and Freedman) for the sample size calculation for the single components. 
-Schoendfeld formula always be used for the composite endpoint.
+The user can choose between the two most common formulae (Schoenfeld and Freedman) for the sample size calculation for the single components. 
+Schoenfeld formula always be used for the composite endpoint.
 }
 \references{
 Friedman L.M., Furberg C.D., DeMets D.L. Fundamentals of Clinical Trials. 3rd ed. New York: Springer; 1998.

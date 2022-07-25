@@ -85,7 +85,7 @@ the HR over time for composite endpoint is stored in the list.
 This function calculates different effect measures for time-to-event composite outcomes. 
 The composite endpoint is assumed to be a time-to-event endpoint formed by a combination of two events (E1 and E2).
 The effect size is calculated on the basis of anticipated information on the composite components and the correlation between them.
-MMarginal distributions are assumed weibull for both endpoints.
+Marginal distributions are assumed weibull for both endpoints.
 The function allows to compute the effect size in terms of the geometric average hazard ratio, the average hazard ratio, 
 the ratio of restricted mean survival times and the median survival time ratio.
 }

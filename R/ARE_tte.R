@@ -107,7 +107,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     theta <- copula0[[2]]   
     
     # Marginal distribution and parameters
-    MarginSelec <- MarginalsSelection(beta_e1,beta_e2,HR_e1,HR_e2,p0_e1,p0_e2,case,theta,copula)
+    MarginSelec <- MarginalsSelection(beta_e1,beta_e2,HR_e1,HR_e2,p0_e1,p0_e2,case,rho,theta,copula)
     T1dist   <- MarginSelec[[1]]
     T2dist   <- MarginSelec[[2]]
     T1pdist  <- MarginSelec[[3]]
