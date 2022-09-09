@@ -7,8 +7,8 @@ v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/li
 <!-- badges: end -->
 
 [**CompARE**](https://cinna.upc.edu/compare/)
-(<https://cinna.upc.edu/compare/>) is a web-platform inspired to provide
-help on issues relating to trials with composite endpoints. CompARE may
+(<https://cinna.upc.edu/compare/>) is a web-platform inspired to 
+help on the design of trials with composite endpoints. CompARE may
 be used as a tool for calculating the elements needed in the planning
 phase of clinical trials involving composite endpoints. With its
 user-friendly interface, CompARE allows to input the main parameters
@@ -58,3 +58,5 @@ The `CompAREdesign` package contains the following functions:
 library(devtools)
 install_github("CompARE-Composite/CompARE-package")
 ```
+
+See also [https://cran.r-project.org/package=CompAREdesign](https://cran.r-project.org/package=CompAREdesign)
