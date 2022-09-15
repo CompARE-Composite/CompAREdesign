@@ -49,23 +49,22 @@ simula_tte(
 \item{sample_size}{sample size for each arm (treated and control)}
 }
 \value{
-A list formed by three data.frames: 
-1) The time and status (0: censored, 1: observed) for the endpoint 1 in both arms; 
-2) The time and status (0: censored, 1: observed) for the endpoint 2 in both arms; ;
-3) The time and status (0: censored, 1: observed) for the composite endpoint in both arms.
-
-\code{simulation} list:
+A data.frame with 7 colums: 
 
 \describe{
-    \item{\code{endpoint_1}}{data.frame endpoint 1}
-    \item{\code{endpoint_2}}{data.frame endpoint 2}
-    \item{\code{endpoint_c}}{data.frame composite endpoint}
+    \item{\code{time_e1}}{time to event for endpoint 1}
+    \item{\code{status_e1}}{The status indicator of endpoint 1, 0=censored, 1=event}
+    \item{\code{time_e2}}{time to event for endpoint 2}
+    \item{\code{status_e2}}{The status indicator of endpoint 2, 0=censored, 1=event}
+    \item{\code{time_ce}}{time to event for composite endpoint}
+    \item{\code{status_ce}}{The status indicator of the composite endpoint, 0=censored, 1=event}
+    \item{\code{treated}}{0 if control arm and 1, otherwise}
 }
 }
 \description{
-This function simulates time-to-event components and their pertinent composite endpoint given some 
-input parameters via copulas.
+This function simulates time-to-event components and their pertinent composite 
+endpoint via copulas.
 }
 \details{
-If \code{sample_size} is not an integer, the number is rounded to the nearest integer.
+If \code{sample_size} is not an integer, it is rounded to the nearest integer.
 }
