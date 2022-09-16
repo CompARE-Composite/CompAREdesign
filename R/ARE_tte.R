@@ -22,7 +22,8 @@
 #' @param plot_res logical indicating if the ARE according to the correlation should be displayed. The default is FALSE
 #' @param plot_store logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE
 #' 
-#' @import copula
+#' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
+#' @import utils
 #' @export 
 #'
 #' @return Returns the ARE value along with the fixed correlation. If the ARE 
@@ -41,10 +42,10 @@
 #' @references Gomez Melis, G. and Lagakos, S.W. (2013). Statistical considerations when using a composite endpoint for comparing treatment groups. Statistics in Medicine. Vol 32(5), pp. 719-738. https://doi.org/10.1002/sim.5547
 #'
 #' @examples
-#' # Asymptotic relative Efficiency for a specific study where the composite endpoint is recommended
+#' # ARE for a specific study where the composite endpoint is recommended
 #' ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
 #' case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
-#' # Asymptotic relative Efficiency for a specific study where the composite endpoint is not recommended
+#' # ARE for a specific study where the composite endpoint is not recommended
 #' ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
 #' case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
 
@@ -267,6 +268,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   # }
   
   if(plot_res | plot_store){
+    ARE <- NULL          # To avoid the note: "no visible binding for global variable 'NULL'"
     dd <- data.frame(rho=rho_seq, ARE=ARE_array)
     gg1 <- ggplot(dd,aes(x=rho,y=ARE)) + 
       geom_line(color='darkblue',size=1.3) +

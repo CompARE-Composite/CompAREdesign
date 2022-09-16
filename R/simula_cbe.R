@@ -8,7 +8,6 @@
 #' @param eff_e1 numeric parameter, anticipated effect for the composite component E1
 #' @param effm_e2 Effect measure used for the event E2  (effm_e2 = "diff" for difference of proportions, effm_e2 = "rr" for risk ratio, effm_e2 = "or" for odds ratio)
 #' @param eff_e2 numeric parameter, anticipated effect for the composite component E2
-#' @param effm_ce Effect measure used for the composite endpoint (effm_ce = "diff" for difference of proportions, effm_ce = "rr" for risk ratio, effm_ce = "or" for odds ratio)
 #' @param rho numeric parameter, Pearson's correlation between the two events E1 and E2
 #' @param samplesize sample size per arm
 #'
@@ -20,7 +19,6 @@
 #' Note that Pearson's correlation takes values between two bounds that depend on the probabilities p0_e1 and p0_e2.
 #' To calculate the correlation bounds you can use the R functions lower_corr and upper_corr, available in this package.
 #' 
-#' @references  
 #'
 #'
 

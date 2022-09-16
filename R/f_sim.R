@@ -1,17 +1,20 @@
 #' Simulation 1-arm
 #' 
-#' @description 
+#' @description Simulation of a trial with a composite endpoint
 #' 
 #' @param p_e1 numeric parameter, probability of the event E1
 #' @param p_e2 numeric parameter, probability of the event E2
-#' @param rho numeric parameter, Pearson's correlation between E1 and E2
+#' @param p_ce probability of the composite endpoint
 #' @param samplesize sample size per arm
 #'
 #' @export 
 #' @keywords internal 
 #'
+#' @return simulated data
 #'
-
+#' @examples
+#' data=f_sim(samplesize=100,p_e1=0.1,p_e2=0.5,p_ce=0.6)
+#' head(data)
 
 f_sim <- function(samplesize,p_e1,p_e2,p_ce){ 
   
@@ -33,6 +36,3 @@ f_sim <- function(samplesize,p_e1,p_e2,p_ce){
   return(out)
 }
 
-# example
-# data=f_sim(samplesize=100,p_e1=0.1,p_e2=0.5,p_ce=0.6)
-# head(data)

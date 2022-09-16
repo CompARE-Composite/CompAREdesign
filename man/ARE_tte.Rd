@@ -70,10 +70,10 @@ For the type of correlation (rho_type), although two different type of correlati
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 }
 \examples{
-# Asymptotic relative Efficiency for a specific study where the composite endpoint is recommended
+# ARE for a specific study where the composite endpoint is recommended
 ARE_tte(p0_e1=0.1, p0_e2=0.1, HR_e1=0.9, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
 case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
-# Asymptotic relative Efficiency for a specific study where the composite endpoint is not recommended
+# ARE for a specific study where the composite endpoint is not recommended
 ARE_tte(p0_e1=0.1, p0_e2=0.05, HR_e1=0.6, HR_e2=0.8, beta_e1 = 1, beta_e2 = 1, 
 case=1, copula = "Frank", rho = 0.3, rho_type = "Spearman")
 }

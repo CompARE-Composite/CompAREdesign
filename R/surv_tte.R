@@ -141,6 +141,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     t_plot <- c(0.0001, seq(0.04,0.99,0.05))   # x points where to calculate HR*
     n_t_plot <- length(t_plot)                 # number of x points to calculate survival function
     f_time <- as.numeric(followup_time)        # follow_up_time  
+    x <- NULL                                  # To avoid the note: "no visible binding for global variable 'x'"
     
     ## Endpoint 1
     gg1  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
@@ -160,7 +161,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     gg2  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
       stat_function(fun = sweibull,args = list(shape=MS[[6]]$shape,scale=MS[[6]]$scale),aes(color='lightblue'),size=1.3,linetype='longdash') +
       stat_function(fun = sweibull,args = list(shape=MS[[8]]$shape,scale=MS[[8]]$scale),aes(color='darkcyan'),size=1.3,linetype='longdash')  +
-      xlab('Time') + ylab('Survival E2') + #ggtitle('Endpoint 2') +
+      xlab('Time') + ylab('Survival E2') + 
       scale_y_continuous(limits=c(0,1),minor_breaks=NULL,expand=c(0,0)) +
       scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,labels=pretty(0:1*f_time),expand=c(0,0.01)) +
       scale_color_identity(name = "Group",
@@ -182,20 +183,6 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     gg_all <- ggarrange(gg1,gg2,gg3,nrow=1,ncol=3,common.legend = TRUE)
   }
 
-  # g_legend <- function(a.gplot){
-  #   tmp <- ggplot_gtable(ggplot_build(a.gplot))
-  #   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-  #   legend <- tmp$grobs[[leg]]
-  #   return(legend)}
-  # 
-  # mylegend <- g_legend(gg1)
-  # grid.arrange(arrangeGrob(gg1+theme(legend.position="none"),
-  #                          gg2+theme(legend.position="none"),
-  #                          gg3+theme(legend.position="none"),ncol=2),
-  #              mylegend,nrow=2,heights=c(10, 1))
-  
-  
-  
   return_object <- list(gg_object=NA)
   
   ## Print graphic

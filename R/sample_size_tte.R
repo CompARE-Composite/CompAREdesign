@@ -13,7 +13,7 @@
 #' @param plot_store logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE
 #' @inheritParams ARE_tte
 #' 
-#' @import copula
+#' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
 #' 
 #' @export 
 #'
@@ -128,6 +128,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }  
   
   if(plot_res | plot_store){
+    sample_size <- NULL                # To avoid the note: "no visible binding for global variable 'sample_size'"
     dd <- data.frame(rho=rho_seq, sample_size=SS_array_c)
     gg1 <- ggplot(dd,aes(x=rho,y=sample_size)) + 
       geom_line(color='darkblue',size=1.3) +
