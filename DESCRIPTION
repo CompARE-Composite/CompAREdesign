@@ -1,6 +1,6 @@
 Package: CompAREdesign
 Title: Statistical Functions for the Design of Studies with Composite Endpoints
-Version: 2.0
+Version: 2.1
 Author: Marta Bofill Roig [aut, cre], Jordi Cortes Martinez [aut], Guadalupe Gomez Melis [ctb]
 Authors@R: c(person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("cre","aut"),comment = c(ORCID = "0000-0002-4400-7541")), 
              person("Jordi", "Cortes Martinez", email = "jordi.cortes-martinez@upc.edu", role = "aut", comment = c(ORCID = "0000-0002-3764-0795")), 

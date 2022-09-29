@@ -98,9 +98,9 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   ARE_array <- c()
   
   # Calculate ARE for each rho
-  pb = txtProgressBar(min = 0, max = length(rho_seq), initial = 0)
+  # pb = txtProgressBar(min = 0, max = length(rho_seq), initial = 0)
   for(rho in rho_seq){
-    setTxtProgressBar(pb,which(rho_seq==rho))
+    # setTxtProgressBar(pb,which(rho_seq==rho))
     
     # Copula
     copula0 <- CopulaSelection(copula=copula,rho=rho,rho_type=rho_type)
@@ -171,12 +171,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       
       
       # Only marginal Weibull distributions for fT10, fT20, ST10, ST20.
-      # fT10 <- function(t) dweibull(x=t,beta_e1,b10)
-      # ST10 <- function(t) 1-pweibull(q=t,beta_e1,b10)
-      # 
-      # fT20 <- function(t) dweibull(x=t,beta_e2,b20)
-      # ST20 <- function(t) 1-pweibull(q=t,beta_e2,b20)
-      fT0 <- function(t,beta,b) dweibull(x=t,beta,b)         # density function
+      fT0 <- function(t,beta,b)   dweibull(x=t,beta,b)       # density function
       ST0 <- function(t,beta,b) 1-pweibull(q=t,beta,b)       # survival function
       
       
@@ -257,15 +252,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     
     ARE_array <- c(ARE_array,AREstarT)
   }
-  close(pb)
-  
-  # if(ARE_array[1]>1){
-  #   cat("The use of the composite endpoint as primary endpoint is recommended over the use of the relevant endpoint since ARE =",
-  #       formatC(ARE_array[1],digits = 3,big.mark = ','),"> 1.\n")
-  # }else{
-  #   cat("The use of the first endpoint as primary endpoint is recommended over the use of the composite endpoint since ARE =",
-  #       formatC(ARE_array[1],digits = 3,big.mark = ','),"< 1.\n")
-  # }
+  # close(pb)
   
   if(plot_res | plot_store){
     ARE <- NULL          # To avoid the note: "no visible binding for global variable 'NULL'"
@@ -287,6 +274,8 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   ## Store plot in the output
   if(plot_store) return_object$gg_object <- gg1
 
+  ## Print ARE
+  print(round(return_object$ARE,3))
   
   return(invisible(return_object))
 }
