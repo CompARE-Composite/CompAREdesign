@@ -93,9 +93,9 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   SS_array_1 <- SS_array_2 <- SS_array_c <- c()
   
   # Calculate Sample size for each rho
-  pb = txtProgressBar(min = 0, max = length(rho_seq), initial = 0)
+  # pb = txtProgressBar(min = 0, max = length(rho_seq), initial = 0)
   for(rho in rho_seq){
-    setTxtProgressBar(pb,which(rho_seq==rho))
+    # setTxtProgressBar(pb,which(rho_seq==rho))
   
     ##-- Effect size
     invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_res = FALSE)))
