@@ -43,27 +43,14 @@ The `CompAREdesign` package contains the following functions:
 - *upper_corr* to compute the upper bound for Pearson's correlation; 
 - *effectsize_cbe* to compute the treatment effect on the composite binary endpoint;
 - *samplesize_cbe* to compute the sample size for composite binary endpoint; 
-- *ARE_cbe* to compute the ARE method for composite binary endpoint; 
-- *surv_tte* to compute the survival function for the composite endpoint and both components;
-- *effectsize_tte*  to compute the treatment effect for the composite endpoint; 
-- *samplesize_tte*  to compute the sample size for the composite endpoint; 
-- *ARE_tte*  to compute the ARE method for time-to-event endpoints; 
-- *plot_tte*  Returns four plots related to previous features; 
-- *simula_tte*  to simulate time-to-event data for the composite and its components.
+- *ARE_cbe* to compute the ARE method for composite binary endpoint. 
 
 ## Installation
 
-```{r, eval = FALSE} 
-require(devtools)
-install_github("CompARE-Composite/CompARE-package") #developers version
-
-install.packages("CompAREdesign") #stable version from CRAN
-library(CompAREdesign)
+```{r, eval = FALSE}
+# install.packages("devtools")
+library(devtools)
+install_github("CompARE-Composite/CompARE-package")
 ```
-
-## References
-
-- Jordi Cortes-Martinez, Marta Bofill Roig, Guadalupe Gómez Melis (2022). Design of Trials with Composite Endpoints with the R Package CompAREdesign. [[Preprint](https://arxiv.org/abs/2211.02535)].
-
 
 

@@ -1,99 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//index.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/ARE_cbe.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/CompARE-package.html</loc>
   </url>
   <url>
-    <loc>/readme.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/effectsize_cbe.html</loc>
   </url>
   <url>
-    <loc>/reference/ARE_cbe.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/lower_corr.html</loc>
   </url>
   <url>
-    <loc>/reference/ARE_tte.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/prob_cbe.html</loc>
   </url>
   <url>
-    <loc>/reference/CompARE-package.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/samplesize_cbe.html</loc>
   </url>
   <url>
-    <loc>/reference/CompAREdesign-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CopulaSelection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dClayton.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dFGM.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dFrank.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dGumbel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dNormal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/effectsize_cbe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/effectsize_tte.html</loc>
-  </url>
-  <url>
-    <loc>/reference/freedman_formula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/f_sim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lower_corr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MarginalsSelection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_tte.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prob_cbe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/samplesize_cbe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/samplesize_tte.html</loc>
-  </url>
-  <url>
-    <loc>/reference/schoenfeld_formula.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simula_cbe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simula_tte.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Sstar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Sstar_func_perc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/surv_tte.html</loc>
-  </url>
-  <url>
-    <loc>/reference/upper_corr.html</loc>
+    <loc>http://martabofillroig.github.io/CompARE//reference/upper_corr.html</loc>
   </url>
 </urlset>

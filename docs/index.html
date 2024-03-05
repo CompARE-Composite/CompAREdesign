@@ -26,8 +26,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,12 +38,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CompAREdesign</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -62,35 +66,34 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="compare-">CompARE <img src="reference/figures/logo.png" align="right" alt="" width="250"><a class="anchor" aria-label="anchor" href="#compare-"></a>
+<div id="compare-" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#compare-" class="anchor"></a>CompARE <img src="reference/figures/logo.png" align="right" alt="" width="250">
 </h1></div>
 
 <!-- badges: end -->
-<p><a href="https://cinna.upc.edu/compare/" class="external-link"><strong>CompARE</strong></a> (<a href="https://cinna.upc.edu/compare/" class="external-link uri">https://cinna.upc.edu/compare/</a>) is a web-platform inspired to provide help on issues relating to trials with composite endpoints. CompARE may be used as a tool for calculating the elements needed in the planning phase of clinical trials involving composite endpoints. With its user-friendly interface, CompARE allows to input the main parameters included in the trial -such as the treatment effect on the components of the composite endpoint, and its frequencies of occurrence- and helps provide power and sample size calculations among others.</p>
-<p><a href="https://cinna.upc.edu/compare/" class="external-link"><strong>CompARE</strong></a> comprises two different Shiny apps: one devoted to time-to-event endpoints, the other to binary endpoints.</p>
+<p><a href="https://cinna.upc.edu/compare/"><strong>CompARE</strong></a> (<a href="https://cinna.upc.edu/compare/" class="uri">https://cinna.upc.edu/compare/</a>) is a web-platform inspired to provide help on issues relating to trials with composite endpoints. CompARE may be used as a tool for calculating the elements needed in the planning phase of clinical trials involving composite endpoints. With its user-friendly interface, CompARE allows to input the main parameters included in the trial -such as the treatment effect on the components of the composite endpoint, and its frequencies of occurrence- and helps provide power and sample size calculations among others.</p>
+<p><a href="https://cinna.upc.edu/compare/"><strong>CompARE</strong></a> comprises two different Shiny apps: one devoted to time-to-event endpoints, the other to binary endpoints.</p>
 <ul>
 <li>
-<strong>CompARE for Time-to-event endpoints</strong>: <a href="http://cinna.upc.edu:3838/compare/CompARETimeToEvent/" class="external-link">Time-to-event app</a>.</li>
+<strong>CompARE for Time-to-event endpoints</strong>: <a href="http://cinna.upc.edu:3838/compare/CompARETimeToEvent/">Time-to-event app</a>.</li>
 <li>
-<strong>CompARE for Binary endpoints</strong>: <a href="http://cinna.upc.edu:3838/compare/CompAREBinary/" class="external-link">Binary app</a>.</li>
+<strong>CompARE for Binary endpoints</strong>: <a href="http://cinna.upc.edu:3838/compare/CompAREBinary/">Binary app</a>.</li>
 </ul>
-<p>You can also find the R-package version of CompARE in CRAN <a href="https://cran.r-project.org/web/packages/CompAREdesign/index.html" class="external-link">CompAREdesign</a>.</p>
-<div class="section level2">
-<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
-</h2>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>If you are a newcomer, we recommend starting with the tutorial vignettes. These vignettes provide an introduction to CompARE:</p>
 <ul>
 <li>
-<strong>Time-to-event Tutorial</strong>: Guide document of CompARE for Time-to-event endpoints <a href="http://cinna.upc.edu:3838/compare/CompARETimeToEvent/help_Tutorial.html" class="external-link">Time-to-event Tutorial</a>.</li>
+<strong>Time-to-event Tutorial</strong>: Guide document of CompARE for Time-to-event endpoints <a href="http://cinna.upc.edu:3838/compare/CompARETimeToEvent/help_Tutorial.html">Time-to-event Tutorial</a>.</li>
 <li>
-<strong>Binary Tutorial</strong>: Guide document of CompARE for Binary endpoints <a href="http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html" class="external-link">Binary Tutorial</a>.</li>
+<strong>Binary Tutorial</strong>: Guide document of CompARE for Binary endpoints <a href="http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html">Binary Tutorial</a>.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="comparedesign-r-package">
-<code>CompAREdesign</code> R package<a class="anchor" aria-label="anchor" href="#comparedesign-r-package"></a>
-</h2>
+<div id="comparedesign-r-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#comparedesign-r-package" class="anchor"></a><code>CompAREdesign</code> R package</h2>
 <p>The <code>CompAREdesign</code> package contains the following functions:</p>
 <ul>
 <li>
@@ -105,92 +108,59 @@
 <li>
 <em>samplesize_cbe</em> to compute the sample size for composite binary endpoint;</li>
 <li>
-<em>ARE_cbe</em> to compute the ARE method for composite binary endpoint;</li>
-<li>
-<em>surv_tte</em> to compute the survival function for the composite endpoint and both components;</li>
-<li>
-<em>effectsize_tte</em> to compute the treatment effect for the composite endpoint;</li>
-<li>
-<em>samplesize_tte</em> to compute the sample size for the composite endpoint;</li>
-<li>
-<em>ARE_tte</em> to compute the ARE method for time-to-event endpoints;</li>
-<li>
-<em>plot_tte</em> Returns four plots related to previous features;</li>
-<li>
-<em>simula_tte</em> to simulate time-to-event data for the composite and its components.</li>
+<em>ARE_cbe</em> to compute the ARE method for composite binary endpoint.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"CompARE-Composite/CompARE-package"</span><span class="op">)</span> <span class="co">#developers version</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"CompAREdesign"</span><span class="op">)</span> <span class="co">#stable version from CRAN</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CompAREdesign</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<ul>
-<li>Jordi Cortes-Martinez, Marta Bofill Roig, Guadalupe Gómez Melis (2022). Design of Trials with Composite Endpoints with the R Package CompAREdesign. [<a href="https://arxiv.org/abs/2211.02535" class="external-link">Preprint</a>].</li>
-</ul>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
+<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"CompARE-Composite/CompARE-package"</span><span class="op">)</span></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://cloud.r-project.org/package=CompAREdesign" class="external-link">View on CRAN</a></li>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=CompAREdesign">https://​cloud.r-project.org/​package=CompAREdesign</a>
+</li>
 </ul>
 </div>
-
 <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
 </ul>
 </div>
-
-
-<div class="citation">
-<h2 data-toc-skip>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing CompAREdesign</a></li>
-</ul>
-</div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Marta Bofill Roig <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-4400-7541" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Jordi Cortes Martinez <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3764-0795" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
+<li>Marta Bofill Roig <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-4400-7541" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jordi Cortes Martinez <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3764-0795" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
+  <div class="dev-status">
+<h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></li>
 </ul>
 </div>
-
-  </div>
+</div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Marta Bofill Roig, Jordi Cortes Martinez.</p>
+  <p>Developed by Marta Bofill Roig, Jordi Cortes Martinez.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -198,8 +168,6 @@
 
   
 
-
-  
 
   </body>
 </html>

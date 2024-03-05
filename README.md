@@ -20,62 +20,41 @@ provide power and sample size calculations among others.
 Shiny apps: one devoted to time-to-event endpoints, the other to binary
 endpoints.
 
-- **CompARE for Time-to-event endpoints**: [Time-to-event
-  app](http://cinna.upc.edu:3838/compare/CompARETimeToEvent/).
-- **CompARE for Binary endpoints**: [Binary
-  app](http://cinna.upc.edu:3838/compare/CompAREBinary/).
-
-You can also find the R-package version of CompARE in CRAN
-[CompAREdesign](https://cran.r-project.org/web/packages/CompAREdesign/index.html).
+  - **CompARE for Time-to-event endpoints**: [Time-to-event
+    app](http://cinna.upc.edu:3838/compare/CompARETimeToEvent/).
+  - **CompARE for Binary endpoints**: [Binary
+    app](http://cinna.upc.edu:3838/compare/CompAREBinary/).
 
 ## Getting Started
 
 If you are a newcomer, we recommend starting with the tutorial
 vignettes. These vignettes provide an introduction to CompARE:
 
-- **Time-to-event Tutorial**: Guide document of CompARE for
-  Time-to-event endpoints [Time-to-event
-  Tutorial](http://cinna.upc.edu:3838/compare/CompARETimeToEvent/help_Tutorial.html).
-- **Binary Tutorial**: Guide document of CompARE for Binary endpoints
-  [Binary
-  Tutorial](http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html).
+  - **Time-to-event Tutorial**: Guide document of CompARE for
+    Time-to-event endpoints [Time-to-event
+    Tutorial](http://cinna.upc.edu:3838/compare/CompARETimeToEvent/help_Tutorial.html).
+  - **Binary Tutorial**: Guide document of CompARE for Binary endpoints
+    [Binary
+    Tutorial](http://cinna.upc.edu:3838/compare/CompAREBinary/Help-Tutorial.html).
 
 ## `CompAREdesign` R package
 
 The `CompAREdesign` package contains the following functions:
 
-- *prob_cbe* to compute the probability of a composite binary
-  endpoint;  
-- *lower_corr* to compute the lower bound of Pearson’s correlation;
-- *upper_corr* to compute the upper bound for Pearson’s correlation;
-- *effectsize_cbe* to compute the treatment effect on the composite
-  binary endpoint;
-- *samplesize_cbe* to compute the sample size for composite binary
-  endpoint;
-- *ARE_cbe* to compute the ARE method for composite binary endpoint;
-- *surv_tte* to compute the survival function for the composite endpoint
-  and both components;
-- *effectsize_tte* to compute the treatment effect for the composite
-  endpoint;
-- *samplesize_tte* to compute the sample size for the composite
-  endpoint;
-- *ARE_tte* to compute the ARE method for time-to-event endpoints;
-- *plot_tte* Returns four plots related to previous features;
-- *simula_tte* to simulate time-to-event data for the composite and its
-  components.
+  - *prob\_cbe* to compute the probability of a composite binary
+    endpoint;  
+  - *lower\_corr* to compute the lower bound of Pearson’s correlation;
+  - *upper\_corr* to compute the upper bound for Pearson’s correlation;
+  - *effectsize\_cbe* to compute the treatment effect on the composite
+    binary endpoint;
+  - *samplesize\_cbe* to compute the sample size for composite binary
+    endpoint;
+  - *ARE\_cbe* to compute the ARE method for composite binary endpoint.
 
 ## Installation
 
 ``` r
-require(devtools)
-install_github("CompARE-Composite/CompARE-package") #developers version
-
-install.packages("CompAREdesign") #stable version from CRAN
-library(CompAREdesign)
+# install.packages("devtools")
+library(devtools)
+install_github("CompARE-Composite/CompARE-package")
 ```
-
-## References
-
-- Jordi Cortes-Martinez, Marta Bofill Roig, Guadalupe Gómez Melis
-  (2022). Design of Trials with Composite Endpoints with the R Package
-  CompAREdesign. \[[Preprint](https://arxiv.org/abs/2211.02535)\].
