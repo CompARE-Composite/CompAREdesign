@@ -52,22 +52,22 @@ vignettes. These vignettes provide an introduction to CompARE:
 
 The `CompAREdesign` package contains the following functions:
 
-  - *surv\_tte* to compute the survival function for the composite time-to-event endpoint and both components
-  - *effectsize\_tte* to compute the treatment effect for the composite time-to-event endpoint
-  - *samplesize\_tte* to compute the sample size for the composite time-to-event endpoint
-  - *ARE\_tte* to compute the ARE method for time-to-event endpoints
-  - *plot\_tte* to get four plots related to previous features
-  - *simula\_tte* to simulate time-to-event data for the time-to-event composite endpoint and its components
-  - *prob\_cbe* to compute the probability of a composite binary
-    endpoint;  
-  - *lower\_corr* to compute the lower bound of Pearson’s correlation;
-  - *upper\_corr* to compute the upper bound for Pearson’s correlation;
-  - *effectsize\_cbe* to compute the treatment effect on the composite
-    binary endpoint;
-  - *samplesize\_cbe* to compute the sample size for composite binary
-    endpoint;
-  - *ARE\_cbe* to compute the ARE method for composite binary endpoint.
-  - *simula\_cbe* to simulate time-to-event data for the binary composite endpoint and its components
+  - __*surv\_tte*__ to compute the survival function for the composite time-to-event endpoint and both components
+  - __*effectsize\_tte*__ to compute the treatment effect for the composite time-to-event endpoint
+  - __*samplesize\_tte*__ to compute the sample size for the composite time-to-event endpoint
+  - __*ARE\_tte*__ to compute the ARE method for time-to-event endpoints
+  - __*plot\_tte*__ to get four plots related to previous features
+  - __*simula\_tte*__ to simulate time-to-event data for the time-to-event composite endpoint and its components
+  - __*prob\_cbe*__ to compute the probability of a composite binary
+    endpoint 
+  - __*lower\_corr*__ to compute the lower bound of Pearson’s correlation
+  - __*upper\_corr*__ to compute the upper bound for Pearson’s correlation
+  - __*effectsize\_cbe*__ to compute the treatment effect on the composite
+    binary endpoint
+  - __*samplesize\_cbe*__ to compute the sample size for composite binary
+    endpoint
+  - __*ARE\_cbe*__ to compute the ARE method for composite binary endpoint
+  - __*simula\_cbe*__ to simulate time-to-event data for the binary composite endpoint and its components
   
 
 ## Installation
