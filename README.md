@@ -11,7 +11,7 @@ v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/li
 help on issues relating to trials with composite endpoints. CompARE may
 be used as a tool for calculating the elements needed in the planning
 phase of clinical trials involving composite endpoints. CompARE comprises 
-two diferrent tools:
+two diferent tools:
 
 - A couple of [**shiny**](https://www.rstudio.com/products/shiny/) apps for time-to-event and binary endpoints, respectively.
 - The R package [**CompAREdesign**](https://CRAN.R-project.org/package=CompAREdesign)
