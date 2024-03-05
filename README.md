@@ -46,7 +46,7 @@ vignettes. These vignettes provide an introduction to CompARE:
     [Binary
     Tutorial](https://www.grbio.eu/compare/CompAREBinary/Help-Tutorial.html).
 
-# CompARE design R package
+# CompAREdesign R package
 
 ## Functions
 
