@@ -13,38 +13,9 @@ be used as a tool for calculating the elements needed in the planning
 phase of clinical trials involving composite endpoints. CompARE comprises 
 two diferent tools:
 
-- A couple of [**shiny**](https://www.rstudio.com/products/shiny/) apps for time-to-event and binary endpoints, respectively.
+- A couple of [**shiny**](https://www.rstudio.com/products/shiny/) apps for time-to-event and binary endpoints, respectively. You can found more info [here](https://github.com/CompARE-Composite/Functions-shiny-apps)
 - The R package [**CompAREdesign**](https://CRAN.R-project.org/package=CompAREdesign)
 
-
-# CompARE shiny apps
-
-[**CompARE**](https://www.grbio.eu/compare/) comprises two different
-Shiny apps: one devoted to time-to-event endpoints, the other to binary
-endpoints.
-
-  - **CompARE for Time-to-event endpoints**: [Time-to-event
-    app](https://www.grbio.eu/compare/CompARETimeToEvent/).
-  - **CompARE for Binary endpoints**: [Binary
-    app](https://www.grbio.eu/compare/CompAREBinary/).
-
-
-Their user-friendly interface allows to input the main parameters
-included in the trial -such as the treatment effect on the components of
-the composite endpoint, and the frequencies of occurrence- and the app
-provides sample size calculations among others.
-
-## Getting Started
-
-If you are a newcomer, we recommend starting with the tutorial
-vignettes. These vignettes provide an introduction to CompARE:
-
-  - **Time-to-event Tutorial**: Guide document of CompARE for
-    Time-to-event endpoints [Time-to-event
-    Tutorial](https://www.grbio.eu/compare/CompARETimeToEvent/help_Tutorial.html).
-  - **Binary Tutorial**: Guide document of CompARE for Binary endpoints
-    [Binary
-    Tutorial](https://www.grbio.eu/compare/CompAREBinary/Help-Tutorial.html).
 
 # CompAREdesign R package
 
