@@ -1,10 +1,8 @@
 
-# CompARE <img src="man/figures/logo.png" align="right" alt="" width="250" />
+# CompARE <img src="man/figures/CompAREdesign_logo.png" align="right" alt="" width="250" />
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-<!-- badges: end -->
 
 [**CompARE**](https://www.grbio.eu/compare/)
 (<https://www.grbio.eu/compare/>) is a initiative inspired to provide
