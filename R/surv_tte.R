@@ -17,7 +17,7 @@
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
 #' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param plot_res logical indicating if the survival curves should be displayed. The default is TRUE
-#' @param plot_store logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE
+#' @param plot_save logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE
 #' 
 #' @import ggplot2
 #' @import rootSolve
@@ -41,7 +41,7 @@
 
 surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case, 
                      copula = 'Frank', rho=0.3, rho_type='Spearman',followup_time=1, 
-                     plot_res=TRUE, plot_store=FALSE){
+                     plot_res=TRUE, plot_save=FALSE){
   
   requireNamespace("stats")
   
@@ -69,8 +69,8 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The followup_time must be a positive numeric value")    
   }else if(!is.logical(plot_res)){
      stop("The parameter plot_res must be logical")
-  }else if(!is.logical(plot_store)){
-    stop("The parameter plot_store must be logical")    
+  }else if(!is.logical(plot_save)){
+    stop("The parameter plot_save must be logical")    
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
   }
@@ -121,7 +121,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   ##################################################
   # Plots
   ##################################################
-  if(plot_res | plot_store){
+  if(plot_res | plot_save){
     xmax <- max(1,as.numeric(followup_time),na.rm=TRUE)
     
     theme.plot <- theme(legend.position="bottom",
@@ -185,7 +185,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   if(plot_res) print(gg_all)
   
   ## Store plot in the output
-  if(plot_store) return_object$gg_object <- gg3
+  if(plot_save) return_object$gg_object <- gg3
   
   return(invisible(return_object))
 }

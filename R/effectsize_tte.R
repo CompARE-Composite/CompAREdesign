@@ -20,7 +20,7 @@
 #' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
 #' @param plot_res logical indicating if the HR over time should be displayed. The default is FALSE
-#' @param plot_store logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE
+#' @param plot_save logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE
 #' 
 #' @import ggplot2
 #' @import rootSolve
@@ -52,7 +52,7 @@
 #'     \item{\code{Median}}{array with the median surival time for each group}
 #' }
 #'
-#' In addition, if \code{plot_store=TRUE} an object of class \code{ggplot} with
+#' In addition, if \code{plot_save=TRUE} an object of class \code{ggplot} with
 #' the HR over time for composite endpoint is stored in the list.
 #'     
 #' @details Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 
@@ -71,7 +71,7 @@
 effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman',
                            followup_time=1,
-                           subdivisions=1000, plot_res=FALSE, plot_store=FALSE){
+                           subdivisions=1000, plot_res=FALSE, plot_save=FALSE){
  
   requireNamespace("stats")
   
@@ -101,8 +101,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     stop("The followup_time must be a positive numeric value")      
   }else if(!is.logical(plot_res)){
     stop("The parameter plot_res must be logical")
-  }else if(!is.logical(plot_store)){
-    stop("The parameter plot_store must be logical")  
+  }else if(!is.logical(plot_save)){
+    stop("The parameter plot_save must be logical")  
   }else if(case==4 && p0_e1 + p0_e2 > 1){
     stop("The sum of the proportions of observed events in both endpoints in case 4 must be lower than 1")
   }
@@ -235,7 +235,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   
   f_time <- as.numeric(followup_time)          # follow_up_time 
   
-  if(plot_res | plot_store){
+  if(plot_res | plot_save){
     dd <- data.frame(t=t, HRstar=HRstar)
     ymin <- floor(min(HRstar)*10)/10                 # min(HRstar,0.5)
     ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) # max(HRstar,1)
@@ -273,7 +273,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   if(plot_res) print(gg1)
   
   ## Store plot in the output
-  if(plot_store) return_object$gg_object <- gg1
+  if(plot_save) return_object$gg_object <- gg1
   
   return(invisible(return_object))
 }

@@ -8,9 +8,9 @@
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
 #' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman' 
-#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE.
+#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE.
 #' @param plot_res logical indicating if the sample size according to the correlation should be displayed. The default is FALSE
-#' @param plot_store logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE
+#' @param plot_save logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE
 #' @inheritParams ARE_tte
 #' 
 #' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
@@ -25,7 +25,7 @@
 #'   \item{\code{ss_Ec}}{Total sample size (both groups) for a trial using composite endpoint as primary endpoint}
 #' } 
 #'
-#' In addition, if \code{plot_store=TRUE} an object of class \code{ggplot} with
+#' In addition, if \code{plot_save=TRUE} an object of class \code{ggplot} with
 #' the sample size for composite endpoint according to correlation is stored 
 #' in the list.
 #' 
@@ -47,7 +47,7 @@
 samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman', 
                            alpha=0.05, power=0.80 ,ss_formula='schoenfeld', 
-                           subdivisions=50, plot_res=FALSE, plot_store=FALSE){
+                           subdivisions=50, plot_res=FALSE, plot_save=FALSE){
   requireNamespace("stats")
   if(p0_e1 < 0 || p0_e1 > 1){
     stop("The probability of observing the event E1 (p_e1) must be a number between 0 and 1")
@@ -77,13 +77,13 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     stop("The selected formula (ss_formula) must be one of 'schoenfeld' (default) or 'freedman'")
   }else if(!is.logical(plot_res)){
     stop("The parameter plot_res must be logical")
-  }else if(!is.logical(plot_store)){
-    stop("The parameter plot_store must be logical")
+  }else if(!is.logical(plot_save)){
+    stop("The parameter plot_save must be logical")
   }
   
   # Values of rho where to calculate Sample size
   rho_sel <- rho
-  if(plot_res | plot_store){
+  if(plot_res | plot_save){
     rho_seq <- unique(c(rho,seq(0.01,0.98,length=subdivisions)))
   }else{
     rho_seq <- rho
@@ -127,7 +127,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     
   }  
   
-  if(plot_res | plot_store){
+  if(plot_res | plot_save){
     sample_size <- NULL                # To avoid the note: "no visible binding for global variable 'sample_size'"
     dd <- data.frame(rho=rho_seq, sample_size=SS_array_c)
     gg1 <- ggplot(dd,aes(x=rho,y=sample_size)) + 
@@ -150,7 +150,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   if(plot_res) print(gg1)
   
   ## Store plot in the output
-  if(plot_store) return_object$gg_object <- gg1
+  if(plot_save) return_object$gg_object <- gg1
   
   
   ##-- Returned list

@@ -17,7 +17,7 @@ ARE_tte(
   rho_type = "Spearman",
   subdivisions = 50,
   plot_res = FALSE,
-  plot_store = FALSE
+  plot_save = FALSE
 )
 }
 \arguments{
@@ -41,17 +41,17 @@ ARE_tte(
 
 \item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
 
-\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE.}
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE.}
 
 \item{plot_res}{logical indicating if the ARE according to the correlation should be displayed. The default is FALSE}
 
-\item{plot_store}{logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE}
+\item{plot_save}{logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE}
 }
 \value{
 Returns the ARE value along with the fixed correlation. If the ARE 
 value is larger than 1 then the composite endpoint is preferred over the 
 relevant endpoint. Otherwise, the endpoint 1 is preferred as the primary 
-endpoint of the study. In addition, if \code{plot_store=TRUE} an object of 
+endpoint of the study. In addition, if \code{plot_save=TRUE} an object of 
 class \code{ggplot} with the ARE according to the correlation is stored in the output.
 }
 \description{

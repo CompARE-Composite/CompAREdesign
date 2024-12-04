@@ -20,7 +20,7 @@ samplesize_tte(
   ss_formula = "schoenfeld",
   subdivisions = 50,
   plot_res = FALSE,
-  plot_store = FALSE
+  plot_save = FALSE
 )
 }
 \arguments{
@@ -50,11 +50,11 @@ samplesize_tte(
 
 \item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman'}
 
-\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_store=FALSE.}
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE.}
 
 \item{plot_res}{logical indicating if the sample size according to the correlation should be displayed. The default is FALSE}
 
-\item{plot_store}{logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE}
+\item{plot_save}{logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE}
 }
 \value{
 A list containing the following components:
@@ -65,7 +65,7 @@ A list containing the following components:
   \item{\code{ss_Ec}}{Total sample size (both groups) for a trial using composite endpoint as primary endpoint}
 } 
 
-In addition, if \code{plot_store=TRUE} an object of class \code{ggplot} with
+In addition, if \code{plot_save=TRUE} an object of class \code{ggplot} with
 the sample size for composite endpoint according to correlation is stored 
 in the list.
 }

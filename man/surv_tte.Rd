@@ -17,7 +17,7 @@ surv_tte(
   rho_type = "Spearman",
   followup_time = 1,
   plot_res = TRUE,
-  plot_store = FALSE
+  plot_save = FALSE
 )
 }
 \arguments{
@@ -45,7 +45,7 @@ surv_tte(
 
 \item{plot_res}{logical indicating if the survival curves should be displayed. The default is TRUE}
 
-\item{plot_store}{logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE}
+\item{plot_save}{logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE}
 }
 \value{
 For each group, if  \code{plot_res=TRUE}, the function returns a plot 

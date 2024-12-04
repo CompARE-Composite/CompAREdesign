@@ -18,7 +18,7 @@ effectsize_tte(
   followup_time = 1,
   subdivisions = 1000,
   plot_res = FALSE,
-  plot_store = FALSE
+  plot_save = FALSE
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ effectsize_tte(
 
 \item{plot_res}{logical indicating if the HR over time should be displayed. The default is FALSE}
 
-\item{plot_store}{logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE}
+\item{plot_save}{logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE}
 }
 \value{
 A list formed by two lists: \code{effect_size}, which contains the 
@@ -74,7 +74,7 @@ some relevant measures for each group
     \item{\code{Median}}{array with the median surival time for each group}
 }
 
-In addition, if \code{plot_store=TRUE} an object of class \code{ggplot} with
+In addition, if \code{plot_save=TRUE} an object of class \code{ggplot} with
 the HR over time for composite endpoint is stored in the list.
 }
 \description{
