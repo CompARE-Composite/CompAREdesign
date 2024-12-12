@@ -100,12 +100,27 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
                                 alpha=0.05, power=0.80 ,ss_formula='schoenfeld')$gg_object))
 
 
-  print(ggarrange(plot_surv + ...,
-                  plot_effect + ...,
-                  plot_ARE + ...,
-                  plot_ss + ..., ncol=2,nrow=2))
-
-
+  if (length(list(...)) == 0) {
+    # No additional arguments provided; run with default settings
+    print(ggarrange(
+      plot_surv,
+      plot_effect,
+      plot_ARE,
+      plot_ss,
+      ncol=2, nrow=2)
+      )
+  } else {
+    # Additional arguments provided; pass them to the plots
+    print(ggarrange(
+      plot_surv + ...,
+      plot_effect + ...,
+      plot_ARE + ...,
+      plot_ss + ...,
+      ncol=2, nrow=2)
+      )
+  }
 }
+
+
 
 
