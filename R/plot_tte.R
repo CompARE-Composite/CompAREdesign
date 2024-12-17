@@ -100,27 +100,28 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
                                 alpha=0.05, power=0.80 ,ss_formula='schoenfeld')$gg_object))
 
 
-  if (length(list(...)) == 0) {
-    # No additional arguments provided; run with default settings
-    print(ggarrange(
-      plot_surv,
-      plot_effect,
-      plot_ARE,
-      plot_ss,
-      ncol=2, nrow=2)
-      )
-  } else {
-    # Additional arguments provided; pass them to the plots
-    print(ggarrange(
-      plot_surv + ...,
-      plot_effect + ...,
-      plot_ARE + ...,
-      plot_ss + ...,
-      ncol=2, nrow=2)
-      )
+  # Helper function to add extra arguments to a ggplot
+  add_args <- function(plot, args) {
+    Reduce(`+`, c(list(plot), args))
   }
-}
 
+  # Apply the extra arguments to each plot
+  args <- list(...)  # Capture additional arguments passed to the function
+
+  plots <- lapply(
+    list(plot_surv, plot_effect, plot_ARE, plot_ss),
+    add_args,
+    args = args
+  )
+
+  # Arrange and print the plots
+  print(ggarrange(
+    plots[[1]],
+    plots[[2]],
+    plots[[3]],
+    plots[[4]],
+    ncol = 2, nrow = 2
+  ))
 
 
 
