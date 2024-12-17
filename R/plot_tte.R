@@ -122,6 +122,6 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     plots[[4]],
     ncol = 2, nrow = 2
   ))
-
+}
 
 
