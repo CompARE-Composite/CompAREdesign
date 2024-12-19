@@ -16,7 +16,7 @@ surv_tte(
   rho = 0.3,
   rho_type = "Spearman",
   followup_time = 1,
-  plot_res = TRUE,
+  plot_print = TRUE,
   plot_save = FALSE
 )
 }
@@ -43,12 +43,12 @@ surv_tte(
 
 \item{followup_time}{numeric parameter indicating the maximum follow up time (in any unit). Default is 1.}
 
-\item{plot_res}{logical indicating if the survival curves should be displayed. The default is TRUE}
+\item{plot_print}{logical indicating if the survival curves should be displayed. The default is TRUE}
 
 \item{plot_save}{logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE}
 }
 \value{
-For each group, if  \code{plot_res=TRUE}, the function returns a plot 
+For each group, if  \code{plot_print=TRUE}, the function returns a plot 
 of the survival functions for composite endpoint as well as the plots of the 
 survival function for each component.
 }

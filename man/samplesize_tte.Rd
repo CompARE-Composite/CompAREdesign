@@ -19,7 +19,7 @@ samplesize_tte(
   power = 0.8,
   ss_formula = "schoenfeld",
   subdivisions = 50,
-  plot_res = FALSE,
+  plot_print = FALSE,
   plot_save = FALSE
 )
 }
@@ -50,9 +50,9 @@ samplesize_tte(
 
 \item{ss_formula}{character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman'}
 
-\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE.}
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the sample size according to correlation. The default is 50. Ignored if plot_print=FALSE and plot_save=FALSE.}
 
-\item{plot_res}{logical indicating if the sample size according to the correlation should be displayed. The default is FALSE}
+\item{plot_print}{logical indicating if the sample size according to the correlation should be displayed. The default is FALSE}
 
 \item{plot_save}{logical indicating if the plot of sample size according to the correlation is stored for future customization. The default is FALSE}
 }

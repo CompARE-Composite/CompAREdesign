@@ -16,7 +16,7 @@ ARE_tte(
   rho = 0.3,
   rho_type = "Spearman",
   subdivisions = 50,
-  plot_res = FALSE,
+  plot_print = FALSE,
   plot_save = FALSE
 )
 }
@@ -41,9 +41,9 @@ ARE_tte(
 
 \item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
 
-\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE.}
+\item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_print=FALSE and plot_save=FALSE.}
 
-\item{plot_res}{logical indicating if the ARE according to the correlation should be displayed. The default is FALSE}
+\item{plot_print}{logical indicating if the ARE according to the correlation should be displayed. The default is FALSE}
 
 \item{plot_save}{logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE}
 }

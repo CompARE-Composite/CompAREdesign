@@ -14,8 +14,8 @@
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
-#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_res=FALSE and plot_save=FALSE. 
-#' @param plot_res logical indicating if the ARE according to the correlation should be displayed. The default is FALSE
+#' @param subdivisions integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_print=FALSE and plot_save=FALSE. 
+#' @param plot_print logical indicating if the ARE according to the correlation should be displayed. The default is FALSE
 #' @param plot_save logical indicating if the plot of ARE according to the correlation is stored for future customization. The default is FALSE
 #' 
 #' @rawNamespace import(copula, except = c(profile,coef,logLik,confint))
@@ -48,7 +48,7 @@
 
 ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                     case, copula = 'Frank', rho=0.3, rho_type='Spearman', 
-                    subdivisions=50, plot_res=FALSE, plot_save=FALSE){ 
+                    subdivisions=50, plot_print=FALSE, plot_save=FALSE){ 
   
   
   requireNamespace("stats")
@@ -74,8 +74,8 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
   }else if(!(is.numeric(subdivisions) && subdivisions>=10)){
     stop("The number of subdivisions must be an integer greater than or equal to 10")    
-  }else if(!is.logical(plot_res)){
-    stop("The parameter plot_res must be logical")
+  }else if(!is.logical(plot_print)){
+    stop("The parameter plot_print must be logical")
   }else if(!is.logical(plot_save)){
     stop("The parameter plot_save must be logical")      
   }else if(case==4 && p0_e1 + p0_e2 > 1){
@@ -84,7 +84,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   
   # Values of rho where to calculate ARE
   rho_sel <- rho
-  if(plot_res | plot_save){
+  if(plot_print | plot_save){
     rho_seq <- unique(c(rho,seq(0.01,0.98,length=subdivisions)))
   }else{
     rho_seq <- rho
@@ -250,7 +250,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }
   # close(pb)
   
-  if(plot_res | plot_save){
+  if(plot_print | plot_save){
     ARE <- NULL          # To avoid the note: "no visible binding for global variable 'NULL'"
     dd <- data.frame(rho=rho_seq, ARE=ARE_array)
     gg1 <- ggplot(dd,aes(x=rho,y=ARE)) + 
@@ -265,7 +265,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
                         gg_object=NA)
   
   ## Print graphic
-  if(plot_res) print(gg1)
+  if(plot_print) print(gg1)
   
   ## Store plot in the output
   if(plot_save) return_object$gg_object <- gg1
