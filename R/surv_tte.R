@@ -16,7 +16,7 @@
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
 #' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
 #' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
-#' @param plot_res logical indicating if the survival curves should be displayed. The default is TRUE
+#' @param plot_print logical indicating if the survival curves should be displayed. The default is TRUE
 #' @param plot_save logical indicating if the plot of the survival curve for composite endpoint is stored for future customization. The default is FALSE
 #'
 #' @import ggplot2
@@ -26,7 +26,7 @@
 #'
 #' @export
 #'
-#' @return For each group, if  \code{plot_res=TRUE}, the function returns a plot
+#' @return For each group, if  \code{plot_print=TRUE}, the function returns a plot
 #' of the survival functions for composite endpoint as well as the plots of the
 #' survival function for each component.
 #'
@@ -41,7 +41,7 @@
 
 surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
                      copula = 'Frank', rho=0.3, rho_type='Spearman',followup_time=1,
-                     plot_res=TRUE, plot_save=FALSE){
+                     plot_print=TRUE, plot_save=FALSE){
 
   requireNamespace("stats")
 
@@ -67,8 +67,8 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The correlation type (rho_type) must be one of 'Spearman' or 'Kendall'")
   }else if(!(is.numeric(followup_time) && followup_time>0)){
     stop("The followup_time must be a positive numeric value")
-  }else if(!is.logical(plot_res)){
-     stop("The parameter plot_res must be logical")
+  }else if(!is.logical(plot_print)){
+     stop("The parameter plot_print must be logical")
   }else if(!is.logical(plot_save)){
     stop("The parameter plot_save must be logical")
   }else if(case==4 && p0_e1 + p0_e2 > 1){
@@ -121,7 +121,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   ##################################################
   # Plots
   ##################################################
-  if(plot_res | plot_save){
+  if(plot_print | plot_save){
     xmax <- max(1,as.numeric(followup_time),na.rm=TRUE)
 
     theme.plot <- theme(#legend.position="bottom",
@@ -192,7 +192,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   return_object <- list(gg_object=NA)
 
   ## Print graphic
-  if(plot_res) print(gg_all)
+  if(plot_print) print(gg_all)
 
   ## Store plot in the output
   if(plot_save) return_object$gg_object <- gg3

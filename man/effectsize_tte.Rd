@@ -17,7 +17,7 @@ effectsize_tte(
   rho_type = "Spearman",
   followup_time = 1,
   subdivisions = 1000,
-  plot_res = FALSE,
+  plot_print = FALSE,
   plot_save = FALSE
 )
 }
@@ -46,7 +46,7 @@ effectsize_tte(
 
 \item{subdivisions}{integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000.}
 
-\item{plot_res}{logical indicating if the HR over time should be displayed. The default is FALSE}
+\item{plot_print}{logical indicating if the HR over time should be displayed. The default is FALSE}
 
 \item{plot_save}{logical indicating if the plot of HR over time should is stored for future customization. The default is FALSE}
 }
