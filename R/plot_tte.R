@@ -18,7 +18,10 @@
 #' @param alpha numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}
 #' @param power numeric parameter. The power to detect the treatment effect. By default \eqn{1-\beta=0.80}
 #' @param ss_formula character indicating the formula to be used for the sample size calculation on the single components: 'schoenfeld' (default) or 'freedman'
-#'
+#' @param summary logical. TRUE if you want all the relevant plots for the trial design 
+#' @param type character indicating the type of plot: 'survival', 'effect', 'ARE', 'samplesize'
+#' 
+#' 
 #' @import ggpubr
 #' @export
 #'
