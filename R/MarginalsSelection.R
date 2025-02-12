@@ -11,13 +11,14 @@
 #' @param case    Censoring case 
 #' @param theta   Dependence parameter for the bivariate distribution in control group
 #' @param copula  Copula to use
+#' @param seed    Seed for obtaining the probabilities of observing the events by simulation
 #'
 #' @export 
 #' @keywords internal 
 #'
 #'
 
-MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='Frank') 
+MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='Frank', seed=12345) 
 {
 
   dcopula <- get(paste0('d',copula))
@@ -66,14 +67,14 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
     limits <- c(0.00001,10000) 
     b20 <- try(uniroot(Fb20, interval=limits,p2=p2)$root,silent=TRUE)
     if(inherits(b20,'try-error')){
-      # First attemp: to approximate for limits based on frank copula
+      # First attempt: to approximate for limits based on frank copula
       dcopula <- dFrank
       b20 <- uniroot(Fb20, interval=limits,p2=p2)$root
       dcopula <- get(paste0('d',copula))
       limits <- c(0.5,2)*b20
       b20 <- try(uniroot(Fb20, interval=limits,p2=p2)$root,silent=TRUE)
       
-      # Second attemp: search for factible limits
+      # Second attempt: search for feasible limits
       if(inherits(b20,'try-error')){
         FFB20 <- c()
         VALUES <- unique(c(seq(0.1,10,0.1),seq(10,100,1),seq(100,1000,10),seq(1000,10000,100)))
@@ -151,21 +152,18 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
   b21 <- b20/HR2^(1/beta2)
   
   # Probabilities p11,p21
-  #p11 <- 1-exp(-(1/b11)^beta1)
-  #p21 <- 1-exp(-(1/b21)^beta2)
   if(case==1){
     p11 <- 1-exp(-(1/b11)^beta1)
     p21 <- 1-exp(-(1/b21)^beta2)
   }else if(case==2){
-    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1)
+    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1,seed=seed)
     p21 <- 1-exp(-(1/b21)^beta2)
   }else if(case==3){
     p11 <- 1-exp(-(1/b11)^beta1)
-    # cat(beta1,beta2,b11,b21,case,rho,copula,"\n")
-    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2) # theta or rho?
+    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2,seed=seed) # theta or rho?
   }else if(case==4){
-    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1)
-    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2) # theta or rho?
+    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1,seed=seed)
+    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2,seed=seed) # theta or rho?
   } 
 
   T1dist<-"weibull"

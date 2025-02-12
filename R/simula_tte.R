@@ -84,7 +84,7 @@ simula_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   ##-- Find parameters
   theta <- CopulaSelection(copula=copula,rho=rho,rho_type=rho_type)[[2]]
   MarginSelec <- MarginalsSelection(beta_e1,beta_e2,HR_e1,HR_e2,
-                                    p0_e1,p0_e2,case,rho=rho,theta=theta,copula=copula)
+                                    p0_e1,p0_e2,case,rho=rho,theta=theta,copula=copula, seed=NA)
   par_shape <- c(beta_e1,beta_e2,beta_e1,beta_e1)              # Weibull shape parameters
   par_scale <- c(MarginSelec[[5]][[2]],                        # Weibull scale parameters
                  MarginSelec[[6]][[2]],
