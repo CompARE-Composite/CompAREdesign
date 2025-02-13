@@ -106,24 +106,24 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
 
   if(summary == TRUE){
 
-    print(ggarrange(plot_surv, plot_effect, plot_ARE, plot_ss,
+    return(ggarrange(plot_surv, plot_effect, plot_ARE, plot_ss,
                     ncol = 2, nrow = 2))
 
   } else if(type=='survival' & summary == FALSE){
 
-    print(plot_surv)
+    return(plot_surv)
 
   } else if(type=='effect' & summary == FALSE){
 
-    print(plot_effect)
+    return(plot_effect)
 
   } else if(type=='ARE' & summary == FALSE){
 
-    print(plot_ARE)
+    return(plot_ARE)
 
   } else if(type=='samplesize' & summary == FALSE){
 
-    print(plot_ss)
+    return(plot_ss)
 
   }
 
