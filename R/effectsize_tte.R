@@ -237,15 +237,14 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   
   if(plot_print | plot_save){
     dd <- data.frame(t=t, HRstar=HRstar)
-    ymin <- floor(min(HRstar)*10)/10                 # min(HRstar,0.5)
-    ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) # max(HRstar,1)
+    ymin <- floor(min(HRstar)*10)/10                 
+    ymax <- max(ceiling(max(HRstar)*10)/10,ymin+0.1) 
     gg1 <- ggplot(dd, aes(x=t,y=HRstar)) + geom_line(color='darkblue',size=1.3) +
-      geom_hline(yintercept=1,linetype='dashed') + 
       ylim(ymin,ymax) + 
       scale_x_continuous(limits=c(0,1),breaks=pretty(0:1*f_time)/f_time,
                          labels=pretty(0:1*f_time),expand=c(0,0.01)) +
-      # ggtitle('HR*(t) of the composite endpoint') + 
       xlab('Time') + ylab('HR CE')
+    if(ymin<=1 & ymax>=1) gg1 <- gg1 + geom_hline(yintercept=1,linetype='dashed')
   }
   
   ##-- Output data.frame
