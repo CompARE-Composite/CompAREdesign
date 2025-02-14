@@ -100,7 +100,7 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
                                                          copula = copula, rho=rho, rho_type=rho_type,
                                                          plot_print=FALSE,plot_save=TRUE,
-                                                         alpha=0.05, power=0.80 ,ss_formula='schoenfeld')$gg_object))
+                                                         alpha=alpha, power=power ,ss_formula='schoenfeld')$gg_object))
 
 
 
