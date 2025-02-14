@@ -258,16 +258,15 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
                    check.names = FALSE)
   print(df, row.names = FALSE,right=FALSE)
   
-  return_object <- list(effect_size=list('gAHR' = round(gAHR,4),
-                                         'AHR' = round(AHR,4),
-                                         'RMST_ratio' = round(RMST_1/RMST_0,4),
-                                         'Median_Ratio' = round(Med_1/Med_0,4)),
-                        measures_by_group=list('pstar'= c('Reference'=pstar_0,'Treated'=pstar_1),
-                                               'p_e1'= c('Reference'=p0_e1,'Treated'=p1_e1),
-                                               'p_e2'= c('Reference'=p0_e2,'Treated'=p1_e2),
-                                               'RMST'= c('Reference'=RMST_0,'Treated'=RMST_1),
-                                               'Median'= c('Reference'=Med_0,'Treated'=Med_1)),
-                        gg_object=NA)
+  return_object <- list(effect_size       = list('gAHR'         = round(gAHR,4),
+                                                 'AHR'          = round(AHR,4),
+                                                 'RMST_ratio'   = round(RMST_1/RMST_0,4),
+                                                 'Median_Ratio' = round(Med_1/Med_0,4)),
+                        measures_by_group = list('pstar'  = c('Reference'=pstar_0,'Treated'=pstar_1),
+                                                 'p_e1'   = c('Reference'=p0_e1,  'Treated'=p1_e1),
+                                                 'p_e2'   = c('Reference'=p0_e2,  'Treated'=p1_e2),
+                                                 'Median' = c('Reference'=Med_0,  'Treated'=Med_1)),
+                        gg_object = NA)
   
   ## Print graphic
   if(plot_print) print(gg1)

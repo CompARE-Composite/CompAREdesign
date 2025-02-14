@@ -98,7 +98,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     # setTxtProgressBar(pb,which(rho_seq==rho))
   
     ##-- Effect size
-    invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000,plot_print = FALSE)))
+    invisible(capture.output(eff_size <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1, beta_e2, case, copula, rho, rho_type, subdivisions=1000, plot_print = FALSE)))
     gAHR <- eff_size$effect_size$gAHR
     
     ##-- Events
@@ -111,8 +111,8 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     events_c <- schoenfeld_formula(alpha,power,gAHR)
     
     ##-- Probabilities of observing the event
-    p1_e1 <- eff_size$measures_by_group$p_e1[2]
-    p1_e2 <- eff_size$measures_by_group$p_e2[2]
+    p1_e1   <- eff_size$measures_by_group$p_e1[2]
+    p1_e2   <- eff_size$measures_by_group$p_e2[2]
     p0_star <- eff_size$measures_by_group$pstar[1]
     p1_star <- eff_size$measures_by_group$pstar[2]
     
@@ -128,7 +128,7 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }  
   
   if(plot_print | plot_save){
-    sample_size <- NULL                # To avoid the note: "no visible binding for global variable 'sample_size'"
+    sample_size <- NULL     # To avoid the note: "no visible binding for global variable 'sample_size'"
     dd <- data.frame(rho=rho_seq, sample_size=SS_array_c)
     gg1 <- ggplot(dd,aes(x=rho,y=sample_size)) + 
       geom_line(color='darkblue',size=1.3) +
@@ -137,10 +137,10 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   
   ##-- Output data.frame
   df <- data.frame(Endpoint=c('--------','Endpoint 1','Endpoint 2','Composite endpoint'),
-                   "Total sample size"=c("-----------------",SS_array_1[1],SS_array_2[1],SS_array_c[1]),
-                   check.names = FALSE)
-  print(df, row.names = FALSE,right=FALSE)
-  
+                     "Total sample size"=c("-----------------",SS_array_1[1],SS_array_2[1],SS_array_c[1]),
+                     check.names = FALSE)
+  print(df, row.names = FALSE, right=FALSE)
+
   return_object <- list('ss_E1'     = SS_array_1[1],
                         'ss_E2'     = SS_array_2[1],
                         'ss_Ec'     = SS_array_c[1],
@@ -149,10 +149,9 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   ## Print graphic
   if(plot_print) print(gg1)
   
-  ## Store plot in the output
+  ## Save plot in the output
   if(plot_save) return_object$gg_object <- gg1
   
-  
-  ##-- Returned list
+  ##-- Returned object
   return(invisible(return_object))
 }
