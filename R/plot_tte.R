@@ -85,8 +85,8 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
 
   invisible(capture.output(plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
                                                    copula = copula, rho=rho, rho_type=rho_type,
-                                                   followup_time=followup_time,
-                                                   plot_print=FALSE,plot_save=TRUE)$gg_object))
+                                                   followup_time = followup_time,
+                                                   plot_print = FALSE, plot_save = TRUE)$gg_object))
 
   invisible(capture.output(plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
                                                          copula = copula, rho=rho, rho_type=rho_type,

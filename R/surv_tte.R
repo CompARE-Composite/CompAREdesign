@@ -124,17 +124,11 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
   if(plot_print | plot_save){
     xmax <- max(1,as.numeric(followup_time),na.rm=TRUE)
 
-    theme.plot <- theme(#legend.position="bottom",
-                        #legend.text=element_text(size=15,face='bold'),
-                        legend.title =element_blank(),
+    theme_plot <- theme(legend.title =element_blank(),
                         legend.key.size = unit(0.3, "cm"),
-                        legend.position = c(0.9, 0.9), # Position legend in top-right corner
+                        legend.position = c(0.9, 0.9),  # Position legend in top-right corner
                         legend.justification = c(1, 1), # Align legend's top-right corner
                         legend.background = element_blank()) # Remove legend background
-                        #axis.text=element_text(size=14,hjust=0.5, face='bold'),
-                        #axis.title.x=element_text(size=15,face="bold"),
-                        #axis.title = element_text(size=10))
-                        # plot.title = element_text(face='bold'))
 
     # Data for plot
     t_plot <- c(0.0001, seq(0.04,0.99,0.05))   # x points where to calculate HR*
@@ -154,7 +148,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
       scale_color_identity(name = "Group",
                            breaks = c('darkcyan','lightblue'),
                            labels = c("Treated", "Control"),
-                           guide = "legend") + theme.plot
+                           guide = "legend") + theme_plot
 
     ## Endpoint 2
     gg2  <- ggplot(data = data.frame(x = 0), mapping = aes(x = x)) +
@@ -166,7 +160,7 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
       scale_color_identity(name = "Group",
                            breaks = c('darkcyan','lightblue'),
                            labels = c("Treated", "Control"),
-                           guide = "legend") + theme.plot
+                           guide = "legend") + theme_plot
 
 
     ## Composite endpoint
@@ -181,9 +175,9 @@ surv_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
       xlab('Time') +
       ylab('Survival CE') +
       scale_color_manual(name = "Group",
-                         values = c("Treated" = "darkcyan", "Control" = "lightblue"),
-                         labels = c("Treated", "Control")) +
-      theme.plot
+                         values = c("Control" = "lightblue", "Treated" = "darkcyan"),
+                         labels = c("Control", "Treated")) +
+      theme_plot
 
 
     gg_all <- ggarrange(gg1,gg2,gg3,nrow=1,ncol=3,common.legend = TRUE)
