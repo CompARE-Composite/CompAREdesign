@@ -271,7 +271,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   if(plot_save) return_object$gg_object <- gg1
 
   ## Print ARE
-  print(round(return_object$ARE,3))
+  # print(round(return_object$ARE,3))
   
   return(invisible(return_object))
 }
