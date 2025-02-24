@@ -16,7 +16,7 @@
 #' @param case integer parameter in \{1,2,3,4\}: (1) none of the endpoints is death; (2) endpoint 2 is death; (3) endpoint 1 is death; (4) both endpoints are death by different causes. 
 #' @param copula character indicating the copula to be used: "Frank" (default), "Gumbel" or "Clayton". See details for more info.
 #' @param rho numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.
-#' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.
+#' @param rho_type character indicating the type of correlation to be used: "Spearman" (default) or "Kendall". See details for more info.
 #' @param followup_time numeric parameter indicating the maximum follow up time (in any unit). Default is 1.
 #' @param subdivisions integer parameter greater than or equal to 10. Number of subintervals to estimate the effect size. The default is 1000. 
 #' @param plot_print logical indicating if the HR over time should be displayed. The default is FALSE
