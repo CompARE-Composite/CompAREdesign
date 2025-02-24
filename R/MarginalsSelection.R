@@ -156,15 +156,14 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
     p11 <- 1-exp(-(1/b11)^beta1)
     p21 <- 1-exp(-(1/b21)^beta2)
   }else if(case==2){
-    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1,seed=seed)
+    p11 <- get_prob1(beta1, beta2, b11, b21, case, rho, copula, endpoint = 1, seed = seed)
     p21 <- 1-exp(-(1/b21)^beta2)
   }else if(case==3){
     p11 <- 1-exp(-(1/b11)^beta1)
-    cat(beta1,beta2,b11,b21,case,rho,copula)
-    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2,seed=seed) # theta or rho?
+    p21 <- get_prob1(beta1, beta2, b11, b21, case, rho, copula, endpoint = 2, seed = seed) 
   }else if(case==4){
-    p11 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=1,seed=seed)
-    p21 <- get_prob1(beta1,beta2,b11,b21,case,rho,copula,endpoint=2,seed=seed) # theta or rho?
+    p11 <- get_prob1(beta1, beta2, b11, b21, case, rho, copula, endpoint = 1, seed = seed)
+    p21 <- get_prob1(beta1, beta2, b11, b21, case, rho, copula, endpoint = 2, seed = seed) # theta or rho?
   } 
 
   T1dist<-"weibull"
