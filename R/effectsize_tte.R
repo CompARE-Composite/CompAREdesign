@@ -177,8 +177,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
     fstar0 <- (ST10^(theta+1) * fT10 + ST20^(theta+1) * fT20)/(Sstar0*(ST10^(-theta) + ST20^(-theta) - 1))
     fstar1 <- (ST11^(theta+1) * fT11 + ST20^(theta+1) * fT21)/(Sstar1*(ST11^(-theta) + ST21^(-theta) - 1))
   }else if(copula=='Gumbel'){
-    fstar0 <- Sstar0 * log(Sstar0) * ((-log(ST10))^(theta-1) * fT10 * (-ST10)^(-1) + (-log(ST20))^(theta-1)  * fT20 * (-ST20)^(-1))/((-log(ST10))^theta + (-log(ST20))^theta)
-    fstar1 <- Sstar1 * log(Sstar1) * ((-log(ST11))^(theta-1) * fT11 * (-ST11)^(-1) + (-log(ST21))^(theta-1)  * fT21 * (-ST21)^(-1))/((-log(ST11))^theta + (-log(ST21))^theta)
+    fstar0 <- Sstar0 * log(Sstar0) * ((-log(ST10))^(theta - 1) * fT10 * (-ST10)^(-1) + (-log(ST20))^(theta - 1) * fT20 * (-ST20)^(-1) + 1e-6)/((-log(ST10))^theta + (-log(ST20))^theta + 1e-6)
+    fstar1 <- Sstar1 * log(Sstar1) * ((-log(ST11))^(theta - 1) * fT11 * (-ST11)^(-1) + (-log(ST21))^(theta - 1) * fT21 * (-ST21)^(-1) + 1e-6)/((-log(ST11))^theta + (-log(ST21))^theta + 1e-6)
   }
   
   ##-- Hazards and hazard ratio for the composite
