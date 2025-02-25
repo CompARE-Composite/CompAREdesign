@@ -134,10 +134,10 @@ samplesize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }
   
   ##-- Output data.frame
-  # df <- data.frame(Endpoint=c('--------','Endpoint 1','Endpoint 2','Composite endpoint'),
-  #                    "Total sample size"=c("-----------------",SS_array_1[1],SS_array_2[1],SS_array_c[1]),
-  #                    check.names = FALSE)
-  # print(df, row.names = FALSE, right=FALSE)
+  df <- data.frame(Endpoint=c('--------','Endpoint 1','Endpoint 2','Composite endpoint'),
+                     "Total sample size"=c("-----------------",SS_array_1[1],SS_array_2[1],SS_array_c[1]),
+                     check.names = FALSE)
+  print(df, row.names = FALSE, right=FALSE)
 
   return_object <- list('ss_E1'     = SS_array_1[1],
                         'ss_E2'     = SS_array_2[1],
