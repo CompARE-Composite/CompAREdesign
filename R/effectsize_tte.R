@@ -152,21 +152,21 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   fT21 <- (beta_e2/b21) * ((t/b21)^(beta_e2-1)) * (exp(-(t/b21)^beta_e2))
   
   ##-- Survival for both endpoints
-  ST10 <- exp(-(t/b10)^beta_e1)
-  ST11 <- exp(-(t/b11)^beta_e1)
-  ST20 <- exp(-(t/b20)^beta_e2)
-  ST21 <- exp(-(t/b21)^beta_e2)
+  ST10 <- pmin(1 , exp(-(t/b10)^beta_e1) + 1e-6)
+  ST11 <- pmin(1 , exp(-(t/b11)^beta_e1) + 1e-6)
+  ST20 <- pmin(1 , exp(-(t/b20)^beta_e2) + 1e-6)
+  ST21 <- pmin(1 , exp(-(t/b21)^beta_e2) + 1e-6)
   
   ##-- Survival for the composite endpoint
-  if(copula=='Frank'){
-    Sstar0 <- (-log(1+(exp(-theta*ST10)-1)*(exp(-theta*ST20)-1)/(exp(-theta)-1))/theta)
-    Sstar1 <- (-log(1+(exp(-theta*ST11)-1)*(exp(-theta*ST21)-1)/(exp(-theta)-1))/theta)  
-  }else if(copula=='Clayton'){
-    Sstar0 <- (ST10^(-theta) + ST20^(-theta) - 1)^{-1/theta}
-    Sstar1 <- (ST11^(-theta) + ST21^(-theta) - 1)^{-1/theta}
-  }else if(copula=='Gumbel'){
-    Sstar0 <- exp(-((-log(ST10))^theta + (-log(ST20))^theta)^(1/theta))
-    Sstar1 <- exp(-((-log(ST11))^theta + (-log(ST21))^theta)^(1/theta))      
+  if (copula == "Frank") {
+    Sstar0 <- pmin(1 , (-log(1 + (exp(-theta * ST10) - 1) * (exp(-theta * ST20) - 1)/(exp(-theta) - 1))/theta) + 1e-6)
+    Sstar1 <- pmin(1 , (-log(1 + (exp(-theta * ST11) - 1) * (exp(-theta * ST21) - 1)/(exp(-theta) - 1))/theta) + 1e-6)
+  } else if (copula == "Clayton") {
+    Sstar0 <- pmin(1 , (ST10^(-theta) + ST20^(-theta) - 1)^{-1/theta} + 1e-6)
+    Sstar1 <- pmin(1 , (ST11^(-theta) + ST21^(-theta) - 1)^{-1/theta} + 1e-6)
+  } else if (copula == "Gumbel") {
+    Sstar0 <- pmin(1 , exp(-((-log(ST10))^theta + (-log(ST20))^theta)^(1/theta)) + 1e-6)
+    Sstar1 <- pmin(1 , exp(-((-log(ST11))^theta + (-log(ST21))^theta)^(1/theta)) + 1e-6)
   }
   
   ##-- Density, hazards and hazard ratio for the composite
@@ -182,8 +182,8 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   }
   
   ##-- Hazards and hazard ratio for the composite
-  Lstar0 <- fstar0/(Sstar0 + 1e-6)
-  Lstar1 <- fstar1/(Sstar1 + 1e-6)
+  Lstar0 <- fstar0/Sstar0
+  Lstar1 <- fstar1/Sstar1
   HRstar <- (Lstar1 + 1e-6)/(Lstar0 + 1e-6)
   
   ##-- Summary measures for the HR* (see Schempfer 2009)
