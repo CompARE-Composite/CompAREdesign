@@ -195,7 +195,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       # WHENEVER LambdaC20 FAILS, WE INCREASE THE LOWER LIMIT OF INTEGRATION
       LambdaC20_check <- tryCatch(LambdaC20 <- function(t) integrate(lambdaC20,lower=0,upper=t,subdivisions=10000)$value,error = function(e) e)
       lower_LambdaC20 <- 0
-      while(inherits(LambdaC20_check, "error")=="TRUE" ){
+      while(inherits(LambdaC20_check, "error") ){
         lower_LambdaC20 <- lower_LambdaC20 + 0.001
         LambdaC20_check <- tryCatch(LambdaC20 <- function(t) integrate(lambdaC20,lower=0+lower_LambdaC20,upper=t,subdivisions=10000)$value,error = function(e) e)
       }
@@ -213,7 +213,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       temp3 <- Vectorize(function(t) logHRstar(t)*fstar0(t))
       temp4_check <- tryCatch(temp4 <- integrate(temp3,0,1,subdivisions=10000)$value,error = function(e) e)
       lower_temp4 <- 0
-      while(inherits(temp4_check, "error")=="TRUE" & lower_temp4 < 1){ # add "& lower_temp4 < 1"
+      while(inherits(temp4_check, "error") & lower_temp4 < 1){ # add "& lower_temp4 < 1"
         lower_temp4 <- lower_temp4 + 0.001
         temp4_check<-tryCatch(temp4 <- integrate(temp3, lower_temp4, 1, subdivisions=10000)$value,error = function(e) e)
       }
@@ -224,7 +224,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       PROBT1UNC_temp <- Vectorize(function(t){PROBT1UNC_temp_num(t)/PROBT1UNC_temp_den(t)})
       PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=0, upper=1,subdivisions=10000)$value, error = function(e) e)
       lower_LambdaC20 <- 0
-      while(inherits(PROBT1UNC_int_check, "error")=="TRUE"){
+      while(inherits(PROBT1UNC_int_check, "error")){
         lower_LambdaC20 <- lower_LambdaC20+0.001
         PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
       }
