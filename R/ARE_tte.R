@@ -198,7 +198,6 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       while(inherits(LambdaC20_check, "error")=="TRUE" ){
         lower_LambdaC20 <- lower_LambdaC20 + 0.001
         LambdaC20_check <- tryCatch(LambdaC20 <- function(t) integrate(lambdaC20,lower=0+lower_LambdaC20,upper=t,subdivisions=10000)$value,error = function(e) e)
-        print(LambdaC20_check)
       }
       LambdaC20 <- Vectorize(function(t) integrate(lambdaC20,lower=0+lower_LambdaC20,upper=t,subdivisions=10000)$value)
       
@@ -232,7 +231,6 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       while(inherits(PROBT1UNC_int_check, "error")=="TRUE"){
         lower_LambdaC20 <- lower_LambdaC20+0.001
         PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
-        print(lower_LambdaC20)
       }
       lower_PROBT1UNC_int <- lower_LambdaC20
       PROBT1UNC_int <- integrate(PROBT1UNC_temp,lower=lower_PROBT1UNC_int, upper=1,subdivisions=10000)$value
@@ -271,7 +269,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   if(plot_save) return_object$gg_object <- gg1
 
   ## Print ARE
-  # print(round(return_object$ARE,3))
+  print(round(return_object$ARE,3))
   
   return(invisible(return_object))
 }
