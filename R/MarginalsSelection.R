@@ -139,8 +139,9 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
       c(Fb10_case4(x[1],x[2],p1), Fb20_case4(x[1],x[2],p2))
     }
     
-    suppressMessages(capture.output(sol <- multiroot(f = model, start = c(1,1), positive=TRUE)))
-
+    suppressMessages(capture.output(sol <- tryCatch(multiroot(f = model, start = c(1,1), positive=TRUE), error = function(e) e)))
+    # if(inherits(sol, "error")) suppressMessages(capture.output(sol <- multiroot(f = model, start = c(b10,b20), positive=TRUE)))
+    
     sol <- as.data.frame(sol[1])
     b10 <- max(sol[1,],1e-6)
     b20 <- max(sol[2,],1e-6)
