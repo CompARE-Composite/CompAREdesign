@@ -180,13 +180,13 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       # CS endpoint 1
       aux21 <- function(t,y) theta*exp(-theta*(ST0(t,beta_e1,b10)+y))*(1-exp(-theta))/(exp(-theta)-exp(-theta*ST0(t,beta_e1,b10))-exp(-theta*y)+exp(-theta*(ST0(t,beta_e1,b10)+y)))^2
       aux22 <- function(u) {integrate(aux21,0, ST0(u,beta_e2,b20),t=u,subdivisions=10000)$value} # t=u indicates that we are derivating respect to the other variable in aux21(t,y). That is, respect to y.
-      lambdaC10 <- function(t) aux22(t)*fT0(t,beta_e1,b10)/Sstar0(t)
+      lambdaC10 <- function(t) aux22(t)*fT0(t,beta_e1,b10)/(Sstar0(t) + 1e-6)
       lambdaC11 <- function(t) HR_e1*lambdaC10(t)
       
       # CS endpoint 2
       aux23 <- function(x,t) theta*exp(-theta*(x+ST0(t,beta_e2,b20)))*(1-exp(-theta))/(exp(-theta)-exp(-theta*x)-exp(-theta*ST0(t,beta_e2,b20))+exp(-theta*(x+ST0(t,beta_e2,b20))))^2
       aux24 <- Vectorize(function(u){integrate(aux23,0,ST0(u,beta_e1,b10),t=u,subdivisions=10000)$value}) #t=u indicates that we are derivating respect to the other variable in aux23(x,t). That is, respect to x.
-      lambdaC20 <- function(t) aux24(t)*fT0(t,beta_e2,b20)/Sstar0(t)
+      lambdaC20 <- function(t) aux24(t)*fT0(t,beta_e2,b20)/(Sstar0(t) + 1e-6)
       lambdaC21 <- function(t) HR_e2*lambdaC20(t)
       
       
