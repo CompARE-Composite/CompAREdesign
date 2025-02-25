@@ -219,10 +219,6 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       }
       temp4 <- integrate(temp3,0+lower_temp4, 1, subdivisions=10000)$value
       numerator <- (temp4)^2
-      
-      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      ## Computation of PROBT1UNC
       PROBT1UNC_temp_num <- function(t) exp(-HR_e2*LambdaC20(t)) * Sstar0(t) * lambdaC10(t)
       PROBT1UNC_temp_den <- function(t) 1/2 * (exp(-LambdaC20(t)) + exp(-HR_e2 * LambdaC20(t)))
       PROBT1UNC_temp <- Vectorize(function(t){PROBT1UNC_temp_num(t)/PROBT1UNC_temp_den(t)})
@@ -232,11 +228,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
         lower_LambdaC20 <- lower_LambdaC20+0.001
         PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
       }
-      lower_PROBT1UNC_int <- lower_LambdaC20
-      PROBT1UNC_int <- integrate(PROBT1UNC_temp,lower=lower_PROBT1UNC_int, upper=1,subdivisions=10000)$value
-      ## End of computation of PROBT1UNC
-      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      PROBT1UNC_int <- PROBT1UNC_int_check
       
       ############################################
       # ARE VALUE:
