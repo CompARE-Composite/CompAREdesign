@@ -210,7 +210,7 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       HRstar <- function(t) Lstar1(t)/Lstar0(t)
       logHRstar <- function(t) log(Lstar1(t)/Lstar0(t))
       
-      temp3 <- Vectorize(function(t) logHRstar(t)*fstar0(t))
+      temp3 <- Vectorize(function(t){res = logHRstar(t) * fstar0(t); res[is.na(res)] <- 0; res}) 
       temp4_check <- tryCatch(temp4 <- integrate(temp3,0,1,subdivisions=10000)$value,error = function(e) e)
       lower_temp4 <- 0
       while(inherits(temp4_check, "error") & lower_temp4 < 1){ # add "& lower_temp4 < 1"
