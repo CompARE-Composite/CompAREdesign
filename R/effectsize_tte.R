@@ -184,7 +184,7 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   ##-- Hazards and hazard ratio for the composite
   Lstar0 <- fstar0/(Sstar0 + 1e-6)
   Lstar1 <- fstar1/(Sstar1 + 1e-6)
-  HRstar <- Lstar1/(Lstar0 + 1e-6)
+  HRstar <- (Lstar1 + 1e-6)/(Lstar0 + 1e-6)
   
   ##-- Summary measures for the HR* (see Schempfer 2009)
   HRstar_int <- rowMeans(cbind(HRstar[-1],rev(rev(HRstar)[-1]))) # Mean of HRs for each interval
@@ -205,12 +205,12 @@ effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
   gAHR   <- exp(sum(log(HRstar_int)*(fstar0_int+fstar1_int))/sum(fstar0_int+fstar1_int)) # Alternative gAHR weighted by f_0 + f_1
   
   ##-- AHR weighted by f0 and by f0+f1
-  AHR_0_num <- sum(Lstar1_int/(Lstar0_int + Lstar1_int)*fstar0_int)/sum(fstar0_int)
-  AHR_0_den <- sum(Lstar0_int/(Lstar0_int + Lstar1_int)*fstar0_int)/sum(fstar0_int)
+  AHR_0_num <- sum((Lstar1_int + 1e-6)/(Lstar0_int + Lstar1_int + 1e-6)*fstar0_int)/sum(fstar0_int)
+  AHR_0_den <- sum((Lstar0_int + 1e-6)/(Lstar0_int + Lstar1_int + 1e-6)*fstar0_int)/sum(fstar0_int)
   AHR_0 <- AHR_0_num/AHR_0_den                                                           # AHR "_0" indicates that f_0 is used instead of f_1
 
-  AHR_num <- sum(Lstar1_int/(Lstar0_int + Lstar1_int)*(fstar0_int+fstar1_int))/sum(fstar0_int+fstar1_int)
-  AHR_den <- sum(Lstar0_int/(Lstar0_int + Lstar1_int)*(fstar0_int+fstar1_int))/sum(fstar0_int+fstar1_int)
+  AHR_num <- sum((Lstar1_int + 1e-6)/(Lstar0_int + Lstar1_int + 1e-6)*(fstar0_int+fstar1_int))/sum(fstar0_int+fstar1_int)
+  AHR_den <- sum((Lstar0_int + 1e-6)/(Lstar0_int + Lstar1_int + 1e-6)*(fstar0_int+fstar1_int))/sum(fstar0_int+fstar1_int)
   AHR <- AHR_num/AHR_den                                                                 # Alternative AHR weighted by f_0 + f_1
     
   ##-- RMST (Restricted Mean Survival Time)
