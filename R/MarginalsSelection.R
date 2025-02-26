@@ -39,15 +39,15 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
       }, lower=0 , upper=1-exp(-1/b10^beta1))$value
       return(integral-p1) 
     }
-    limits <- c(0.00001,10000)                                         # The first and the last values must be in opposite signs for the function
-    b10 <- try(uniroot(Fb10, interval=limits,p1=p1)$root,silent=TRUE)  # Find the root (value which equals the function zero)
+    limits <- c(0.00001,10000)                                                          # The first and the last values must be in opposite signs for the function
+    b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)  # Find the root (value which equals the function zero)
     b20 <- 1/(-log(1-p2))^(1/beta2)
     if(inherits(b10,'try-error')){
       dcopula <- dFrank
-      b10 <- uniroot(Fb10, interval=limits,p1=p1)$root
+      b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)
       dcopula <- get(paste0('d',copula))
       limits <- c(0.8,1.2)*b10 
-      b10 <- uniroot(Fb10, interval=limits,p1=p1)$root
+      b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)
     }
   
   ## -- Case 3 --------------------------------------------------------
