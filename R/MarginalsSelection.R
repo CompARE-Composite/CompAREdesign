@@ -39,9 +39,16 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
       }, lower=0 , upper=1-exp(-1/b10^beta1))$value
       return(integral-p1) 
     }
-    limits <- c(0.00001,10000)                                                          # The first and the last values must be in opposite signs for the function
-    b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)  # Find the root (value which equals the function zero)
+    limits <- c(0.1,10)   # The first and the last values must be in opposite signs for the function
+    b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)  
+    while(inherits(b10,'try-error') & limits[1]>=0.00001){
+      limits[1] <- limits[1]/10
+      limits[2] <- limits[2]*10
+      b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)
+    }
+                                                     
     b20 <- 1/(-log(1-p2))^(1/beta2)
+
     if(inherits(b10,'try-error')){
       dcopula <- dFrank
       b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)
@@ -49,7 +56,6 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
       limits <- c(0.8,1.2)*b10 
       b10 <- try(uniroot(Fb10, interval=limits,p1=p1, extendInt='yes')$root,silent=TRUE)
     }
-  
   ## -- Case 3 --------------------------------------------------------
   } else if (case==3) {
     
@@ -147,7 +153,7 @@ MarginalsSelection <- function(beta1,beta2,HR1,HR2,p1,p2,case,rho,theta,copula='
     b20 <- max(sol[2,],1e-6)
     
   }
-  
+
   # Scale parameters for group 1 b11,b21
   b11 <- b10/HR1^(1/beta1)
   b21 <- b20/HR2^(1/beta2)
