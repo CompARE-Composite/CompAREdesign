@@ -226,7 +226,8 @@ ARE_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
       lower_LambdaC20 <- 0
       while(inherits(PROBT1UNC_int_check, "error")){
         lower_LambdaC20 <- lower_LambdaC20+0.001
-        PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
+        # PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp,lower=lower_LambdaC20, upper=1,theta=theta,HR2=HR_e2,subdivisions=10000)$value, error = function(e) e)
+        PROBT1UNC_int_check <- tryCatch(integrate(PROBT1UNC_temp, lower = lower_LambdaC20, upper = 1, subdivisions = 10000)$value, error = function(e) e)
       }
       PROBT1UNC_int <- PROBT1UNC_int_check
       
