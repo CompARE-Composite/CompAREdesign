@@ -36,7 +36,9 @@
 #' In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 #' 
 #' The user can choose between the two most common formulae (Schoenfeld and Freedman) for the sample size calculation for the single components. 
-#' Schoenfeld formula always be used for the composite endpoint.
+#' Schoenfeld formula always be used for the composite endpoint. Both Freedman's and Schoenfeld's formulas are nearly correct when the number of events, 
+#' is large and the groups are balanced. Schoenfeld's formula generally yields a lower required number of events. From a parsimonious perspective, 
+#' Schoenfeld's formula is preferable when minimizing the sample size is the main criterion.
 #'
 #'
 #' @references 
