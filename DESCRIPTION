@@ -1,6 +1,6 @@
 Package: CompAREdesign
 Title: Statistical Functions for the Design of Studies with Composite Endpoints
-Version: 2.3.1
+Version: 2.4.0
 Author: Marta Bofill Roig [aut, cre], Jordi Cortes Martinez [aut], Guadalupe Gomez Melis [ctb]
 Maintainer: Marta Bofill Roig <marta.bofill.roig@upc.edu>
 Description: It has been designed to calculate the required sample size in randomized clinical trials with composite endpoints. It also calculates the expected effect and the probability of observing the composite endpoint, among others. The methodology can be found in Bofill & Gómez (2019) <doi:10.1002/sim.8092> and Gómez & Lagakos (2013) <doi:10.1002/sim.5547>. 
@@ -15,4 +15,6 @@ Imports:
 	ggpubr,
 	rootSolve,
 	numDeriv
-RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+Suggests: knitr, rmarkdown	
+RoxygenNote: 7.3.2

@@ -40,7 +40,7 @@ effectsize_tte(
 
 \item{rho}{numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.}
 
-\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
+\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Kendall". See details for more info.}
 
 \item{followup_time}{numeric parameter indicating the maximum follow up time (in any unit). Default is 1.}
 

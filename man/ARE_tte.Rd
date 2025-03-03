@@ -39,7 +39,7 @@ ARE_tte(
 
 \item{rho}{numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.}
 
-\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
+\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Kendall". See details for more info.}
 
 \item{subdivisions}{integer parameter greater than or equal to 10. Number of points used to plot the ARE according to correlation. The default is 50. Ignored if plot_print=FALSE and plot_save=FALSE.}
 
@@ -56,7 +56,7 @@ class \code{ggplot} with the ARE according to the correlation is stored in the o
 }
 \description{
 The composite endpoint is assumed to be a time to event endpoint formed by a combination of two events (E1 and E2). We assume that the endpoint 1 is more relevant for the clinical question than endpoint 2. 
-This function calculates the ARE (Assymptotic Relative Efficiency) method for time to event endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to choose the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred.
+This function calculates the ARE (Asymptotic Relative Efficiency) method for time to event endpoints. The method quantifies the differences in efficiency of using the composite or the relevant as primary endpoint to lead the trial and, moreover, provides a decision rule to choose the primary endpoint. If the ARE is larger than 1, the composite endpoint may be considered the best option as primary endpoint. Otherwise, the relevant endpoint is preferred.
 }
 \details{
 Some parameters might be difficult to anticipate, especially the shape parameters of Weibull distributions and those referred to the relationship between the marginal distributions. 

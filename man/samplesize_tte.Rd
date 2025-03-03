@@ -42,7 +42,7 @@ samplesize_tte(
 
 \item{rho}{numeric parameter between -1 and 1, Spearman's correlation coefficient o Kendall Tau between the marginal distribution of the times to the two events E1 and E2. See details for more info.}
 
-\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Tau". See details for more info.}
+\item{rho_type}{character indicating the type of correlation to be used: "Spearman" (default) or "Kendall". See details for more info.}
 
 \item{alpha}{numeric parameter. The probability of type I error. By default \eqn{\alpha=0.05}}
 
@@ -83,7 +83,9 @@ For the type of correlation (rho_type), although two different type of correlati
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 
 The user can choose between the two most common formulae (Schoenfeld and Freedman) for the sample size calculation for the single components. 
-Schoenfeld formula always be used for the composite endpoint.
+Schoenfeld formula always be used for the composite endpoint. Both Freedman's and Schoenfeld's formulas are nearly correct when the number of events, 
+is large and the groups are balanced. Schoenfeld's formula generally yields a lower required number of events. From a parsimonious perspective, 
+Schoenfeld's formula is preferable when minimizing the sample size is the main criterion.
 }
 \references{
 Friedman L.M., Furberg C.D., DeMets D.L. Fundamentals of Clinical Trials. 3rd ed. New York: Springer; 1998.
