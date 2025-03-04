@@ -1,8 +1,12 @@
 ---
-title: "CompAREdesign: Binary endpoint"
+title: "CompAREdesign: Binary endpoints"
 author: "Marta Bofill Roig, Jordi Cortés Martínez and Guadalupe Gómez Melis"
-output: html_document
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Binary endpoints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}

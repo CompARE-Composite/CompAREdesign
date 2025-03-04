@@ -1,8 +1,12 @@
 ---
-title: "CompAREdesign: Time-to-event endpoint"
+title: "CompAREdesign: Time-to-event endpoints"
 author: "Jordi Cortés Martínez, Marta Bofill Roig and Guadalupe Gómez Melis"
-output: html_document
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Time-to-event endpoints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}

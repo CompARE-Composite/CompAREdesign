@@ -1,8 +1,12 @@
 ---
 title: "CompAREdesign: Simulations"
-author: "Marta Bofill Roig, Jordi Cortés Martínez and Guadalupe Gómez Melis"
-output: html_document
+author: "Jordi Cortés Martínez, Marta Bofill Roig and Guadalupe Gómez Melis"
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
