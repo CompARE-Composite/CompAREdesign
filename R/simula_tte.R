@@ -38,7 +38,16 @@
 #' @details If \code{sample_size} is not an integer, it is rounded to the nearest integer.
 #'
 #'
-#'
+#' @examples
+#' # Simulate 10 times and censoring indicators for each arm
+#' simula_tte(p0_e1   = .59, p0_e2   = .74, 
+#'            HR_e1   = .91, HR_e2   = .77, 
+#'            beta_e1 = 1,   beta_e2 = 2, 
+#'            case    = 3,   rho     = .5,
+#'            copula  = 'Frank', rho_type  = 'Spearman',
+#'            sample_size = 10, followup_time = 2)
+
+
 simula_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman',
                            followup_time=1,sample_size){
