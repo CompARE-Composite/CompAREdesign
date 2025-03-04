@@ -95,6 +95,14 @@ In any case, if no information is available on these parameters, we recommend to
 All returned expected effect sizes for the composite endpoint should be interpreted in relative terms (treated to control). 
 gAHR and AHR represent the risk reduction that will be achieved with the new therapy, while RMST_ratio and Median_ratio represent the gain in time gain terms until the event.
 }
+\examples{
+effectsize_tte(p0_e1   = .59, p0_e2   = .74, 
+               HR_e1   = .91, HR_e2   = .77, 
+               beta_e1 = 1,   beta_e2 = 2, 
+               case    = 3,   rho     = .5,
+               copula  = 'Frank', rho_type   = 'Spearman',
+               plot_print = TRUE, plot_save = FALSE) 
+}
 \references{
 Schemper, M., Wakounig, S., Heinze, G. (2009). The estimation of average hazard ratios by weighted Cox regression. Stat. in Med. 28(19): 2473--2489. doi:10.1002/sim.3623
 }

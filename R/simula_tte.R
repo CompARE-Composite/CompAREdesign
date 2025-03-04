@@ -151,5 +151,5 @@ simula_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1,
                                       cbind(time_ce=TC1,status_ce=status_C1))))
   df_all$treated <- c(rep(0,sample_size),rep(1,sample_size))
 
-  return(invisible(df_all))
+  return(df_all)
 }

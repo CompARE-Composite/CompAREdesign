@@ -87,6 +87,14 @@ Schoenfeld formula always be used for the composite endpoint. Both Freedman's an
 is large and the groups are balanced. Schoenfeld's formula generally yields a lower required number of events. From a parsimonious perspective, 
 Schoenfeld's formula is preferable when minimizing the sample size is the main criterion.
 }
+\examples{
+samplesize_tte(p0_e1   = .59, p0_e2   = .74, 
+               HR_e1   = .91, HR_e2   = .77, 
+               beta_e1 = 1,   beta_e2 = 2, 
+               case    = 3,   rho     = .5,
+               copula  = 'Frank', rho_type   = 'Spearman',
+               plot_print = FALSE, plot_save = FALSE)
+}
 \references{
 Friedman L.M., Furberg C.D., DeMets D.L. Fundamentals of Clinical Trials. 3rd ed. New York: Springer; 1998.
 Cortés Martínez, J., Geskus, R.B., Kim, K. et al. Using the geometric average hazard ratio in sample size calculation for time-to-event data with composite endpoints. BMC Med Res Methodol 21, 99 (2021). https://doi.org/10.1186/s12874-021-01286-x

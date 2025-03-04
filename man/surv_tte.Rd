@@ -65,3 +65,12 @@ For the correlation (rho) between both endpoints, generally a positive value is 
 For the type of correlation (rho_type), although two different type of correlations are implemented, we recommend the use of the Spearman's correlation.
 In any case, if no information is available on these parameters, we recommend to use the default values provided by the function.
 }
+\examples{
+surv_tte(p0_e1   = .59, p0_e2   = .74, 
+         HR_e1   = .91, HR_e2   = .77, 
+         beta_e1 = 1,   beta_e2 = 2, 
+         case    = 3,   rho     = .5,
+         copula  = 'Frank', rho_type   = 'Spearman',
+         plot_print = TRUE, plot_save = FALSE,
+         followup_time = 2)
+}
