@@ -93,27 +93,27 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The argument type must be one of 'survival','effect','ARE' or 'samplesize'")
   }
 
-  if(summary | type = "survival"){
+  if(summary | type == "survival"){
     invisible(capture.output(plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
                                                      copula = copula, rho=rho, rho_type=rho_type,
                                                      followup_time = followup_time,
                                                      plot_print = FALSE, plot_save = TRUE)$gg_object))    
   }
 
-  if(summary | type = "effect"){
+  if(summary | type == "effect"){
     invisible(capture.output(plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
                                                            copula = copula, rho=rho, rho_type=rho_type,
                                                            followup_time=followup_time,
                                                            plot_print=FALSE, plot_save=TRUE)$gg_object))
   }
 
-  if(summary | type = "ARE"){
+  if(summary | type == "ARE"){
     invisible(capture.output(plot_ARE    <- ARE_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
                                                     copula = copula, rho=rho, rho_type=rho_type,
                                                     plot_print=FALSE,plot_save=TRUE)$gg_object))
   }
 
-  if(summary | type = "samplesize"){
+  if(summary | type == "samplesize"){
     invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case,
                                                            copula = copula, rho=rho, rho_type=rho_type,
                                                            plot_print=FALSE,plot_save=TRUE,
