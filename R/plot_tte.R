@@ -87,31 +87,42 @@ plot_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, case,
     stop("The power must be a numeric value between 0 and 1")
   }else if(!ss_formula %in% c('schoenfeld','freedman')){
     stop("The selected formula (ss_formula) must be one of 'schoenfeld' (default) or 'freedman'")
+  }else if(!is.logical(summary)){
+    stop("The argument summary must be logical")
+  }else if(!type %in% c('survival','effect','ARE','samplesize')){
+    stop("The argument type must be one of 'survival','effect','ARE' or 'samplesize'")
+  }
+
+  if(summary | type = "survival"){
+    invisible(capture.output(plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
+                                                     copula = copula, rho=rho, rho_type=rho_type,
+                                                     followup_time = followup_time,
+                                                     plot_print = FALSE, plot_save = TRUE)$gg_object))    
+  }
+
+  if(summary | type = "effect"){
+    invisible(capture.output(plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
+                                                           copula = copula, rho=rho, rho_type=rho_type,
+                                                           followup_time=followup_time,
+                                                           plot_print=FALSE, plot_save=TRUE)$gg_object))
+  }
+
+  if(summary | type = "ARE"){
+    invisible(capture.output(plot_ARE    <- ARE_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
+                                                    copula = copula, rho=rho, rho_type=rho_type,
+                                                    plot_print=FALSE,plot_save=TRUE)$gg_object))
+  }
+
+  if(summary | type = "samplesize"){
+    invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case,
+                                                           copula = copula, rho=rho, rho_type=rho_type,
+                                                           plot_print=FALSE,plot_save=TRUE,
+                                                           alpha=alpha, power=power ,ss_formula=ss_formula)$gg_object))
   }
 
 
-  invisible(capture.output(plot_surv   <- surv_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
-                                                   copula = copula, rho=rho, rho_type=rho_type,
-                                                   followup_time = followup_time,
-                                                   plot_print = FALSE, plot_save = TRUE)$gg_object))
 
-  invisible(capture.output(plot_effect <- effectsize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
-                                                         copula = copula, rho=rho, rho_type=rho_type,
-                                                         followup_time=followup_time,
-                                                         plot_print=FALSE,plot_save=TRUE)$gg_object))
-
-  invisible(capture.output(plot_ARE    <- ARE_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case=case,
-                                                  copula = copula, rho=rho, rho_type=rho_type,
-                                                  plot_print=FALSE,plot_save=TRUE)$gg_object))
-
-  invisible(capture.output(plot_ss     <- samplesize_tte(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=beta_e1, beta_e2=beta_e2, case,
-                                                         copula = copula, rho=rho, rho_type=rho_type,
-                                                         plot_print=FALSE,plot_save=TRUE,
-                                                         alpha=alpha, power=power ,ss_formula=ss_formula)$gg_object))
-
-
-
-  if(summary == TRUE){
+  if(summary){
 
     return(ggarrange(plot_surv, plot_effect, plot_ARE, plot_ss, ncol = 2, nrow = 2))
 
