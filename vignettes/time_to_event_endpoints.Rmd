@@ -218,7 +218,7 @@ effectsize_tte(p0_e1   = p0_e1    , p0_e2    = p0_e2,
 
 `plot_tte` returns all the relevant plots for the trial design if `summary=TRUE`.
 
-```{r warning=FALSE}
+```{r warning=FALSE, fig.width=6, fig.height=6}
 plot_tte(p0_e1   = p0_e1    , p0_e2    = p0_e2, 
          HR_e1   = HR_e1    , HR_e2    = HR_e2, 
          beta_e1 = beta_e1  , beta_e2  = beta_e2,  
