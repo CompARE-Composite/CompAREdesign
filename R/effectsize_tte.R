@@ -67,7 +67,14 @@
 #'
 #' @references Schemper, M., Wakounig, S., Heinze, G. (2009). The estimation of average hazard ratios by weighted Cox regression. Stat. in Med. 28(19): 2473--2489. doi:10.1002/sim.3623
 #'
-#'
+#' @examples
+#' effectsize_tte(p0_e1   = .59, p0_e2   = .74, 
+#'                HR_e1   = .91, HR_e2   = .77, 
+#'                beta_e1 = 1,   beta_e2 = 2, 
+#'                case    = 3,   rho     = .5,
+#'                copula  = 'Frank', rho_type   = 'Spearman',
+#'                plot_print = TRUE, plot_save = FALSE) 
+
 effectsize_tte <- function(p0_e1, p0_e2, HR_e1, HR_e2, beta_e1=1, beta_e2=1, 
                            case, copula = 'Frank', rho=0.3, rho_type='Spearman',
                            followup_time=1,
