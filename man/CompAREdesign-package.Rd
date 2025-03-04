@@ -18,16 +18,16 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Marta Bofill \email{marta.bofill.roig@upc.edu}
+\strong{Maintainer}: Marta Bofill Roig \email{marta.bofill.roig@upc.edu} (\href{https://orcid.org/0000-0002-4400-7541}{ORCID})
 
 Authors:
 \itemize{
-  \item Jordi Cortes
+  \item Jordi Cortes Martinez (\href{https://orcid.org/0000-0002-3764-0795}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Guadalupe Gomez [contributor]
+  \item Guadalupe Gomez Melis (\href{https://orcid.org/0000-0003-4252-4884}{ORCID}) [contributor]
 }
 
 }
