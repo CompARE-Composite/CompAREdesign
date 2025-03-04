@@ -17,4 +17,18 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Marta Bofill \email{marta.bofill.roig@upc.edu}
+
+Authors:
+\itemize{
+  \item Jordi Cortes
+}
+
+Other contributors:
+\itemize{
+  \item Guadalupe Gomez [contributor]
+}
+
+}
 \keyword{internal}

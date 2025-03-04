@@ -3,15 +3,18 @@ Title: Statistical Functions for the Design of Studies with Composite Endpoints
 Version: 2.4.0
 Author: Marta Bofill Roig [aut, cre], Jordi Cortes Martinez [aut], Guadalupe Gomez Melis [ctb]
 Authors@R: c(person(given  = "Marta",
-                    family = "Bofill",
+                    family = "Bofill Roig",
                     role   = c("aut", "cre"),
-                    email  = "marta.bofill.roig@upc.edu"),
+                    email  = "marta.bofill.roig@upc.edu",
+					comment = c(ORCID = "0000-0002-4400-7541")),
              person(given  = "Jordi",
-                    family = "Cortes",
-                    role   = "aut"),
+                    family = "Cortes Martinez",
+                    role   = "aut",
+					comment = c(ORCID = "0000-0002-3764-0795")),
              person(given  = "Guadalupe",
-                    family = "Gomez",
-                    role   = "ctb"))
+                    family = "Gomez Melis",
+                    role   = "ctb",
+					comment = c(ORCID = "0000-0003-4252-4884")))
 Maintainer: Marta Bofill Roig <marta.bofill.roig@upc.edu>
 Description: It has been designed to calculate the required sample size in randomized clinical trials with composite endpoints. It also calculates the expected effect and the probability of observing the composite endpoint, among others. The methodology can be found in Bofill & Gómez (2019) <doi:10.1002/sim.8092> and Gómez & Lagakos (2013) <doi:10.1002/sim.5547>. 
 URL: https://compare-composite.github.io/compare/
